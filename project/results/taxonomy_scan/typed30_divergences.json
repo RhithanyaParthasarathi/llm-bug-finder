@@ -1,0 +1,57 @@
+[
+  [
+    "HumanEval_1",
+    "separate_paren_groups",
+    "Given: (paren_string='\\x00 \\x00\\x00('),\n  HumanEval_1_canon.separate_paren_groups : returns ['\\x00', '\\x00', '\\x00']\n    HumanEval_1_llm.separate_paren_groups : returns []\nGiven: (paren_string='\\x01)('),\n  HumanEval_1_canon.separate_paren_groups : returns ['\\x01', ')(']\n    HumanEval_1_llm.separate_paren_groups : raises IndexError('pop from empty list')"
+  ],
+  [
+    "HumanEval_6",
+    "parse_nested_parens",
+    "Given: (paren_string=' \\x1c'),\n  HumanEval_6_canon.parse_nested_parens : returns [0]\n    HumanEval_6_llm.parse_nested_parens : returns []"
+  ],
+  [
+    "HumanEval_10",
+    "make_palindrome",
+    "Given: (string='\\x00\\x01\\x00\\x01\\x01'),\n  HumanEval_10_canon.make_palindrome : returns '\\x00\\x01\\x00\\x01\\x01\\x00\\x01\\x00'\n    HumanEval_10_llm.make_palindrome : returns '\\x00\\x01\\x00\\x01\\x01\\x01\\x00\\x01\\x00'"
+  ],
+  [
+    "HumanEval_11",
+    "string_xor",
+    "Given: (a='\\x00', b='\\x00'),\n  HumanEval_11_canon.string_xor : raises ValueError(\"invalid literal for int() with base 10: '\\\\x00'\")\n    HumanEval_11_llm.string_xor : returns '0'\nGiven: (a='\\x00\\x00', b='\\x01'),\n  HumanEval_11_canon.string_xor : raises ValueError(\"invalid literal for int() with base 10: '\\\\x00'\")\n    HumanEval_11_llm.string_xor : raises IndexError('string index out of range')"
+  ],
+  [
+    "HumanEval_17",
+    "parse_music",
+    "Given: (music_string='o|\\x1c'),\n  HumanEval_17_canon.parse_music : returns [None]\n    HumanEval_17_llm.parse_music : returns [2]\nGiven: (music_string='o\\x1do'),\n  HumanEval_17_canon.parse_music : returns [None]\n    HumanEval_17_llm.parse_music : returns [4, 4]\nGiven: (music_string='\\x00\\u1680'),\n  HumanEval_17_canon.parse_music : returns [None]\n    HumanEval_17_llm.parse_music : returns []"
+  ],
+  [
+    "HumanEval_18",
+    "how_many_times",
+    "Given: (string='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x01\\x01\\x00\\x00\\x02\\x00\\x00\\x01', substring=''),\n  HumanEval_18_canon.how_many_times : returns 15\n    HumanEval_18_llm.how_many_times : returns 0"
+  ],
+  [
+    "HumanEval_19",
+    "sort_numbers",
+    "Given: (numbers='\\t'),\n  HumanEval_19_canon.sort_numbers : raises KeyError()\n    HumanEval_19_llm.sort_numbers : returns ''"
+  ],
+  [
+    "HumanEval_20",
+    "find_closest_elements",
+    "Given: (numbers=[0.25, -0.75, 1.25]),\n  HumanEval_20_canon.find_closest_elements : returns (-0.75, 0.25), after execution numbers=[-0.75, 0.25, 1.25]\n    HumanEval_20_llm.find_closest_elements : returns (-0.75, 0.25), after execution numbers=[0.25, -0.75, 1.25]"
+  ],
+  [
+    "HumanEval_22",
+    "filter_integers",
+    "Given: (values=['\\x00\\x00', <AlertDescription.ALERT_DESCRIPTION_CLOSE_NOTIFY: 0>, '']),\n  HumanEval_22_canon.filter_integers : returns []\n    HumanEval_22_llm.filter_integers : returns [<AlertDescription.ALERT_DESCRIPTION_CLOSE_NOTIFY: 0>]"
+  ],
+  [
+    "HumanEval_25",
+    "factorize",
+    "Given: (n=-10),\n  HumanEval_25_canon.factorize : raises ValueError('math domain error')\n    HumanEval_25_llm.factorize : returns []"
+  ],
+  [
+    "HumanEval_26",
+    "remove_duplicates",
+    "Given: (numbers=[13, 11, 14, 12, 15, 12, 13, 14, 12, 15]),\n  HumanEval_26_canon.remove_duplicates : returns [11]\n    HumanEval_26_llm.remove_duplicates : returns [13, 11, 14, 12, 15]"
+  ]
+]
