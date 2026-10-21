@@ -12,7 +12,8 @@
     "repro_script": "results/benchmark/repro_kym6464_read_csv.py",
     "verified_input": "user_id,username,email",
     "canonical_behavior": "Returns (b'user_id,username,email', '<hash>.csv')",
-    "ai_behavior": "Raises AssertionError('Expected at least 2 lines for CSV structure')"
+    "ai_behavior": "Raises AssertionError('Expected at least 2 lines for CSV structure')",
+    "minimized_counterexample": "Args: (value='col1,col2')\n- Old Code: Unknown\n- New Code: Unknown"
   },
   {
     "task_name": "alexwday__iris-project_2a072768__process_reference_buffer",
@@ -27,7 +28,8 @@
     "repro_script": "results/benchmark/repro_alexwday_process_reference_buffer.py",
     "verified_input": "('See [REF:1]\\n\\n', {'1': {'file_link': 'doc.pdf'}})",
     "canonical_behavior": "Replaces [REF:1] with HTML link tag in processed output",
-    "ai_behavior": "Returns raw unmodified buffer without replacing link"
+    "ai_behavior": "Returns raw unmodified buffer without replacing link",
+    "minimized_counterexample": "Args: (buffer='See [REF:1]\\n\\n', reference_index={'1': {'file_link': 'doc.pdf'}})\n- Old Code: Unknown\n- New Code: Unknown"
   },
   {
     "task_name": "HumanEval_10_make_palindrome",
@@ -42,7 +44,8 @@
     "repro_script": "results/benchmark/repro_HumanEval_10.py",
     "verified_input": "ababb",
     "canonical_behavior": "Returns 'ababbaba' (minimal palindrome)",
-    "ai_behavior": "Returns 'ababbbaba' (suboptimal non-minimal palindrome)"
+    "ai_behavior": "Returns 'ababbbaba' (suboptimal non-minimal palindrome)",
+    "minimized_counterexample": "Args: (string='ababb')\n- Old Code: Unknown\n- New Code: Unknown"
   },
   {
     "task_name": "HumanEval_18_how_many_times",
@@ -57,7 +60,8 @@
     "repro_script": "results/benchmark/repro_HumanEval_18.py",
     "verified_input": "('banana', '')",
     "canonical_behavior": "Returns 6 (matches at each index)",
-    "ai_behavior": "Returns 0 (special-case early return for empty string)"
+    "ai_behavior": "Returns 0 (special-case early return for empty string)",
+    "minimized_counterexample": "Args: (string='banana', substring='')\n- Old Code: Unknown\n- New Code: Unknown"
   },
   {
     "task_name": "HumanEval_26_remove_duplicates",
@@ -72,7 +76,8 @@
     "repro_script": "results/benchmark/repro_HumanEval_26.py",
     "verified_input": "[1, 2, 2, 3]",
     "canonical_behavior": "Returns [1, 3] (removes all occurrences of duplicate elements)",
-    "ai_behavior": "Returns [1, 2, 3] (preserves first occurrence of duplicate elements)"
+    "ai_behavior": "Returns [1, 2, 3] (preserves first occurrence of duplicate elements)",
+    "minimized_counterexample": "Args: (numbers=[1, 2, 2, 3])\n- Old Code: Unknown\n- New Code: Unknown"
   },
   {
     "task_name": "MementoRC__ci-framework_3478c8b8_test_security_to_reporting_integration",
@@ -84,7 +89,8 @@
     "category": "Requirement misunderstanding / Missing branch logic",
     "commit_description": "fix: remove unused variables causing lint failures\n\nIteration: 3/5 (Security tests)\nJob: \ud83e\uddf9 Lint & Format\nError: F841 unused variable violations\n\nCleaned up unused collector and security_data variables\nAll critical lint checks now pass\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Autho",
     "raw_counterexample": "Given: (tmp_path='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x01\\x01'),\n  MementoRC__ci-framework_3478c8b8_test_security_to_reporting_integration_old.test_security_to_reporting_integration_wrapper : raises NameError(\"name 'SecurityCollector' is not defined\")\n  MementoRC__ci-framework_3478c8b8_test_security_to_reporting_integration_new.test_security_to_reporting_integration_wrapper : raises NameError(\"name 'GitHubReporter' is not defined\")",
-    "repro_script": "results/benchmark\\repro_MementoRC__ci-framework_3478c8b8_test_security_to_reporting_integration.py"
+    "repro_script": "results/benchmark\\repro_MementoRC__ci-framework_3478c8b8_test_security_to_reporting_integration.py",
+    "minimized_counterexample": "Args: (tmp_path='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x01\\x01')\n- Old Code: raises NameError(\"name 'SecurityCollector' is not defined\")\n- New Code: raises NameError(\"name 'GitHubReporter' is not defined\")"
   },
   {
     "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_test_add_pattern",
@@ -96,7 +102,8 @@
     "category": "Type-semantics bug",
     "commit_description": "fix: update test_knowledge_manager.py to use UnifiedDatabase instead of ChromaDBConnector\n\nFixed test infrastructure issues affecting CI:\n- Updated all mock references from ChromaDBConnector to UnifiedDatabase\n- Added proper 'document' field to test data for pattern/solution validation\n- Fixed mock ",
     "raw_counterexample": "Given: (manager='\\x00', mock_unified_db='', mock_semantic_search='\\x00\\x00\\x02\\x00\\x00\\x00'),\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_add_pattern_old.test_add_pattern : raises TypeError('test_add_pattern() takes 2 positional arguments but 3 were given')\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_add_pattern_new.test_add_pattern : raises AttributeError(\"'method' object has no attribute 'return_value' and no __dict__ for setting new attributes\")\nGiven: (manager='', mock_pattern_manager='\\x02\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00'),\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_add_pattern_old.test_add_pattern : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'add_pattern'\")\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_add_pattern_new.test_add_pattern : raises TypeError(\"test_add_pattern() missing 1 required positional argument: 'mock_semantic_search'\")",
-    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_test_add_pattern.py"
+    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_test_add_pattern.py",
+    "minimized_counterexample": "Args: (manager='\\x00', mock_unified_db='', mock_semantic_search='\\x00\\x00\\x02\\x00\\x00\\x00')\n- Old Code: raises TypeError('test_add_pattern() takes 2 positional arguments but 3 were given')\n- New Code: raises AttributeError(\"'method' object has no attribute 'return_value' and no __dict__ for setting new attributes\")"
   },
   {
     "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_test_update_pattern",
@@ -108,7 +115,8 @@
     "category": "Type-semantics bug",
     "commit_description": "fix: update test_knowledge_manager.py to use UnifiedDatabase instead of ChromaDBConnector\n\nFixed test infrastructure issues affecting CI:\n- Updated all mock references from ChromaDBConnector to UnifiedDatabase\n- Added proper 'document' field to test data for pattern/solution validation\n- Fixed mock ",
     "raw_counterexample": "Given: (manager='\\x00', mock_unified_db='', mock_semantic_search='\\x00\\x00\\x02\\x00\\x00\\x00'),\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_update_pattern_old.test_update_pattern : raises TypeError('test_update_pattern() takes 2 positional arguments but 3 were given')\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_update_pattern_new.test_update_pattern : raises AttributeError(\"'method' object has no attribute 'return_value' and no __dict__ for setting new attributes\")\nGiven: (manager='', mock_pattern_manager='\\x02\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00'),\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_update_pattern_old.test_update_pattern : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'update_pattern'\")\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_update_pattern_new.test_update_pattern : raises TypeError(\"test_update_pattern() missing 1 required positional argument: 'mock_semantic_search'\")",
-    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_test_update_pattern.py"
+    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_test_update_pattern.py",
+    "minimized_counterexample": "Args: (manager='\\x00', mock_unified_db='', mock_semantic_search='\\x00\\x00\\x02\\x00\\x00\\x00')\n- Old Code: raises TypeError('test_update_pattern() takes 2 positional arguments but 3 were given')\n- New Code: raises AttributeError(\"'method' object has no attribute 'return_value' and no __dict__ for setting new attributes\")"
   },
   {
     "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_test_search_patterns",
@@ -120,22 +128,11 @@
     "category": "Type-semantics bug",
     "commit_description": "fix: update test_knowledge_manager.py to use UnifiedDatabase instead of ChromaDBConnector\n\nFixed test infrastructure issues affecting CI:\n- Updated all mock references from ChromaDBConnector to UnifiedDatabase\n- Added proper 'document' field to test data for pattern/solution validation\n- Fixed mock ",
     "raw_counterexample": "Given: (manager='\\x00', mock_unified_db='', mock_semantic_search='\\x00\\x00\\x00\\x00\\x00\\x00\\x00'),\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_search_patterns_old.test_search_patterns : raises TypeError('test_search_patterns() takes 2 positional arguments but 3 were given')\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_search_patterns_new.test_search_patterns : raises AttributeError(\"'method' object has no attribute 'return_value' and no __dict__ for setting new attributes\")\nGiven: (manager='', mock_pattern_manager='\\x02\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00'),\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_search_patterns_old.test_search_patterns : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'search_patterns'\")\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_search_patterns_new.test_search_patterns : raises TypeError(\"test_search_patterns() missing 1 required positional argument: 'mock_semantic_search'\")",
-    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_test_search_patterns.py"
+    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_test_search_patterns.py",
+    "minimized_counterexample": "Args: (manager='\\x00', mock_unified_db='', mock_semantic_search='\\x00\\x00\\x00\\x00\\x00\\x00\\x00')\n- Old Code: raises TypeError('test_search_patterns() takes 2 positional arguments but 3 were given')\n- New Code: raises AttributeError(\"'method' object has no attribute 'return_value' and no __dict__ for setting new attributes\")"
   },
   {
     "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_test_create_category",
-    "repo": "MementoRC/claude-code-knowledge-framework",
-    "sha": "ef3c137f0d5ae533a3a50bff7b4a48fbe2cb237b",
-    "agent": "Claude Code",
-    "function_name": "test_create_category",
-    "is_method": false,
-    "category": "Type-semantics bug",
-    "commit_description": "fix: update test_knowledge_manager.py to use UnifiedDatabase instead of ChromaDBConnector\n\nFixed test infrastructure issues affecting CI:\n- Updated all mock references from ChromaDBConnector to UnifiedDatabase\n- Added proper 'document' field to test data for pattern/solution validation\n- Fixed mock ",
-    "raw_counterexample": "Given: (manager='', mock_pattern_classification='\\x02\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00'),\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_create_category_old.test_create_category : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'add_category'\")\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_create_category_new.test_create_category : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'create_category'\")",
-    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_test_create_category.py"
-  },
-  {
-    "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_test_get_patterns_by_category",
     "repo": "MementoRC/claude-code-knowledge-framework",
     "sha": "ef3c137f0d5ae533a3a50bff7b4a48fbe2cb237b",
     "agent": "Claude Code",
@@ -144,7 +141,8 @@
     "category": "Type-semantics bug",
     "commit_description": "fix: update test_knowledge_manager.py to use UnifiedDatabase instead of ChromaDBConnector\n\nFixed test infrastructure issues affecting CI:\n- Updated all mock references from ChromaDBConnector to UnifiedDatabase\n- Added proper 'document' field to test data for pattern/solution validation\n- Fixed mock ",
     "raw_counterexample": "Given: (manager='', mock_pattern_classification='\\x02\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00'),\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_get_patterns_by_category_old.test_get_patterns_by_category : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'get_patterns_in_category'\")\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_get_patterns_by_category_new.test_get_patterns_by_category : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'get_patterns_by_category'\")",
-    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_test_get_patterns_by_category.py"
+    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_test_get_patterns_by_category.py",
+    "minimized_counterexample": "Args: (manager='', mock_pattern_classification='\\x02\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00')\n- Old Code: raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'get_patterns_in_category'\")\n- New Code: raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'get_patterns_by_category'\")"
   },
   {
     "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_test_get_pattern_categories",
@@ -156,7 +154,8 @@
     "category": "Type-semantics bug",
     "commit_description": "fix: update test_knowledge_manager.py to use UnifiedDatabase instead of ChromaDBConnector\n\nFixed test infrastructure issues affecting CI:\n- Updated all mock references from ChromaDBConnector to UnifiedDatabase\n- Added proper 'document' field to test data for pattern/solution validation\n- Fixed mock ",
     "raw_counterexample": "Given: (manager='', mock_pattern_classification='\\x02\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00'),\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_get_pattern_categories_old.test_get_pattern_categories : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'get_categories_for_pattern'\")\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_get_pattern_categories_new.test_get_pattern_categories : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'get_pattern_categories'\")",
-    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_test_get_pattern_categories.py"
+    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_test_get_pattern_categories.py",
+    "minimized_counterexample": "Args: (manager='', mock_pattern_classification='\\x02\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00')\n- Old Code: raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'get_categories_for_pattern'\")\n- New Code: raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'get_pattern_categories'\")"
   },
   {
     "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_test_add_error_solution",
@@ -168,7 +167,8 @@
     "category": "Type-semantics bug",
     "commit_description": "fix: update test_knowledge_manager.py to use UnifiedDatabase instead of ChromaDBConnector\n\nFixed test infrastructure issues affecting CI:\n- Updated all mock references from ChromaDBConnector to UnifiedDatabase\n- Added proper 'document' field to test data for pattern/solution validation\n- Fixed mock ",
     "raw_counterexample": "Given: (manager='\\x00', mock_unified_db='', mock_semantic_search='\\x00\\x00\\x00\\x00\\x00\\x00\\x00'),\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_add_error_solution_old.test_add_error_solution : raises TypeError('test_add_error_solution() takes 2 positional arguments but 3 were given')\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_add_error_solution_new.test_add_error_solution : raises AttributeError(\"'method' object has no attribute 'return_value' and no __dict__ for setting new attributes\")\nGiven: (manager='', mock_error_solution_manager='\\x00\\x00\\x00\\x00\\x01\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00'),\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_add_error_solution_old.test_add_error_solution : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'add_error_solution'\")\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_add_error_solution_new.test_add_error_solution : raises TypeError(\"test_add_error_solution() missing 1 required positional argument: 'mock_semantic_search'\")",
-    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_test_add_error_solution.py"
+    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_test_add_error_solution.py",
+    "minimized_counterexample": "Args: (manager='\\x00', mock_unified_db='', mock_semantic_search='\\x00\\x00\\x00\\x00\\x00\\x00\\x00')\n- Old Code: raises TypeError('test_add_error_solution() takes 2 positional arguments but 3 were given')\n- New Code: raises AttributeError(\"'method' object has no attribute 'return_value' and no __dict__ for setting new attributes\")"
   },
   {
     "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_test_search_error_solutions",
@@ -180,7 +180,8 @@
     "category": "Type-semantics bug",
     "commit_description": "fix: update test_knowledge_manager.py to use UnifiedDatabase instead of ChromaDBConnector\n\nFixed test infrastructure issues affecting CI:\n- Updated all mock references from ChromaDBConnector to UnifiedDatabase\n- Added proper 'document' field to test data for pattern/solution validation\n- Fixed mock ",
     "raw_counterexample": "Given: (manager='\\x00', mock_unified_db='', mock_semantic_search='\\x00\\x00\\x00\\x00\\x00\\x00\\x00'),\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_search_error_solutions_old.test_search_error_solutions : raises TypeError('test_search_error_solutions() takes 2 positional arguments but 3 were given')\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_search_error_solutions_new.test_search_error_solutions : raises AttributeError(\"'method' object has no attribute 'return_value' and no __dict__ for setting new attributes\")\nGiven: (manager='', mock_error_solution_manager='\\x00\\x00\\x00\\x00\\x01\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00'),\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_search_error_solutions_old.test_search_error_solutions : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'search_error_solutions'\")\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_search_error_solutions_new.test_search_error_solutions : raises TypeError(\"test_search_error_solutions() missing 1 required positional argument: 'mock_semantic_search'\")",
-    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_test_search_error_solutions.py"
+    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_test_search_error_solutions.py",
+    "minimized_counterexample": "Args: (manager='\\x00', mock_unified_db='', mock_semantic_search='\\x00\\x00\\x00\\x00\\x00\\x00\\x00')\n- Old Code: raises TypeError('test_search_error_solutions() takes 2 positional arguments but 3 were given')\n- New Code: raises AttributeError(\"'method' object has no attribute 'return_value' and no __dict__ for setting new attributes\")"
   },
   {
     "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_add_pattern",
@@ -192,7 +193,8 @@
     "category": "Requirement misunderstanding / Missing branch logic",
     "commit_description": "fix: update test_knowledge_manager.py to use UnifiedDatabase instead of ChromaDBConnector\n\nFixed test infrastructure issues affecting CI:\n- Updated all mock references from ChromaDBConnector to UnifiedDatabase\n- Added proper 'document' field to test data for pattern/solution validation\n- Fixed mock ",
     "raw_counterexample": "Given: (),\n  MementoRC__claude-code-knowledge-framework_ef3c137f_add_pattern_old.add_pattern_wrapper : raises Exception('fail')\n  MementoRC__claude-code-knowledge-framework_ef3c137f_add_pattern_new.add_pattern_wrapper : raises Exception('fail add_pattern')",
-    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_add_pattern.py"
+    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_add_pattern.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises Exception('fail')\n- New Code: raises Exception('fail add_pattern')"
   },
   {
     "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_get_pattern",
@@ -204,7 +206,8 @@
     "category": "Requirement misunderstanding / Missing branch logic",
     "commit_description": "fix: update test_knowledge_manager.py to use UnifiedDatabase instead of ChromaDBConnector\n\nFixed test infrastructure issues affecting CI:\n- Updated all mock references from ChromaDBConnector to UnifiedDatabase\n- Added proper 'document' field to test data for pattern/solution validation\n- Fixed mock ",
     "raw_counterexample": "Given: (),\n  MementoRC__claude-code-knowledge-framework_ef3c137f_get_pattern_old.get_pattern_wrapper : raises Exception('fail')\n  MementoRC__claude-code-knowledge-framework_ef3c137f_get_pattern_new.get_pattern_wrapper : raises Exception('fail get_pattern')",
-    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_get_pattern.py"
+    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_get_pattern.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises Exception('fail')\n- New Code: raises Exception('fail get_pattern')"
   },
   {
     "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_update_pattern",
@@ -216,7 +219,8 @@
     "category": "Requirement misunderstanding / Missing branch logic",
     "commit_description": "fix: update test_knowledge_manager.py to use UnifiedDatabase instead of ChromaDBConnector\n\nFixed test infrastructure issues affecting CI:\n- Updated all mock references from ChromaDBConnector to UnifiedDatabase\n- Added proper 'document' field to test data for pattern/solution validation\n- Fixed mock ",
     "raw_counterexample": "Given: (),\n  MementoRC__claude-code-knowledge-framework_ef3c137f_update_pattern_old.update_pattern_wrapper : raises Exception('fail')\n  MementoRC__claude-code-knowledge-framework_ef3c137f_update_pattern_new.update_pattern_wrapper : raises Exception('fail update_pattern')",
-    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_update_pattern.py"
+    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_update_pattern.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises Exception('fail')\n- New Code: raises Exception('fail update_pattern')"
   },
   {
     "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_delete_pattern",
@@ -228,7 +232,8 @@
     "category": "Requirement misunderstanding / Missing branch logic",
     "commit_description": "fix: update test_knowledge_manager.py to use UnifiedDatabase instead of ChromaDBConnector\n\nFixed test infrastructure issues affecting CI:\n- Updated all mock references from ChromaDBConnector to UnifiedDatabase\n- Added proper 'document' field to test data for pattern/solution validation\n- Fixed mock ",
     "raw_counterexample": "Given: (),\n  MementoRC__claude-code-knowledge-framework_ef3c137f_delete_pattern_old.delete_pattern_wrapper : raises Exception('fail')\n  MementoRC__claude-code-knowledge-framework_ef3c137f_delete_pattern_new.delete_pattern_wrapper : raises Exception('fail delete_pattern')",
-    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_delete_pattern.py"
+    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_delete_pattern.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises Exception('fail')\n- New Code: raises Exception('fail delete_pattern')"
   },
   {
     "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_search_patterns",
@@ -240,7 +245,8 @@
     "category": "Requirement misunderstanding / Missing branch logic",
     "commit_description": "fix: update test_knowledge_manager.py to use UnifiedDatabase instead of ChromaDBConnector\n\nFixed test infrastructure issues affecting CI:\n- Updated all mock references from ChromaDBConnector to UnifiedDatabase\n- Added proper 'document' field to test data for pattern/solution validation\n- Fixed mock ",
     "raw_counterexample": "Given: (),\n  MementoRC__claude-code-knowledge-framework_ef3c137f_search_patterns_old.search_patterns_wrapper : raises Exception('fail')\n  MementoRC__claude-code-knowledge-framework_ef3c137f_search_patterns_new.search_patterns_wrapper : raises Exception('fail search_patterns')",
-    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_search_patterns.py"
+    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_search_patterns.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises Exception('fail')\n- New Code: raises Exception('fail search_patterns')"
   },
   {
     "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_add_error_solution",
@@ -252,7 +258,8 @@
     "category": "Requirement misunderstanding / Missing branch logic",
     "commit_description": "fix: update test_knowledge_manager.py to use UnifiedDatabase instead of ChromaDBConnector\n\nFixed test infrastructure issues affecting CI:\n- Updated all mock references from ChromaDBConnector to UnifiedDatabase\n- Added proper 'document' field to test data for pattern/solution validation\n- Fixed mock ",
     "raw_counterexample": "Given: (),\n  MementoRC__claude-code-knowledge-framework_ef3c137f_add_error_solution_old.add_error_solution_wrapper : raises Exception('fail')\n  MementoRC__claude-code-knowledge-framework_ef3c137f_add_error_solution_new.add_error_solution_wrapper : raises Exception('fail add_error_solution')",
-    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_add_error_solution.py"
+    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_add_error_solution.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises Exception('fail')\n- New Code: raises Exception('fail add_error_solution')"
   },
   {
     "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_get_error_solution",
@@ -264,7 +271,8 @@
     "category": "Requirement misunderstanding / Missing branch logic",
     "commit_description": "fix: update test_knowledge_manager.py to use UnifiedDatabase instead of ChromaDBConnector\n\nFixed test infrastructure issues affecting CI:\n- Updated all mock references from ChromaDBConnector to UnifiedDatabase\n- Added proper 'document' field to test data for pattern/solution validation\n- Fixed mock ",
     "raw_counterexample": "Given: (),\n  MementoRC__claude-code-knowledge-framework_ef3c137f_get_error_solution_old.get_error_solution_wrapper : raises Exception('fail')\n  MementoRC__claude-code-knowledge-framework_ef3c137f_get_error_solution_new.get_error_solution_wrapper : raises Exception('fail get_error_solution')",
-    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_get_error_solution.py"
+    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_get_error_solution.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises Exception('fail')\n- New Code: raises Exception('fail get_error_solution')"
   },
   {
     "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_search_error_solutions",
@@ -276,7 +284,8 @@
     "category": "Requirement misunderstanding / Missing branch logic",
     "commit_description": "fix: update test_knowledge_manager.py to use UnifiedDatabase instead of ChromaDBConnector\n\nFixed test infrastructure issues affecting CI:\n- Updated all mock references from ChromaDBConnector to UnifiedDatabase\n- Added proper 'document' field to test data for pattern/solution validation\n- Fixed mock ",
     "raw_counterexample": "Given: (),\n  MementoRC__claude-code-knowledge-framework_ef3c137f_search_error_solutions_old.search_error_solutions_wrapper : raises Exception('fail')\n  MementoRC__claude-code-knowledge-framework_ef3c137f_search_error_solutions_new.search_error_solutions_wrapper : raises Exception('fail search_error_solutions')",
-    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_search_error_solutions.py"
+    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_search_error_solutions.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises Exception('fail')\n- New Code: raises Exception('fail search_error_solutions')"
   },
   {
     "task_name": "MementoRC__claude-code-knowledge-framework_5a06fe2c_test_get_error_solution_success",
@@ -288,7 +297,8 @@
     "category": "Type-semantics bug",
     "commit_description": "fix: apply ChromaDBConnector \u2192 UnifiedDatabase pattern to ErrorSolutionManager tests\n\nApplied successful pattern from knowledge manager fix:\n- Updated mock fixtures from mock_chroma to mock_unified_db\n- Fixed constructor calls and assertions to use unified_db\n- Added proper method call expectations ",
     "raw_counterexample": "Given: (manager='', mock_chroma='\\x00\\x00\\x00\\x00\\x01\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00'),\n  MementoRC__claude-code-knowledge-framework_5a06fe2c_test_get_error_solution_success_old.test_get_error_solution_success : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'get_document'\")\n  MementoRC__claude-code-knowledge-framework_5a06fe2c_test_get_error_solution_success_new.test_get_error_solution_success : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'get_error_solution'\")",
-    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_5a06fe2c_test_get_error_solution_success.py"
+    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_5a06fe2c_test_get_error_solution_success.py",
+    "minimized_counterexample": "Args: (manager='', mock_chroma='\\x00\\x00\\x00\\x00\\x01\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00')\n- Old Code: raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'get_document'\")\n- New Code: raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'get_error_solution'\")"
   },
   {
     "task_name": "MementoRC__claude-code-knowledge-framework_5a06fe2c_test_update_error_solution_success",
@@ -300,7 +310,8 @@
     "category": "Type-semantics bug",
     "commit_description": "fix: apply ChromaDBConnector \u2192 UnifiedDatabase pattern to ErrorSolutionManager tests\n\nApplied successful pattern from knowledge manager fix:\n- Updated mock fixtures from mock_chroma to mock_unified_db\n- Fixed constructor calls and assertions to use unified_db\n- Added proper method call expectations ",
     "raw_counterexample": "Given: (manager='\\x00', mock_unified_db='', mock_semantic_search='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x01'),\n  MementoRC__claude-code-knowledge-framework_5a06fe2c_test_update_error_solution_success_old.test_update_error_solution_success : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'update_document'\")\n  MementoRC__claude-code-knowledge-framework_5a06fe2c_test_update_error_solution_success_new.test_update_error_solution_success : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'update_error_solution'\")",
-    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_5a06fe2c_test_update_error_solution_success.py"
+    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_5a06fe2c_test_update_error_solution_success.py",
+    "minimized_counterexample": "Args: (manager='\\x00', mock_unified_db='', mock_semantic_search='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x01')\n- Old Code: raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'update_document'\")\n- New Code: raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'update_error_solution'\")"
   },
   {
     "task_name": "MementoRC__claude-code-knowledge-framework_5a06fe2c_test_update_error_solution_metadata_only",
@@ -312,7 +323,8 @@
     "category": "Type-semantics bug",
     "commit_description": "fix: apply ChromaDBConnector \u2192 UnifiedDatabase pattern to ErrorSolutionManager tests\n\nApplied successful pattern from knowledge manager fix:\n- Updated mock fixtures from mock_chroma to mock_unified_db\n- Fixed constructor calls and assertions to use unified_db\n- Added proper method call expectations ",
     "raw_counterexample": "Given: (manager='', mock_unified_db='\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00'),\n  MementoRC__claude-code-knowledge-framework_5a06fe2c_test_update_error_solution_metadata_only_old.test_update_error_solution_metadata_only : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'update_document'\")\n  MementoRC__claude-code-knowledge-framework_5a06fe2c_test_update_error_solution_metadata_only_new.test_update_error_solution_metadata_only : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'update_error_solution'\")",
-    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_5a06fe2c_test_update_error_solution_metadata_only.py"
+    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_5a06fe2c_test_update_error_solution_metadata_only.py",
+    "minimized_counterexample": "Args: (manager='', mock_unified_db='\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00')\n- Old Code: raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'update_document'\")\n- New Code: raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'update_error_solution'\")"
   },
   {
     "task_name": "MementoRC__claude-code-knowledge-framework_5a06fe2c_test_delete_error_solution_success",
@@ -324,7 +336,8 @@
     "category": "Type-semantics bug",
     "commit_description": "fix: apply ChromaDBConnector \u2192 UnifiedDatabase pattern to ErrorSolutionManager tests\n\nApplied successful pattern from knowledge manager fix:\n- Updated mock fixtures from mock_chroma to mock_unified_db\n- Fixed constructor calls and assertions to use unified_db\n- Added proper method call expectations ",
     "raw_counterexample": "Given: (manager='', mock_unified_db='\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00'),\n  MementoRC__claude-code-knowledge-framework_5a06fe2c_test_delete_error_solution_success_old.test_delete_error_solution_success : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'delete_document'\")\n  MementoRC__claude-code-knowledge-framework_5a06fe2c_test_delete_error_solution_success_new.test_delete_error_solution_success : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'delete_error_solution'\")",
-    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_5a06fe2c_test_delete_error_solution_success.py"
+    "repro_script": "results/benchmark\\repro_MementoRC__claude-code-knowledge-framework_5a06fe2c_test_delete_error_solution_success.py",
+    "minimized_counterexample": "Args: (manager='', mock_unified_db='\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00')\n- Old Code: raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'delete_document'\")\n- New Code: raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'delete_error_solution'\")"
   },
   {
     "task_name": "MementoRC__mcp-git_fc222178_test_load_environment_with_empty_github_token",
@@ -336,7 +349,8 @@
     "category": "Type-semantics bug",
     "commit_description": "fix: resolve CI test failure in environment loading test\n\n- Replace patch.dict with pytest monkeypatch for better test isolation\n- Explicitly clean environment variables before test execution\n- Fix GitHub token assertion failure in CI environment\n- Maintain test functionality while ensuring CI compa",
     "raw_counterexample": "Given: (tmp_path='', monkeypatch='\\x00\\x00\\x01\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x01\\x00'),\n  MementoRC__mcp-git_fc222178_test_load_environment_with_empty_github_token_old.test_load_environment_with_empty_github_token_wrapper : raises TypeError('test_load_environment_with_empty_github_token_wrapper() takes 1 positional argument but 2 were given')\n  MementoRC__mcp-git_fc222178_test_load_environment_with_empty_github_token_new.test_load_environment_with_empty_github_token_wrapper : raises TypeError(\"unsupported operand type(s) for /: 'str' and 'str'\")\nGiven: (tmp_path='\\x00\\x00\\x00'),\n  MementoRC__mcp-git_fc222178_test_load_environment_with_empty_github_token_old.test_load_environment_with_empty_github_token_wrapper : raises TypeError(\"unsupported operand type(s) for /: 'str' and 'str'\")\n  MementoRC__mcp-git_fc222178_test_load_environment_with_empty_github_token_new.test_load_environment_with_empty_github_token_wrapper : raises TypeError(\"test_load_environment_with_empty_github_token_wrapper() missing 1 required positional argument: 'monkeypatch'\")",
-    "repro_script": "results/benchmark\\repro_MementoRC__mcp-git_fc222178_test_load_environment_with_empty_github_token.py"
+    "repro_script": "results/benchmark\\repro_MementoRC__mcp-git_fc222178_test_load_environment_with_empty_github_token.py",
+    "minimized_counterexample": "Args: (tmp_path='', monkeypatch='\\x00\\x00\\x01\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x01\\x00')\n- Old Code: raises TypeError('test_load_environment_with_empty_github_token_wrapper() takes 1 positional argument but 2 were given')\n- New Code: raises TypeError(\"unsupported operand type(s) for /: 'str' and 'str'\")"
   },
   {
     "task_name": "MementoRC__mcp-git_c6fd58c9_test_load_environment_with_empty_github_token",
@@ -348,7 +362,8 @@
     "category": "Type-semantics bug",
     "commit_description": "fix: resolve CI test failure in environment loading test\n\n- Replace patch.dict with pytest monkeypatch for better test isolation\n- Explicitly clean environment variables before test execution\n- Fix GitHub token assertion failure in CI environment\n- Maintain test functionality while ensuring CI compa",
     "raw_counterexample": "Given: (tmp_path='', monkeypatch='\\x01\\x00\\x00\\x02\\x00\\x00\\x01\\x00\\x00\\x00\\x00'),\n  MementoRC__mcp-git_c6fd58c9_test_load_environment_with_empty_github_token_old.test_load_environment_with_empty_github_token_wrapper : raises TypeError('test_load_environment_with_empty_github_token_wrapper() takes 1 positional argument but 2 were given')\n  MementoRC__mcp-git_c6fd58c9_test_load_environment_with_empty_github_token_new.test_load_environment_with_empty_github_token_wrapper : raises TypeError(\"unsupported operand type(s) for /: 'str' and 'str'\")\nGiven: (tmp_path='\\x00\\x00\\x00'),\n  MementoRC__mcp-git_c6fd58c9_test_load_environment_with_empty_github_token_old.test_load_environment_with_empty_github_token_wrapper : raises TypeError(\"unsupported operand type(s) for /: 'str' and 'str'\")\n  MementoRC__mcp-git_c6fd58c9_test_load_environment_with_empty_github_token_new.test_load_environment_with_empty_github_token_wrapper : raises TypeError(\"test_load_environment_with_empty_github_token_wrapper() missing 1 required positional argument: 'monkeypatch'\")",
-    "repro_script": "results/benchmark\\repro_MementoRC__mcp-git_c6fd58c9_test_load_environment_with_empty_github_token.py"
+    "repro_script": "results/benchmark\\repro_MementoRC__mcp-git_c6fd58c9_test_load_environment_with_empty_github_token.py",
+    "minimized_counterexample": "Args: (tmp_path='', monkeypatch='\\x01\\x00\\x00\\x02\\x00\\x00\\x01\\x00\\x00\\x00\\x00')\n- Old Code: raises TypeError('test_load_environment_with_empty_github_token_wrapper() takes 1 positional argument but 2 were given')\n- New Code: raises TypeError(\"unsupported operand type(s) for /: 'str' and 'str'\")"
   },
   {
     "task_name": "tobypullan__CC_GH_Integration_229fa7e5_subtract_vectors",
@@ -360,7 +375,8 @@
     "category": "Type-semantics bug",
     "commit_description": "Fix subtract_vectors function bug\n\nFixed the subtract_vectors function in src/vector_ops.py that was using\naddition (+) instead of subtraction (-). This resolves the test failure\nwhere the function was returning [6, 9, 12] instead of [4, 5, 6].\n\nFixes #1\n\n\ud83e\udd16 Generated with [Claude Code](https://claud",
     "raw_counterexample": "Given: (x='', y='\\x00\\x00'),\n  tobypullan__CC_GH_Integration_229fa7e5_subtract_vectors_old.subtract_vectors : returns '\\x00\\x00'\n  tobypullan__CC_GH_Integration_229fa7e5_subtract_vectors_new.subtract_vectors : raises TypeError(\"unsupported operand type(s) for -: 'str' and 'str'\")",
-    "repro_script": "results/benchmark\\repro_tobypullan__CC_GH_Integration_229fa7e5_subtract_vectors.py"
+    "repro_script": "results/benchmark\\repro_tobypullan__CC_GH_Integration_229fa7e5_subtract_vectors.py",
+    "minimized_counterexample": "Args: (x='', y='\\x00\\x00')\n- Old Code: returns '\\x00\\x00'\n- New Code: raises TypeError(\"unsupported operand type(s) for -: 'str' and 'str'\")"
   },
   {
     "task_name": "toiee-lab__librechat-manager_c3b15322_list_users",
@@ -372,7 +388,8 @@
     "category": "Wrong/suboptimal algorithm",
     "commit_description": "\u6a5f\u80fd\u6539\u5584: LibreChat\u30e6\u30fc\u30b6\u30fc\u767b\u9332\u306e\u30c7\u30d0\u30c3\u30b0\u6a5f\u80fd\u3092\u5f37\u5316\n\n- \u8907\u6570\u306e\u7570\u306a\u308b\u30b3\u30de\u30f3\u30c9\u5f62\u5f0f\u3092\u8a66\u884c\u3057\u3066\u672c\u756a\u74b0\u5883\u3067\u306e\u30e6\u30fc\u30b6\u30fc\u7ba1\u7406\u3092\u30b5\u30dd\u30fc\u30c8\n- \u8a73\u7d30\u306a\u30a8\u30e9\u30fc\u30ed\u30b0\u51fa\u529b\u3067\u554f\u984c\u8a3a\u65ad\u3092\u5bb9\u6613\u306b\n- JSON\u5f62\u5f0f\u306e\u30ed\u30b0\u51fa\u529b\u3092\u8ffd\u52a0\u3057\u3066\u969c\u5bb3\u5206\u6790\u3092\u6539\u5584\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
     "raw_counterexample": "Given: (),",
-    "repro_script": "results/benchmark\\repro_toiee-lab__librechat-manager_c3b15322_list_users.py"
+    "repro_script": "results/benchmark\\repro_toiee-lab__librechat-manager_c3b15322_list_users.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: Unknown\n- New Code: Unknown"
   },
   {
     "task_name": "naofumi-fujii__my-schedule_d75ef60f_is_holiday",
@@ -384,7 +401,8 @@
     "category": "Requirement misunderstanding / Missing branch logic",
     "commit_description": "refactor: \u30b3\u30fc\u30c9\u30d9\u30fc\u30b9\u3092\u6574\u7406\u3057\u3066\u53ef\u8aad\u6027\u3068\u4fdd\u5b88\u6027\u3092\u5411\u4e0a\n\n- \u30e2\u30b8\u30e5\u30fc\u30eb\u30c9\u30ad\u30e5\u30e1\u30f3\u30c6\u30fc\u30b7\u30e7\u30f3\u306e\u8ffd\u52a0\n- \u5b9a\u6570\u306e\u6574\u7406\u3068\u96c6\u7d04\n- \u30bf\u30a4\u30e0\u30be\u30fc\u30f3\u51e6\u7406\u306e\u5171\u901a\u30e6\u30fc\u30c6\u30a3\u30ea\u30c6\u30a3\u95a2\u6570\u306e\u4f5c\u6210\n- \u95a2\u6570\u306e\u8cac\u4efb\u3092\u660e\u78ba\u306b\u5206\u96e2\n- \u65e5\u672c\u8a9e\u306e\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\u6587\u5b57\u5217\u3078\u306e\u66f4\u65b0\n- \u30b3\u30fc\u30c9\u69cb\u9020\u306e\u6539\u5584\uff08\u5c0f\u3055\u306a\u95a2\u6570\u3078\u306e\u5206\u5272\uff09\n- \u30ea\u30d5\u30a1\u30af\u30bf\u30ea\u30f3\u30b0\u6642\u306b\u6a5f\u80fd\u8ffd\u52a0\u306f\u884c\u308f\u306a\u3044\u65b9\u91dd\u3092\u7dad\u6301\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
     "raw_counterexample": "Given: (service='', date='\\x00\\x00\\x00\\x00\\x01\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00'),\n  naofumi-fujii__my-schedule_d75ef60f_is_holiday_old.is_holiday : raises NameError(\"name 'pytz' is not defined\")\n  naofumi-fujii__my-schedule_d75ef60f_is_holiday_new.is_holiday : raises NameError(\"name 'get_day_start_end' is not defined\")",
-    "repro_script": "results/benchmark\\repro_naofumi-fujii__my-schedule_d75ef60f_is_holiday.py"
+    "repro_script": "results/benchmark\\repro_naofumi-fujii__my-schedule_d75ef60f_is_holiday.py",
+    "minimized_counterexample": "Args: (service='', date='\\x00\\x00\\x00\\x00\\x01\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00')\n- Old Code: raises NameError(\"name 'pytz' is not defined\")\n- New Code: raises NameError(\"name 'get_day_start_end' is not defined\")"
   },
   {
     "task_name": "naofumi-fujii__my-schedule_d75ef60f_get_credentials",
@@ -396,7 +414,8 @@
     "category": "Requirement misunderstanding / Missing branch logic",
     "commit_description": "refactor: \u30b3\u30fc\u30c9\u30d9\u30fc\u30b9\u3092\u6574\u7406\u3057\u3066\u53ef\u8aad\u6027\u3068\u4fdd\u5b88\u6027\u3092\u5411\u4e0a\n\n- \u30e2\u30b8\u30e5\u30fc\u30eb\u30c9\u30ad\u30e5\u30e1\u30f3\u30c6\u30fc\u30b7\u30e7\u30f3\u306e\u8ffd\u52a0\n- \u5b9a\u6570\u306e\u6574\u7406\u3068\u96c6\u7d04\n- \u30bf\u30a4\u30e0\u30be\u30fc\u30f3\u51e6\u7406\u306e\u5171\u901a\u30e6\u30fc\u30c6\u30a3\u30ea\u30c6\u30a3\u95a2\u6570\u306e\u4f5c\u6210\n- \u95a2\u6570\u306e\u8cac\u4efb\u3092\u660e\u78ba\u306b\u5206\u96e2\n- \u65e5\u672c\u8a9e\u306e\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\u6587\u5b57\u5217\u3078\u306e\u66f4\u65b0\n- \u30b3\u30fc\u30c9\u69cb\u9020\u306e\u6539\u5584\uff08\u5c0f\u3055\u306a\u95a2\u6570\u3078\u306e\u5206\u5272\uff09\n- \u30ea\u30d5\u30a1\u30af\u30bf\u30ea\u30f3\u30b0\u6642\u306b\u6a5f\u80fd\u8ffd\u52a0\u306f\u884c\u308f\u306a\u3044\u65b9\u91dd\u3092\u7dad\u6301\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
     "raw_counterexample": "Given: (),\n  naofumi-fujii__my-schedule_d75ef60f_get_credentials_old.get_credentials : raises SideEffectDetected('A \"os.mkdir\" operation was detected. It\\'s dangerous to run CrossHair on code with side effects. To allow this operation anyway, use \"--unblock=os.mkdir:C:\\\\Users\\\\rhith\\\\.credentials:511:-1\". (or some colon-delimited prefix)')\n  naofumi-fujii__my-schedule_d75ef60f_get_credentials_new.get_credentials : raises NameError(\"name 'CREDENTIALS_PATH' is not defined\")",
-    "repro_script": "results/benchmark\\repro_naofumi-fujii__my-schedule_d75ef60f_get_credentials.py"
+    "repro_script": "results/benchmark\\repro_naofumi-fujii__my-schedule_d75ef60f_get_credentials.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises SideEffectDetected('A \"os.mkdir\" operation was detected. It\\'s dangerous to run CrossHair on code with side effects. To allow this operation anyway, use \"--unblock=os.mkdir:C:\\\\Users\\\\rhith\\\\.credentials:511:-1\". (or some colon-delimited prefix)')\n- New Code: raises NameError(\"name 'CREDENTIALS_PATH' is not defined\")"
   },
   {
     "task_name": "naofumi-fujii__my-schedule_d75ef60f_main",
@@ -408,7 +427,8 @@
     "category": "Requirement misunderstanding / Missing branch logic",
     "commit_description": "refactor: \u30b3\u30fc\u30c9\u30d9\u30fc\u30b9\u3092\u6574\u7406\u3057\u3066\u53ef\u8aad\u6027\u3068\u4fdd\u5b88\u6027\u3092\u5411\u4e0a\n\n- \u30e2\u30b8\u30e5\u30fc\u30eb\u30c9\u30ad\u30e5\u30e1\u30f3\u30c6\u30fc\u30b7\u30e7\u30f3\u306e\u8ffd\u52a0\n- \u5b9a\u6570\u306e\u6574\u7406\u3068\u96c6\u7d04\n- \u30bf\u30a4\u30e0\u30be\u30fc\u30f3\u51e6\u7406\u306e\u5171\u901a\u30e6\u30fc\u30c6\u30a3\u30ea\u30c6\u30a3\u95a2\u6570\u306e\u4f5c\u6210\n- \u95a2\u6570\u306e\u8cac\u4efb\u3092\u660e\u78ba\u306b\u5206\u96e2\n- \u65e5\u672c\u8a9e\u306e\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\u6587\u5b57\u5217\u3078\u306e\u66f4\u65b0\n- \u30b3\u30fc\u30c9\u69cb\u9020\u306e\u6539\u5584\uff08\u5c0f\u3055\u306a\u95a2\u6570\u3078\u306e\u5206\u5272\uff09\n- \u30ea\u30d5\u30a1\u30af\u30bf\u30ea\u30f3\u30b0\u6642\u306b\u6a5f\u80fd\u8ffd\u52a0\u306f\u884c\u308f\u306a\u3044\u65b9\u91dd\u3092\u7dad\u6301\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
     "raw_counterexample": "Given: (),\n  naofumi-fujii__my-schedule_d75ef60f_main_old.main : raises NameError(\"name 'argparse' is not defined\")\n  naofumi-fujii__my-schedule_d75ef60f_main_new.main : raises NameError(\"name 'setup_arg_parser' is not defined\")",
-    "repro_script": "results/benchmark\\repro_naofumi-fujii__my-schedule_d75ef60f_main.py"
+    "repro_script": "results/benchmark\\repro_naofumi-fujii__my-schedule_d75ef60f_main.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises NameError(\"name 'argparse' is not defined\")\n- New Code: raises NameError(\"name 'setup_arg_parser' is not defined\")"
   },
   {
     "task_name": "johnathan-greenaway__chat-console_74219b58__get_selected_model_id",
@@ -420,7 +440,8 @@
     "category": "Wrong/suboptimal algorithm",
     "commit_description": "Fix tuple index out of range error by making row handling more resilient\n\n1. Removed strict isinstance(row, tuple) checks\n2. Added more robust error handling for row access\n3. Improved fallback mechanisms when row indexing fails\n4. Added detailed error logging to help diagnose issues\n\n\ud83e\udd16 Generated wi",
     "raw_counterexample": "Given: (),\n  johnathan-greenaway__chat-console_74219b58__get_selected_model_id_old._get_selected_model_id_wrapper : raises NameError(\"name 'logger' is not defined\")\n  johnathan-greenaway__chat-console_74219b58__get_selected_model_id_new._get_selected_model_id_wrapper : raises ModuleNotFoundError(\"No module named 'app'\")",
-    "repro_script": "results/benchmark\\repro_johnathan-greenaway__chat-console_74219b58__get_selected_model_id.py"
+    "repro_script": "results/benchmark\\repro_johnathan-greenaway__chat-console_74219b58__get_selected_model_id.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises NameError(\"name 'logger' is not defined\")\n- New Code: raises ModuleNotFoundError(\"No module named 'app'\")"
   },
   {
     "task_name": "johnYuan98__johnYuan98-warehouse-pdf-processor_b6000f11_get_algin_sort_key",
@@ -432,7 +453,8 @@
     "category": "Requirement misunderstanding / Missing branch logic",
     "commit_description": "MAJOR FIX: Implement proper ALGIN SKU sorting by complete order\n\n- Add original page number to sorting key (sku_order, page_number)\n- Ensure same SKUs are grouped together in original page order\n- Different SKUs follow the predefined 64-SKU sequence order\n- Enhanced debug output showing SKU groups a",
     "raw_counterexample": "Given: (item=''),\n  johnYuan98__johnYuan98-warehouse-pdf-processor_b6000f11_get_algin_sort_key_old.get_algin_sort_key : returns (999, 999)\n  johnYuan98__johnYuan98-warehouse-pdf-processor_b6000f11_get_algin_sort_key_new.get_algin_sort_key : returns (999, 999, 999)",
-    "repro_script": "results/benchmark\\repro_johnYuan98__johnYuan98-warehouse-pdf-processor_b6000f11_get_algin_sort_key.py"
+    "repro_script": "results/benchmark\\repro_johnYuan98__johnYuan98-warehouse-pdf-processor_b6000f11_get_algin_sort_key.py",
+    "minimized_counterexample": "Args: (item='')\n- Old Code: returns (999, 999)\n- New Code: returns (999, 999, 999)"
   },
   {
     "task_name": "Darelldrayton__parking-in-a-pinch_a5979f69_get_permissions",
@@ -444,7 +466,8 @@
     "category": "Requirement misunderstanding / Missing branch logic",
     "commit_description": "\ud83d\udd27 CRITICAL FIX: Remove 403 Forbidden errors from admin endpoints\n\n- Removed get_permissions() authentication check in AdminUserViewSet\n- Disabled admin authentication check in stats() method\n- Fixed all admin endpoints to bypass authentication temporarily\n\n\ud83e\udd16 Generated with [Claude Code](https://clau",
     "raw_counterexample": "Given: (),\n  Darelldrayton__parking-in-a-pinch_a5979f69_get_permissions_old.get_permissions_wrapper : raises NameError(\"name 'permissions' is not defined\")\n  Darelldrayton__parking-in-a-pinch_a5979f69_get_permissions_new.get_permissions_wrapper : returns []",
-    "repro_script": "results/benchmark\\repro_Darelldrayton__parking-in-a-pinch_a5979f69_get_permissions.py"
+    "repro_script": "results/benchmark\\repro_Darelldrayton__parking-in-a-pinch_a5979f69_get_permissions.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises NameError(\"name 'permissions' is not defined\")\n- New Code: returns []"
   },
   {
     "task_name": "Tamas54__Kormanyzati-Gazdasagi-Hirlevel_776e37d0___init__",
@@ -456,7 +479,8 @@
     "category": "Requirement misunderstanding / Missing branch logic",
     "commit_description": "\ud83d\udee1\ufe0f Add robust import error handling to prevent crashes\n\n- Added try/except blocks for openai and google imports\n- App won't crash if packages fail to import\n- Better error messages and graceful degradation\n- This prevents Railway deployment failures\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/",
     "raw_counterexample": "Given: (),",
-    "repro_script": "results/benchmark\\repro_Tamas54__Kormanyzati-Gazdasagi-Hirlevel_776e37d0___init__.py"
+    "repro_script": "results/benchmark\\repro_Tamas54__Kormanyzati-Gazdasagi-Hirlevel_776e37d0___init__.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: Unknown\n- New Code: Unknown"
   },
   {
     "task_name": "kevin82222__remote-server_728c6bf8_connectionLost",
@@ -468,7 +492,8 @@
     "category": "Type-semantics bug",
     "commit_description": "Update server.py to official nvaccess version\n\n- Added comprehensive type hints and modern Python typing\n- Improved code structure with better class organization\n- Enhanced error handling and parameter validation\n- More robust SSL certificate handling with binary read mode\n- Better logging and conne",
     "raw_counterexample": "Given: (),\n  kevin82222__remote-server_728c6bf8_connectionLost_old.connectionLost_wrapper : raises TypeError(\"connectionLost_wrapper() missing 1 required positional argument: 'reason'\")\n  kevin82222__remote-server_728c6bf8_connectionLost_new.connectionLost_wrapper : returns None\nGiven: (reason='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\x00'),\n  kevin82222__remote-server_728c6bf8_connectionLost_old.connectionLost_wrapper : raises NameError(\"name 'logger' is not defined\")\n  kevin82222__remote-server_728c6bf8_connectionLost_new.connectionLost_wrapper : raises TypeError('connectionLost_wrapper() takes 0 positional arguments but 1 was given')",
-    "repro_script": "results/benchmark\\repro_kevin82222__remote-server_728c6bf8_connectionLost.py"
+    "repro_script": "results/benchmark\\repro_kevin82222__remote-server_728c6bf8_connectionLost.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises TypeError(\"connectionLost_wrapper() missing 1 required positional argument: 'reason'\")\n- New Code: returns None"
   },
   {
     "task_name": "kikuchinomegane__task_manager_d1f607fc_run_cli",
@@ -480,7 +505,8 @@
     "category": "Requirement misunderstanding / Missing branch logic",
     "commit_description": "Refactor CLI module for better maintainability and error handling\n\n- Fix variable naming bug (list_parser)\n- Add comprehensive error handling for date parsing and task operations\n- Extract command handlers into separate functions\n- Add docstrings and help text for better UX\n- Improve code structure ",
     "raw_counterexample": "Given: (),\n  kikuchinomegane__task_manager_d1f607fc_run_cli_old.run_cli : raises NameError(\"name 'argparse' is not defined\")\n  kikuchinomegane__task_manager_d1f607fc_run_cli_new.run_cli : raises NameError(\"name 'setup_parser' is not defined\")",
-    "repro_script": "results/benchmark\\repro_kikuchinomegane__task_manager_d1f607fc_run_cli.py"
+    "repro_script": "results/benchmark\\repro_kikuchinomegane__task_manager_d1f607fc_run_cli.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises NameError(\"name 'argparse' is not defined\")\n- New Code: raises NameError(\"name 'setup_parser' is not defined\")"
   },
   {
     "task_name": "kimata__rasp-water_ce116c79_test_event",
@@ -492,7 +518,8 @@
     "category": "Type-semantics bug",
     "commit_description": "test: test_event \u306e\u4e26\u5217\u5b9f\u884c\u6642\u30bf\u30a4\u30e0\u30a2\u30a6\u30c8\u554f\u984c\u3092\u4fee\u6b63\n\n\u554f\u984c:\n- pytest-xdist \u306b\u3088\u308b\u4e26\u5217\u5b9f\u884c\u6642\u306b test_event \u304c\u30bf\u30a4\u30e0\u30a2\u30a6\u30c8\u3057\u3066\u3044\u305f\n- SSE \u30b9\u30c8\u30ea\u30fc\u30e0\u63a5\u7d9a\u5f8c\u306b test_client.delete() \u3067\u63a5\u7d9a\u304c\u5207\u65ad\u3055\u308c\u308b\n- \u305d\u306e\u5f8c\u306e test_terminate() \u306b\u3088\u308b\u30a4\u30d9\u30f3\u30c8\u767a\u751f\u304c SSE \u306b\u5c4a\u304b\u306a\u3044\n\n\u89e3\u6c7a\u7b56:\n- SSE \u30ea\u30af\u30a8\u30b9\u30c8\u3092\u5225\u30b9\u30ec\u30c3\u30c9\u3067\u5b9f\u884c\n- \u30c6\u30b9\u30c8\u5b9f\u884c\u4e2d\u306b app_log_clear() \u3067\u30a4\u30d9\u30f3\u30c8\u3092\u660e\u793a\u7684\u306b\u767a\u751f\n- SSE \u63a5\u7d9a\u304c\u751f\u304d\u3066\u3044\u308b\u9593\u306b\u30a4\u30d9\u30f3\u30c8\u3092\u53d7\u4fe1\u3057 count=1 \u3067\u6b63\u5e38\u7d42\u4e86\n\n\u5909\u66f4:\n- \u5225\u30b9\u30ec\u30c3\u30c9\u3067\u306e ",
     "raw_counterexample": "Given: (client='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\x00'),\n  kimata__rasp-water_ce116c79_test_event_old.test_event : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'get'\")\n  kimata__rasp-water_ce116c79_test_event_new.test_event : raises NameError(\"name 'time' is not defined\")",
-    "repro_script": "results/benchmark\\repro_kimata__rasp-water_ce116c79_test_event.py"
+    "repro_script": "results/benchmark\\repro_kimata__rasp-water_ce116c79_test_event.py",
+    "minimized_counterexample": "Args: (client='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\x00')\n- Old Code: raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'get'\")\n- New Code: raises NameError(\"name 'time' is not defined\")"
   },
   {
     "task_name": "broadinstitute__starrynight_01127134_transform",
@@ -504,7 +531,8 @@
     "category": "Requirement misunderstanding / Missing branch logic",
     "commit_description": "refactor: simplify and improve index algorithm tests\n\n- Reorganized PCPIndex tests into a class for better grouping\n- Simplified test data and assertions for better maintainability\n- Added proper type annotations throughout the test file\n- Reduced complexity in mocking and test setup\n- Improved test",
     "raw_counterexample": "Given: (ast=''),\n  broadinstitute__starrynight_01127134_transform_old.transform_wrapper : returns {'start': [{'dataset_id': 'test_dataset'}, {'batch_id': 'test_batch'}, {'plate_id': 'test_plate'}, {'cycle_id': '1'}, {'magnification': '10'}, {'well_id': 'A1'}, {'site_id': '1'}, {'extension': 'tiff'}]}\n  broadinstitute__starrynight_01127134_transform_new.transform_wrapper : returns {'start': [{'dataset_id': 'test_dataset'}, {'batch_id': 'test_batch'}, {'plate_id': 'test_plate'}, {'cycle_id': '1'}, {'extension': 'tiff'}]}",
-    "repro_script": "results/benchmark\\repro_broadinstitute__starrynight_01127134_transform.py"
+    "repro_script": "results/benchmark\\repro_broadinstitute__starrynight_01127134_transform.py",
+    "minimized_counterexample": "Args: (ast='')\n- Old Code: returns {'start': [{'dataset_id': 'test_dataset'}, {'batch_id': 'test_batch'}, {'plate_id': 'test_plate'}, {'cycle_id': '1'}, {'magnification': '10'}, {'well_id': 'A1'}, {'site_id': '1'}, {'extension': 'tiff'}]}\n- New Code: returns {'start': [{'dataset_id': 'test_dataset'}, {'batch_id': 'test_batch'}, {'plate_id': 'test_plate'}, {'cycle_id': '1'}, {'extension': 'tiff'}]}"
   },
   {
     "task_name": "budouchan__discord-points-bot-sp_9d140101_init_db",
@@ -516,7 +544,8 @@
     "category": "Requirement misunderstanding / Missing branch logic",
     "commit_description": "Implement environment-based database switching\n\n- Add DATABASE_URL environment variable support\n- Auto-detect PostgreSQL vs SQLite based on environment\n- PostgreSQL connection pooling for Railway deployment\n- Maintain SQLite compatibility for local development\n- Safe table creation without dropping ",
     "raw_counterexample": "Given: (),",
-    "repro_script": "results/benchmark\\repro_budouchan__discord-points-bot-sp_9d140101_init_db.py"
+    "repro_script": "results/benchmark\\repro_budouchan__discord-points-bot-sp_9d140101_init_db.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: Unknown\n- New Code: Unknown"
   },
   {
     "task_name": "Darelldrayton__parking-in-a-pinch_c46eca3f_get_queryset",
@@ -528,7 +557,8 @@
     "category": "Requirement misunderstanding / Missing branch logic",
     "commit_description": "CRITICAL FIX: Comprehensive AnonymousUser handling in messaging views\n\n- Fix get_queryset() method to handle AnonymousUser properly\n- Fix perform_create() method to use fallback user logic\n- Add try/catch error handling to prevent database casting errors\n- Resolves TypeError: Field 'id' expected a n",
     "raw_counterexample": "Given: (),\n  Darelldrayton__parking-in-a-pinch_c46eca3f_get_queryset_old.get_queryset_wrapper : raises NameError(\"name 'Conversation' is not defined\")\n  Darelldrayton__parking-in-a-pinch_c46eca3f_get_queryset_new.get_queryset_wrapper : raises NameError(\"name 'logger' is not defined\")",
-    "repro_script": "results/benchmark\\repro_Darelldrayton__parking-in-a-pinch_c46eca3f_get_queryset.py"
+    "repro_script": "results/benchmark\\repro_Darelldrayton__parking-in-a-pinch_c46eca3f_get_queryset.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises NameError(\"name 'Conversation' is not defined\")\n- New Code: raises NameError(\"name 'logger' is not defined\")"
   },
   {
     "task_name": "DevsyAI__devsy-action_07413391_test_pr_gen_mode",
@@ -540,7 +570,8 @@
     "category": "Wrong/suboptimal algorithm",
     "commit_description": "fix: update tests to match new pr-gen MCP behavior\n\n- Update test_pr_gen_mode to expect full MCP config instead of empty config\n- Update test_successful_pr_gen to expect success messages and MCP server config\n- Tests now align with implementation that enables MCP for both pr-gen and pr-update modes\n",
     "raw_counterexample": "Given: (),\n  DevsyAI__devsy-action_07413391_test_pr_gen_mode_old.test_pr_gen_mode_wrapper : raises NameError(\"name 'generate_mcp_config' is not defined\")\n  DevsyAI__devsy-action_07413391_test_pr_gen_mode_new.test_pr_gen_mode_wrapper : raises NameError(\"name 'patch' is not defined\")",
-    "repro_script": "results/benchmark\\repro_DevsyAI__devsy-action_07413391_test_pr_gen_mode.py"
+    "repro_script": "results/benchmark\\repro_DevsyAI__devsy-action_07413391_test_pr_gen_mode.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises NameError(\"name 'generate_mcp_config' is not defined\")\n- New Code: raises NameError(\"name 'patch' is not defined\")"
   },
   {
     "task_name": "stevegsax__mistral-ocr_67d34f85___init__",
@@ -552,7 +583,8 @@
     "category": "Requirement misunderstanding / Missing branch logic",
     "commit_description": "Add RuntimeError for pre-completion result retrieval to fix test_retrieve_before_completion\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
     "raw_counterexample": "Given: (api_key=''),\n  stevegsax__mistral-ocr_67d34f85___init___old.__init___wrapper : returns []\n  stevegsax__mistral-ocr_67d34f85___init___new.__init___wrapper : raises NameError(\"name 'MistralOCRClient' is not defined\")",
-    "repro_script": "results/benchmark\\repro_stevegsax__mistral-ocr_67d34f85___init__.py"
+    "repro_script": "results/benchmark\\repro_stevegsax__mistral-ocr_67d34f85___init__.py",
+    "minimized_counterexample": "Args: (api_key='')\n- Old Code: returns []\n- New Code: raises NameError(\"name 'MistralOCRClient' is not defined\")"
   },
   {
     "task_name": "stevegsax__mistral-ocr_2054bcd9___init__",
@@ -564,7 +596,8 @@
     "category": "Requirement misunderstanding / Missing branch logic",
     "commit_description": "Add unknown document storage handling to fix test_unknown_document_storage\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
     "raw_counterexample": "Given: (api_key='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x01\\x01'),\n  stevegsax__mistral-ocr_2054bcd9___init___old.__init___wrapper : raises NameError(\"name 'destination' is not defined\")\n  stevegsax__mistral-ocr_2054bcd9___init___new.__init___wrapper : raises NameError(\"name 'MistralOCRClient' is not defined\")",
-    "repro_script": "results/benchmark\\repro_stevegsax__mistral-ocr_2054bcd9___init__.py"
+    "repro_script": "results/benchmark\\repro_stevegsax__mistral-ocr_2054bcd9___init__.py",
+    "minimized_counterexample": "Args: (api_key='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x01\\x01')\n- Old Code: raises NameError(\"name 'destination' is not defined\")\n- New Code: raises NameError(\"name 'MistralOCRClient' is not defined\")"
   },
   {
     "task_name": "Von-Base-Enterprises__core-nexus_bddede4d___init__",
@@ -576,7 +609,8 @@
     "category": "Requirement misunderstanding / Missing branch logic",
     "commit_description": "DEFENSIVE FIX: Add error handling for structlog binding to prevent service crashes\n\n- Added try/catch blocks around structlog.bind() calls in circuit breaker modules\n- Falls back to standard Python logger if structlog binding fails\n- Prevents service crashes while maintaining logging functionality\n-",
     "raw_counterexample": "Given: (),\n  Von-Base-Enterprises__core-nexus_bddede4d___init___old.__init___wrapper : raises NameError(\"name 'structlog_logger' is not defined\")\n  Von-Base-Enterprises__core-nexus_bddede4d___init___new.__init___wrapper : raises NameError(\"name 'logger' is not defined\")",
-    "repro_script": "results/benchmark\\repro_Von-Base-Enterprises__core-nexus_bddede4d___init__.py"
+    "repro_script": "results/benchmark\\repro_Von-Base-Enterprises__core-nexus_bddede4d___init__.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises NameError(\"name 'structlog_logger' is not defined\")\n- New Code: raises NameError(\"name 'logger' is not defined\")"
   },
   {
     "task_name": "g1nx22yra1k__Motas_85bb3f86_main",
@@ -588,7 +622,8 @@
     "category": "Wrong/suboptimal algorithm",
     "commit_description": "feat: integrate TaskManager with main application\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
     "raw_counterexample": "Welcome to Motas!\nWelcome to Motas\\!\nWelcome to Motas\\!\nWelcome to Motas!\nGiven: (),\n  g1nx22yra1k__Motas_85bb3f86_main_old.main : returns None\n  g1nx22yra1k__Motas_85bb3f86_main_new.main : raises NameError(\"name 'TaskManager' is not defined\")",
-    "repro_script": "results/benchmark\\repro_g1nx22yra1k__Motas_85bb3f86_main.py"
+    "repro_script": "results/benchmark\\repro_g1nx22yra1k__Motas_85bb3f86_main.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: returns None\n- New Code: raises NameError(\"name 'TaskManager' is not defined\")"
   },
   {
     "task_name": "fsgeek__Mallku_6670996a_get_db_config",
@@ -600,7 +635,8 @@
     "category": "Wrong/suboptimal algorithm",
     "commit_description": "fix: Resolve circular import in database module using direct file import\n\n- Use importlib to load database.py directly by file path\n- Avoids Python's module resolution confusion between package and module\n- This should finally fix the RecursionError in database integration tests\n\nThe issue was that ",
     "raw_counterexample": "Given: (),\n  fsgeek__Mallku_6670996a_get_db_config_old.get_db_config : raises ImportError('attempted relative import with no known parent package')\n  fsgeek__Mallku_6670996a_get_db_config_new.get_db_config : raises FileNotFoundError(2, 'No such file or directory')",
-    "repro_script": "results/benchmark\\repro_fsgeek__Mallku_6670996a_get_db_config.py"
+    "repro_script": "results/benchmark\\repro_fsgeek__Mallku_6670996a_get_db_config.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises ImportError('attempted relative import with no known parent package')\n- New Code: raises FileNotFoundError(2, 'No such file or directory')"
   },
   {
     "task_name": "awilmoth__mcp-firewall_1567d406_preload_rules",
@@ -612,6 +648,683 @@
     "category": "Requirement misunderstanding / Missing branch logic",
     "commit_description": "Add SQLite database support for rule persistence\n\n- Replace JSON file-based storage with SQLite database\n- Add database utilities endpoints for inspection and queries\n- Create database backup functionality\n- Maintain backward compatibility with existing rule format\n\n\ud83e\udd16 Generated with [Claude Code](ht",
     "raw_counterexample": "Given: (),\n  awilmoth__mcp-firewall_1567d406_preload_rules_old.preload_rules : returns None\n  awilmoth__mcp-firewall_1567d406_preload_rules_new.preload_rules : raises NameError(\"name 'logger' is not defined\")",
-    "repro_script": "results/benchmark\\repro_awilmoth__mcp-firewall_1567d406_preload_rules.py"
+    "repro_script": "results/benchmark\\repro_awilmoth__mcp-firewall_1567d406_preload_rules.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: returns None\n- New Code: raises NameError(\"name 'logger' is not defined\")"
+  },
+  {
+    "task_name": "CAESER-UOFM__CAESER_water_levels_monitoring_system_576b618e__load_databases",
+    "repo": "CAESER-UOFM/CAESER_water_levels_monitoring_system",
+    "sha": "576b618ef20c8783057ee09e6332ab4bf5020ca8",
+    "agent": "Claude Code",
+    "function_name": "_load_databases",
+    "is_method": true,
+    "category": "Requirement misunderstanding / Missing branch logic",
+    "commit_description": "Fix duplicate database loading during startup\n\nAdded guard to prevent concurrent _load_databases() calls that were causing:\n- Duplicate API calls to Google Drive\n- Wasted API quota\n- Performance delays during startup\n\nIssue: Both startup authentication and credential setup were calling\n_load_databas",
+    "raw_counterexample": "Given: (),\n  CAESER-UOFM__CAESER_water_levels_monitoring_system_576b618e__load_databases_old._load_databases_wrapper : returns None\n  CAESER-UOFM__CAESER_water_levels_monitoring_system_576b618e__load_databases_new._load_databases_wrapper : raises NameError(\"name 'logger' is not defined\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_CAESER-UOFM__CAESER_water_levels_monitoring_system_576b618e__load_databases.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: returns None\n- New Code: raises NameError(\"name 'logger' is not defined\")"
+  },
+  {
+    "task_name": "willtech3__emoji-smith_bc149977_handler",
+    "repo": "willtech3/emoji-smith",
+    "sha": "bc149977a8b9353fa06c7e842c127f0409ae85fe",
+    "agent": "Claude Code",
+    "function_name": "handler",
+    "is_method": false,
+    "category": "Wrong/suboptimal algorithm",
+    "commit_description": "feat: add comprehensive Lambda handler profiling and fix secrets loading\n\n- Add detailed timing for Lambda handler execution steps\n- Fix missing secrets loading call in AWS environment\n- Profile secrets loading, app initialization, and Mangum setup\n- Identify bottlenecks in cold start initialization",
+    "raw_counterexample": "Given: (event={'': '', '\\x00': 0, '\\x00\\x01': ''}, context=''),\n  willtech3__emoji-smith_bc149977_handler_old.handler : raises NameError(\"name 'get_app' is not defined\")\n  willtech3__emoji-smith_bc149977_handler_new.handler : raises NameError(\"name 'logger' is not defined\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_willtech3__emoji-smith_bc149977_handler.py",
+    "minimized_counterexample": "Args: (event={'': '', '\\x00': 0, '\\x00\\x01': ''}, context='')\n- Old Code: raises NameError(\"name 'get_app' is not defined\")\n- New Code: raises NameError(\"name 'logger' is not defined\")"
+  },
+  {
+    "task_name": "willtech3__emoji-smith_709a44c0___init__",
+    "repo": "willtech3/emoji-smith",
+    "sha": "709a44c08aef005b1b83ca9ce736e30446d16a70",
+    "agent": "Claude Code",
+    "function_name": "__init__",
+    "is_method": true,
+    "category": "Requirement misunderstanding / Missing branch logic",
+    "commit_description": "refactor: replace dummy mocks with real services in background worker tests\n\n- Use create_worker_emoji_service() factory with dummy env vars\n- Implement InMemoryJobQueue for testing without external dependencies\n- Stub Slack and OpenAI clients only at HTTP boundary\n- Add end-to-end job processing as",
+    "raw_counterexample": "Given: (),\n  willtech3__emoji-smith_709a44c0___init___old.__init___wrapper : returns None\n  willtech3__emoji-smith_709a44c0___init___new.__init___wrapper : raises NameError(\"name 'asyncio' is not defined\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_willtech3__emoji-smith_709a44c0___init__.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: returns None\n- New Code: raises NameError(\"name 'asyncio' is not defined\")"
+  },
+  {
+    "task_name": "merlin-quix__webinar-solar-farm_1138e755_main",
+    "repo": "merlin-quix/webinar-solar-farm",
+    "sha": "1138e75587c7799a4fab558306044e6fef605ba9",
+    "agent": "Claude Code",
+    "function_name": "main",
+    "is_method": false,
+    "category": "Type-semantics bug",
+    "commit_description": "Implement solar panel data aggregation with 1-minute tumbling windows\n\n- Transform enriched solar panel telemetry into location-based aggregates\n- Calculate average power per panel, panel count, and total power per location\n- Use Quix Streams windowed reduce for stateful aggregation of unique panels",
+    "raw_counterexample": "Given: (),\n  merlin-quix__webinar-solar-farm_1138e755_main_old.main : raises NameError(\"name 'Application' is not defined\")\n  merlin-quix__webinar-solar-farm_1138e755_main_new.main : raises AttributeError(\"module 'datetime' has no attribute 'now'\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_merlin-quix__webinar-solar-farm_1138e755_main.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises NameError(\"name 'Application' is not defined\")\n- New Code: raises AttributeError(\"module 'datetime' has no attribute 'now'\")"
+  },
+  {
+    "task_name": "willtech3__emoji-smith_f2ebb645__create_app",
+    "repo": "willtech3/emoji-smith",
+    "sha": "f2ebb645241fcf81a012b4aecc1b2bdc2b8e3461",
+    "agent": "Claude Code",
+    "function_name": "_create_app",
+    "is_method": false,
+    "category": "Wrong/suboptimal algorithm",
+    "commit_description": "fix(webhook): resolve Lambda import error by making webhook handler self-contained\n\n- Changed relative import of secrets_loader to direct import since both files are at package root\n- Added try-except pattern to handle import in both Lambda and local environments\n- Replaced emojismith module imports",
+    "raw_counterexample": "Given: (),\n  willtech3__emoji-smith_f2ebb645__create_app_old._create_app : raises ModuleNotFoundError(\"No module named 'emojismith'\")\n  willtech3__emoji-smith_f2ebb645__create_app_new._create_app : raises ModuleNotFoundError(\"No module named 'fastapi'\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_willtech3__emoji-smith_f2ebb645__create_app.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises ModuleNotFoundError(\"No module named 'emojismith'\")\n- New Code: raises ModuleNotFoundError(\"No module named 'fastapi'\")"
+  },
+  {
+    "task_name": "DevinGreenwell__IOAgent_287bb62d__initialize_client",
+    "repo": "DevinGreenwell/IOAgent",
+    "sha": "287bb62d2e693aa59ec8e793397b9f80e2cd332f",
+    "agent": "Claude Code",
+    "function_name": "_initialize_client",
+    "is_method": true,
+    "category": "Wrong/suboptimal algorithm",
+    "commit_description": "fix: improve Anthropic client initialization and error handling\n\n- Add detailed logging for client initialization process\n- Add fallback to reinitialize client if None during timeline extraction\n- Enhanced error handling with specific error messages\n- Log API key availability and initialization succ",
+    "raw_counterexample": "Given: (),",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_DevinGreenwell__IOAgent_287bb62d__initialize_client.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: Unknown\n- New Code: Unknown"
+  },
+  {
+    "task_name": "ANTIFRAGILE-Stadium__racing-drone-simulation_42e6bfa8_draw_drone",
+    "repo": "ANTIFRAGILE-Stadium/racing-drone-simulation",
+    "sha": "42e6bfa8bd4dbfa6884871fa4a303268102719c9",
+    "agent": "Claude Code",
+    "function_name": "draw_drone",
+    "is_method": true,
+    "category": "Type-semantics bug",
+    "commit_description": "fix: update grid visualization to show square stage bounds\n\nReplace rectangular grid with square representation to properly match the cube stage structure. Update drone position mapping to keep indicator within square bounds.\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: C",
+    "raw_counterexample": "Given: (),\n  ANTIFRAGILE-Stadium__racing-drone-simulation_42e6bfa8_draw_drone_old.draw_drone_wrapper : raises TypeError(\"unsupported operand type(s) for /: '_DynamicMock' and '_DynamicMock'\")\n  ANTIFRAGILE-Stadium__racing-drone-simulation_42e6bfa8_draw_drone_new.draw_drone_wrapper : raises TypeError(\"unsupported operand type(s) for /: '_DynamicMock' and 'int'\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_ANTIFRAGILE-Stadium__racing-drone-simulation_42e6bfa8_draw_drone.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises TypeError(\"unsupported operand type(s) for /: '_DynamicMock' and '_DynamicMock'\")\n- New Code: raises TypeError(\"unsupported operand type(s) for /: '_DynamicMock' and 'int'\")"
+  },
+  {
+    "task_name": "ViktorSharga__pwSpammer_5985badc___init__",
+    "repo": "ViktorSharga/pwSpammer",
+    "sha": "5985badc67742edbc459f645cfe3ed7a8cbf9c3a",
+    "agent": "Claude Code",
+    "function_name": "__init__",
+    "is_method": true,
+    "category": "Type-semantics bug",
+    "commit_description": "Implement MemberList Tab functionality\n\n- Added scrollable member list with selection support\n- Implemented top control buttons: Add from Clipboard, Add, Edit, Remove, Delete All\n- Added bottom SAVE/LOAD buttons with JSON file support\n- Created MemberDialog class for adding/editing members\n- Added c",
+    "raw_counterexample": "Given: (parent='\\x00', title='', initial_value='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x01'),\n  ViktorSharga__pwSpammer_5985badc___init___old.__init___wrapper : raises TypeError('__init___wrapper() takes 1 positional argument but 3 were given')\n  ViktorSharga__pwSpammer_5985badc___init___new.__init___wrapper : raises NameError(\"name 'tk' is not defined\")\nGiven: (root='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00'),\n  ViktorSharga__pwSpammer_5985badc___init___old.__init___wrapper : returns None\n  ViktorSharga__pwSpammer_5985badc___init___new.__init___wrapper : raises TypeError(\"__init___wrapper() missing 2 required positional arguments: 'title' and 'initial_value'\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_ViktorSharga__pwSpammer_5985badc___init__.py",
+    "minimized_counterexample": "Args: (parent='\\x00', title='', initial_value='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x01')\n- Old Code: raises TypeError('__init___wrapper() takes 1 positional argument but 3 were given')\n- New Code: raises NameError(\"name 'tk' is not defined\")"
+  },
+  {
+    "task_name": "okihara__juiz-mcp_d619cccc_add_todo",
+    "repo": "okihara/juiz-mcp",
+    "sha": "d619ccccf106b60b6dcd24a060a31dab5af9f445",
+    "agent": "Claude Code",
+    "function_name": "add_todo",
+    "is_method": false,
+    "category": "Type-semantics bug",
+    "commit_description": "refactor: todo_service.py\u304b\u3089DB\u3092\u524a\u9664\u3057\u3066Google Tasks\u306e\u307f\u4f7f\u7528\n\n- DBTodoItem\u30e2\u30c7\u30eb\u3068SQLAlchemy\u64cd\u4f5c\u3092\u5b8c\u5168\u306b\u524a\u9664\n- \u5168\u3066\u306e\u6a5f\u80fd\u3092Google Tasks API\u30d9\u30fc\u30b9\u306b\u5909\u66f4\n- \u30d8\u30eb\u30d1\u30fc\u95a2\u6570\u3092\u8ffd\u52a0\u3057\u3066\u91cd\u8907\u30b3\u30fc\u30c9\u3092\u89e3\u6d88\n  - _get_default_tasklist_id(): \u30c7\u30d5\u30a9\u30eb\u30c8\u30bf\u30b9\u30af\u30ea\u30b9\u30c8\u53d6\u5f97\n  - _create_task_dict(): Google Task\u304b\u3089TODO\u8f9e\u66f8\u4f5c\u6210\n- \u578b\u30a8\u30e9\u30fc\u3092\u4fee\u6b63\uff08todo_id\u3092str\u306b\u5909\u66f4\uff09\n- \u4e0d\u8981\u306aimport\u3092\u524a\u9664\uff08datetime, Session, DBTodoI",
+    "raw_counterexample": "Given: (user_id='\\x00\\x00\\x00', title='\\x00', description='\\x00\\x00\\x00\\x00', sync_to_google=False),\n  okihara__juiz-mcp_d619cccc_add_todo_old.add_todo : raises NameError(\"name 'get_db' is not defined\")\n  okihara__juiz-mcp_d619cccc_add_todo_new.add_todo : raises TypeError('add_todo() takes from 2 to 3 positional arguments but 4 were given')",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_okihara__juiz-mcp_d619cccc_add_todo.py",
+    "minimized_counterexample": "Args: (user_id='\\x00\\x00\\x00', title='\\x00', description='\\x00\\x00\\x00\\x00', sync_to_google=False)\n- Old Code: raises NameError(\"name 'get_db' is not defined\")\n- New Code: raises TypeError('add_todo() takes from 2 to 3 positional arguments but 4 were given')"
+  },
+  {
+    "task_name": "okihara__juiz-mcp_d619cccc_get_all_todos",
+    "repo": "okihara/juiz-mcp",
+    "sha": "d619ccccf106b60b6dcd24a060a31dab5af9f445",
+    "agent": "Claude Code",
+    "function_name": "get_all_todos",
+    "is_method": false,
+    "category": "Type-semantics bug",
+    "commit_description": "refactor: todo_service.py\u304b\u3089DB\u3092\u524a\u9664\u3057\u3066Google Tasks\u306e\u307f\u4f7f\u7528\n\n- DBTodoItem\u30e2\u30c7\u30eb\u3068SQLAlchemy\u64cd\u4f5c\u3092\u5b8c\u5168\u306b\u524a\u9664\n- \u5168\u3066\u306e\u6a5f\u80fd\u3092Google Tasks API\u30d9\u30fc\u30b9\u306b\u5909\u66f4\n- \u30d8\u30eb\u30d1\u30fc\u95a2\u6570\u3092\u8ffd\u52a0\u3057\u3066\u91cd\u8907\u30b3\u30fc\u30c9\u3092\u89e3\u6d88\n  - _get_default_tasklist_id(): \u30c7\u30d5\u30a9\u30eb\u30c8\u30bf\u30b9\u30af\u30ea\u30b9\u30c8\u53d6\u5f97\n  - _create_task_dict(): Google Task\u304b\u3089TODO\u8f9e\u66f8\u4f5c\u6210\n- \u578b\u30a8\u30e9\u30fc\u3092\u4fee\u6b63\uff08todo_id\u3092str\u306b\u5909\u66f4\uff09\n- \u4e0d\u8981\u306aimport\u3092\u524a\u9664\uff08datetime, Session, DBTodoI",
+    "raw_counterexample": "Given: (user_id='', filter_status='\\x00\\x00\\x00\\x02\\x00\\x00\\x01\\x00\\x00\\x00\\x00', include_google_tasks=False),\n  okihara__juiz-mcp_d619cccc_get_all_todos_old.get_all_todos : raises NameError(\"name 'get_db' is not defined\")\n  okihara__juiz-mcp_d619cccc_get_all_todos_new.get_all_todos : raises TypeError('get_all_todos() takes from 1 to 2 positional arguments but 3 were given')",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_okihara__juiz-mcp_d619cccc_get_all_todos.py",
+    "minimized_counterexample": "Args: (user_id='', filter_status='\\x00\\x00\\x00\\x02\\x00\\x00\\x01\\x00\\x00\\x00\\x00', include_google_tasks=False)\n- Old Code: raises NameError(\"name 'get_db' is not defined\")\n- New Code: raises TypeError('get_all_todos() takes from 1 to 2 positional arguments but 3 were given')"
+  },
+  {
+    "task_name": "inspirepan__klaude-code_86c7666b__switch_mode_or_insert",
+    "repo": "inspirepan/klaude-code",
+    "sha": "86c7666beefc8a7e685c29c4977bc4a548f2da76",
+    "agent": "Claude Code",
+    "function_name": "_switch_mode_or_insert",
+    "is_method": true,
+    "category": "Type-semantics bug",
+    "commit_description": "Improve input mode switching compatibility for multiline input\n\n- Mode switching (\\!, #, *) now works at any line start, not just empty buffer\n- Backspace to normal mode works at any line start\n- @ file completion works anywhere without space requirement\n\n\ud83e\udd16 Generated with [Claude Code](https://claud",
+    "raw_counterexample": "Given: (event='\\x00', mode_name='', char='\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00'),\n  inspirepan__klaude-code_86c7666b__switch_mode_or_insert_old._switch_mode_or_insert_wrapper : returns None\n  inspirepan__klaude-code_86c7666b__switch_mode_or_insert_new._switch_mode_or_insert_wrapper : raises TypeError(\"unsupported operand type(s) for +: '_DynamicMock' and '_DynamicMock'\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_inspirepan__klaude-code_86c7666b__switch_mode_or_insert.py",
+    "minimized_counterexample": "Args: (event='\\x00', mode_name='', char='\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00')\n- Old Code: returns None\n- New Code: raises TypeError(\"unsupported operand type(s) for +: '_DynamicMock' and '_DynamicMock'\")"
+  },
+  {
+    "task_name": "mugipan-en__fastapi-ddd-template_dcb4e2e7_rebuild_models",
+    "repo": "mugipan-en/fastapi-ddd-template",
+    "sha": "dcb4e2e7495e14ebf6a33c518aa6247a0d3cfadb",
+    "agent": "Claude Code",
+    "function_name": "rebuild_models",
+    "is_method": false,
+    "category": "Requirement misunderstanding / Missing branch logic",
+    "commit_description": "Fix model rebuild for forward references\n\nAdd missing UserResponse import in rebuild_models function to resolve\nPydantic annotation issues during test imports.\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+    "raw_counterexample": "Given: (),\n  mugipan-en__fastapi-ddd-template_dcb4e2e7_rebuild_models_old.rebuild_models : raises NameError(\"name 'PostWithAuthor' is not defined\")\n  mugipan-en__fastapi-ddd-template_dcb4e2e7_rebuild_models_new.rebuild_models : raises ImportError('attempted relative import with no known parent package')",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_mugipan-en__fastapi-ddd-template_dcb4e2e7_rebuild_models.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises NameError(\"name 'PostWithAuthor' is not defined\")\n- New Code: raises ImportError('attempted relative import with no known parent package')"
+  },
+  {
+    "task_name": "mukhtar-github__taxpoynt-eInvoice_3194e9a2_upgrade",
+    "repo": "mukhtar-github/taxpoynt-eInvoice",
+    "sha": "3194e9a299c0500acd45a88734e19485007308ba",
+    "agent": "Claude Code",
+    "function_name": "upgrade",
+    "is_method": false,
+    "category": "Wrong/suboptimal algorithm",
+    "commit_description": "fix: make certificate migration resilient to missing tables\n\n- Add table existence checks in certificate_request_id migration\n- Gracefully skip operations if certificates table doesn't exist\n- Add column existence checks to prevent duplicate operations\n- Safe downgrade with proper constraint checks\n",
+    "raw_counterexample": "Given: (),\n  mukhtar-github__taxpoynt-eInvoice_3194e9a2_upgrade_old.upgrade : raises NameError(\"name 'op' is not defined\")\n  mukhtar-github__taxpoynt-eInvoice_3194e9a2_upgrade_new.upgrade : raises ModuleNotFoundError(\"No module named 'sqlalchemy'\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_mukhtar-github__taxpoynt-eInvoice_3194e9a2_upgrade.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises NameError(\"name 'op' is not defined\")\n- New Code: raises ModuleNotFoundError(\"No module named 'sqlalchemy'\")"
+  },
+  {
+    "task_name": "mukhtar-github__taxpoynt-eInvoice_3194e9a2_downgrade",
+    "repo": "mukhtar-github/taxpoynt-eInvoice",
+    "sha": "3194e9a299c0500acd45a88734e19485007308ba",
+    "agent": "Claude Code",
+    "function_name": "downgrade",
+    "is_method": false,
+    "category": "Wrong/suboptimal algorithm",
+    "commit_description": "fix: make certificate migration resilient to missing tables\n\n- Add table existence checks in certificate_request_id migration\n- Gracefully skip operations if certificates table doesn't exist\n- Add column existence checks to prevent duplicate operations\n- Safe downgrade with proper constraint checks\n",
+    "raw_counterexample": "Given: (),\n  mukhtar-github__taxpoynt-eInvoice_3194e9a2_downgrade_old.downgrade : raises NameError(\"name 'op' is not defined\")\n  mukhtar-github__taxpoynt-eInvoice_3194e9a2_downgrade_new.downgrade : raises ModuleNotFoundError(\"No module named 'sqlalchemy'\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_mukhtar-github__taxpoynt-eInvoice_3194e9a2_downgrade.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises NameError(\"name 'op' is not defined\")\n- New Code: raises ModuleNotFoundError(\"No module named 'sqlalchemy'\")"
+  },
+  {
+    "task_name": "megjohnson1999__chimeric-contig-detector_d088cfdc__refine_breakpoint",
+    "repo": "megjohnson1999/chimeric-contig-detector",
+    "sha": "d088cfdc64240f0129d764b7f9cbbc19eafd6971",
+    "agent": "Claude Code",
+    "function_name": "_refine_breakpoint",
+    "is_method": true,
+    "category": "Requirement misunderstanding / Missing branch logic",
+    "commit_description": "CRITICAL BUG FIX: Resolve out-of-bounds array indexing in adaptive breakpoint detection\n\nIssue Identified:\n- \"start out of range (-238)\" error preventing pipeline completion\n- Large adaptive window sizes (200-2000bp) caused negative indexing when breakpoints near sequence boundaries\n- Algorithm impr",
+    "raw_counterexample": "Given: (sequence='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00', initial_pos=50, window=-1),\n  megjohnson1999__chimeric-contig-detector_d088cfdc__refine_breakpoint_old._refine_breakpoint_wrapper : returns None\n  megjohnson1999__chimeric-contig-detector_d088cfdc__refine_breakpoint_new._refine_breakpoint_wrapper : returns 50",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_megjohnson1999__chimeric-contig-detector_d088cfdc__refine_breakpoint.py",
+    "minimized_counterexample": "Args: (sequence='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00', initial_pos=50, window=-1)\n- Old Code: returns None\n- New Code: returns 50"
+  },
+  {
+    "task_name": "megjohnson1999__chimeric-contig-detector_d088cfdc__quick_signal_check",
+    "repo": "megjohnson1999/chimeric-contig-detector",
+    "sha": "d088cfdc64240f0129d764b7f9cbbc19eafd6971",
+    "agent": "Claude Code",
+    "function_name": "_quick_signal_check",
+    "is_method": true,
+    "category": "Type-semantics bug",
+    "commit_description": "CRITICAL BUG FIX: Resolve out-of-bounds array indexing in adaptive breakpoint detection\n\nIssue Identified:\n- \"start out of range (-238)\" error preventing pipeline completion\n- Large adaptive window sizes (200-2000bp) caused negative indexing when breakpoints near sequence boundaries\n- Algorithm impr",
+    "raw_counterexample": "Given: (sequence='\\x00\\x00GC\\x00\\x00\\x00\\x01CC\\x00G\\x00\\x00\\x00\\x01\\x01\\x01GG\\x00\\x00\\x00CCHHC\\x00\\x00G\\x00\\x00\\x00\\x00GGCC\\x00\\x00\\x00\\x00\\x00C\\x00\\x00\\x00CG\\x00', pos=26, window=27),\n  megjohnson1999__chimeric-contig-detector_d088cfdc__quick_signal_check_old._quick_signal_check_wrapper : returns False\n  megjohnson1999__chimeric-contig-detector_d088cfdc__quick_signal_check_new._quick_signal_check_wrapper : raises TypeError(\"'<' not supported between instances of 'builtin_function_or_method' and 'int'\")\nGiven: (sequence='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00', pos=0, window=0),\n  megjohnson1999__chimeric-contig-detector_d088cfdc__quick_signal_check_old._quick_signal_check_wrapper : raises ZeroDivisionError('division by zero')\n  megjohnson1999__chimeric-contig-detector_d088cfdc__quick_signal_check_new._quick_signal_check_wrapper : returns False",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_megjohnson1999__chimeric-contig-detector_d088cfdc__quick_signal_check.py",
+    "minimized_counterexample": "Args: (sequence='\\x00\\x00GC\\x00\\x00\\x00\\x01CC\\x00G\\x00\\x00\\x00\\x01\\x01\\x01GG\\x00\\x00\\x00CCHHC\\x00\\x00G\\x00\\x00\\x00\\x00GGCC\\x00\\x00\\x00\\x00\\x00C\\x00\\x00\\x00CG\\x00', pos=26, window=27)\n- Old Code: returns False\n- New Code: raises TypeError(\"'<' not supported between instances of 'builtin_function_or_method' and 'int'\")"
+  },
+  {
+    "task_name": "nduong2000__ab-perf-test-dashboard_ee72fbdc_stop_test",
+    "repo": "nduong2000/ab-perf-test-dashboard",
+    "sha": "ee72fbdcd65e3dd4bd4b88de45eaea32e3797c7a",
+    "agent": "Claude Code",
+    "function_name": "stop_test",
+    "is_method": true,
+    "category": "Type-semantics bug",
+    "commit_description": "Enhance stop functionality for Cloud Tasks and older executions\n\n- Check execution status from database before attempting to stop\n- Handle Cloud Tasks cancellation by searching for matching task names\n- Update database status even if local runner not found\n- Support stopping tests that are running v",
+    "raw_counterexample": "Given: (execution_id='\\x00\\x00\\x00\\x01\\x01\\x00\\x00\\x02\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00'),\n  nduong2000__ab-perf-test-dashboard_ee72fbdc_stop_test_old.stop_test_wrapper : raises TypeError(\"'nduong2000__ab-perf-test-dashboard_ee72fbdc_stop_test_old._DynamicMock' object does not support the context manager protocol (missed __exit__ method)\")\n  nduong2000__ab-perf-test-dashboard_ee72fbdc_stop_test_new.stop_test_wrapper : raises NameError(\"name 'logger' is not defined\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_nduong2000__ab-perf-test-dashboard_ee72fbdc_stop_test.py",
+    "minimized_counterexample": "Args: (execution_id='\\x00\\x00\\x00\\x01\\x01\\x00\\x00\\x02\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00')\n- Old Code: raises TypeError(\"'nduong2000__ab-perf-test-dashboard_ee72fbdc_stop_test_old._DynamicMock' object does not support the context manager protocol (missed __exit__ method)\")\n- New Code: raises NameError(\"name 'logger' is not defined\")"
+  },
+  {
+    "task_name": "cklose2000__document-slides-poc_1f5ea9f1_extract_from_bytes",
+    "repo": "cklose2000/document-slides-poc",
+    "sha": "1f5ea9f10e19b1bf12cb9e68e3f57afbac7839f6",
+    "agent": "Claude Code",
+    "function_name": "extract_from_bytes",
+    "is_method": true,
+    "category": "Requirement misunderstanding / Missing branch logic",
+    "commit_description": "feat: Complete Enhanced Source Attribution system files update\n\n\ud83d\udd27 Updated all Enhanced Source Attribution components:\n\nEnhanced Excel Extractor (lib/excel_extractor.py):\n\u2705 Cell-level tracking with coordinates and context\n\u2705 Formula dependency tracking and confidence scoring  \n\u2705 Context-aware data poi",
+    "raw_counterexample": "Given: (excel_bytes='', filename=''),\n  cklose2000__document-slides-poc_1f5ea9f1_extract_from_bytes_old.extract_from_bytes_wrapper : returns {'error': \"Failed to extract Excel data: name 'io' is not defined\"}\n  cklose2000__document-slides-poc_1f5ea9f1_extract_from_bytes_new.extract_from_bytes_wrapper : returns {'error': \"Failed to extract Excel data from bytes: name 'io' is not defined\"}",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_cklose2000__document-slides-poc_1f5ea9f1_extract_from_bytes.py",
+    "minimized_counterexample": "Args: (excel_bytes='', filename='')\n- Old Code: returns {'error': \"Failed to extract Excel data: name 'io' is not defined\"}\n- New Code: returns {'error': \"Failed to extract Excel data from bytes: name 'io' is not defined\"}"
+  },
+  {
+    "task_name": "cklose2000__document-slides-poc_1f5ea9f1__extract_sheet_data",
+    "repo": "cklose2000/document-slides-poc",
+    "sha": "1f5ea9f10e19b1bf12cb9e68e3f57afbac7839f6",
+    "agent": "Claude Code",
+    "function_name": "_extract_sheet_data",
+    "is_method": true,
+    "category": "Type-semantics bug",
+    "commit_description": "feat: Complete Enhanced Source Attribution system files update\n\n\ud83d\udd27 Updated all Enhanced Source Attribution components:\n\nEnhanced Excel Extractor (lib/excel_extractor.py):\n\u2705 Cell-level tracking with coordinates and context\n\u2705 Formula dependency tracking and confidence scoring  \n\u2705 Context-aware data poi",
+    "raw_counterexample": "Given: (sheet='\\x00\\x00', sheet_name='\\x00\\x01\\x00', filename='', document_id=None),\n  cklose2000__document-slides-poc_1f5ea9f1__extract_sheet_data_old._extract_sheet_data_wrapper : raises TypeError('_extract_sheet_data_wrapper() takes 2 positional arguments but 4 were given')\n  cklose2000__document-slides-poc_1f5ea9f1__extract_sheet_data_new._extract_sheet_data_wrapper : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'max_row'\")\nGiven: (sheet='', sheet_name='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x03\\x00\\x00\\x00\\x00\\x00'),\n  cklose2000__document-slides-poc_1f5ea9f1__extract_sheet_data_old._extract_sheet_data_wrapper : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'iter_rows'\")\n  cklose2000__document-slides-poc_1f5ea9f1__extract_sheet_data_new._extract_sheet_data_wrapper : raises TypeError(\"_extract_sheet_data_wrapper() missing 2 required positional arguments: 'filename' and 'document_id'\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_cklose2000__document-slides-poc_1f5ea9f1__extract_sheet_data.py",
+    "minimized_counterexample": "Args: (sheet='\\x00\\x00', sheet_name='\\x00\\x01\\x00', filename='', document_id=None)\n- Old Code: raises TypeError('_extract_sheet_data_wrapper() takes 2 positional arguments but 4 were given')\n- New Code: raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'max_row'\")"
+  },
+  {
+    "task_name": "tom2tomtomtom__brand_audit_f3ba784a__generate_visual_identity_analysis",
+    "repo": "tom2tomtomtom/brand_audit",
+    "sha": "f3ba784a85042d43108c4155dbb5a19e5f249b6b",
+    "agent": "Claude Code",
+    "function_name": "_generate_visual_identity_analysis",
+    "is_method": true,
+    "category": "Wrong/suboptimal algorithm",
+    "commit_description": "Implement real enterprise analysis methods - Phase 1 complete\n\nMAJOR ENTERPRISE SYSTEM COMPLETION:\n- \u2705 Visual Identity Analysis: Color strategies, typography patterns, logo analysis\n- \u2705 AI-Powered Brand Analysis: Personality convergence, positioning strategies, threat assessment\n- \u2705 Competitive Land",
+    "raw_counterexample": "Given: (brand_profiles=[]),\n  tom2tomtomtom__brand_audit_f3ba784a__generate_visual_identity_analysis_old._generate_visual_identity_analysis_wrapper : returns {'status': 'generated'}",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_tom2tomtomtom__brand_audit_f3ba784a__generate_visual_identity_analysis.py",
+    "minimized_counterexample": "Args: (brand_profiles=[])\n- Old Code: returns {'status': 'generated'}\n- New Code: Unknown"
+  },
+  {
+    "task_name": "tom2tomtomtom__brand_audit_f3ba784a__generate_ai_brand_analysis",
+    "repo": "tom2tomtomtom/brand_audit",
+    "sha": "f3ba784a85042d43108c4155dbb5a19e5f249b6b",
+    "agent": "Claude Code",
+    "function_name": "_generate_ai_brand_analysis",
+    "is_method": true,
+    "category": "Wrong/suboptimal algorithm",
+    "commit_description": "Implement real enterprise analysis methods - Phase 1 complete\n\nMAJOR ENTERPRISE SYSTEM COMPLETION:\n- \u2705 Visual Identity Analysis: Color strategies, typography patterns, logo analysis\n- \u2705 AI-Powered Brand Analysis: Personality convergence, positioning strategies, threat assessment\n- \u2705 Competitive Land",
+    "raw_counterexample": "Given: (brand_profiles=[]),\n  tom2tomtomtom__brand_audit_f3ba784a__generate_ai_brand_analysis_old._generate_ai_brand_analysis_wrapper : returns {'status': 'generated'}",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_tom2tomtomtom__brand_audit_f3ba784a__generate_ai_brand_analysis.py",
+    "minimized_counterexample": "Args: (brand_profiles=[])\n- Old Code: returns {'status': 'generated'}\n- New Code: Unknown"
+  },
+  {
+    "task_name": "tom2tomtomtom__brand_audit_f3ba784a__generate_competitive_landscape_analysis",
+    "repo": "tom2tomtomtom/brand_audit",
+    "sha": "f3ba784a85042d43108c4155dbb5a19e5f249b6b",
+    "agent": "Claude Code",
+    "function_name": "_generate_competitive_landscape_analysis",
+    "is_method": true,
+    "category": "Wrong/suboptimal algorithm",
+    "commit_description": "Implement real enterprise analysis methods - Phase 1 complete\n\nMAJOR ENTERPRISE SYSTEM COMPLETION:\n- \u2705 Visual Identity Analysis: Color strategies, typography patterns, logo analysis\n- \u2705 AI-Powered Brand Analysis: Personality convergence, positioning strategies, threat assessment\n- \u2705 Competitive Land",
+    "raw_counterexample": "Given: (brand_profiles=[]),\n  tom2tomtomtom__brand_audit_f3ba784a__generate_competitive_landscape_analysis_old._generate_competitive_landscape_analysis_wrapper : returns {'status': 'generated'}",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_tom2tomtomtom__brand_audit_f3ba784a__generate_competitive_landscape_analysis.py",
+    "minimized_counterexample": "Args: (brand_profiles=[])\n- Old Code: returns {'status': 'generated'}\n- New Code: Unknown"
+  },
+  {
+    "task_name": "tom2tomtomtom__brand_audit_f3ba784a__generate_strategic_insights",
+    "repo": "tom2tomtomtom/brand_audit",
+    "sha": "f3ba784a85042d43108c4155dbb5a19e5f249b6b",
+    "agent": "Claude Code",
+    "function_name": "_generate_strategic_insights",
+    "is_method": true,
+    "category": "Wrong/suboptimal algorithm",
+    "commit_description": "Implement real enterprise analysis methods - Phase 1 complete\n\nMAJOR ENTERPRISE SYSTEM COMPLETION:\n- \u2705 Visual Identity Analysis: Color strategies, typography patterns, logo analysis\n- \u2705 AI-Powered Brand Analysis: Personality convergence, positioning strategies, threat assessment\n- \u2705 Competitive Land",
+    "raw_counterexample": "Given: (brand_profiles=[]),\n  tom2tomtomtom__brand_audit_f3ba784a__generate_strategic_insights_old._generate_strategic_insights_wrapper : returns {'status': 'generated'}",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_tom2tomtomtom__brand_audit_f3ba784a__generate_strategic_insights.py",
+    "minimized_counterexample": "Args: (brand_profiles=[])\n- Old Code: returns {'status': 'generated'}\n- New Code: Unknown"
+  },
+  {
+    "task_name": "tom2tomtomtom__brand_audit_f3ba784a__generate_strategic_recommendations",
+    "repo": "tom2tomtomtom/brand_audit",
+    "sha": "f3ba784a85042d43108c4155dbb5a19e5f249b6b",
+    "agent": "Claude Code",
+    "function_name": "_generate_strategic_recommendations",
+    "is_method": true,
+    "category": "Wrong/suboptimal algorithm",
+    "commit_description": "Implement real enterprise analysis methods - Phase 1 complete\n\nMAJOR ENTERPRISE SYSTEM COMPLETION:\n- \u2705 Visual Identity Analysis: Color strategies, typography patterns, logo analysis\n- \u2705 AI-Powered Brand Analysis: Personality convergence, positioning strategies, threat assessment\n- \u2705 Competitive Land",
+    "raw_counterexample": "Given: (brand_profiles=[]),\n  tom2tomtomtom__brand_audit_f3ba784a__generate_strategic_recommendations_old._generate_strategic_recommendations_wrapper : returns {'status': 'generated'}",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_tom2tomtomtom__brand_audit_f3ba784a__generate_strategic_recommendations.py",
+    "minimized_counterexample": "Args: (brand_profiles=[])\n- Old Code: returns {'status': 'generated'}\n- New Code: Unknown"
+  },
+  {
+    "task_name": "tom2tomtomtom__brand_audit_f3ba784a__generate_risk_assessment",
+    "repo": "tom2tomtomtom/brand_audit",
+    "sha": "f3ba784a85042d43108c4155dbb5a19e5f249b6b",
+    "agent": "Claude Code",
+    "function_name": "_generate_risk_assessment",
+    "is_method": true,
+    "category": "Wrong/suboptimal algorithm",
+    "commit_description": "Implement real enterprise analysis methods - Phase 1 complete\n\nMAJOR ENTERPRISE SYSTEM COMPLETION:\n- \u2705 Visual Identity Analysis: Color strategies, typography patterns, logo analysis\n- \u2705 AI-Powered Brand Analysis: Personality convergence, positioning strategies, threat assessment\n- \u2705 Competitive Land",
+    "raw_counterexample": "Given: (brand_profiles=[]),\n  tom2tomtomtom__brand_audit_f3ba784a__generate_risk_assessment_old._generate_risk_assessment_wrapper : returns {'status': 'generated'}",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_tom2tomtomtom__brand_audit_f3ba784a__generate_risk_assessment.py",
+    "minimized_counterexample": "Args: (brand_profiles=[])\n- Old Code: returns {'status': 'generated'}\n- New Code: Unknown"
+  },
+  {
+    "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_test_get_patterns_by_category",
+    "repo": "MementoRC/claude-code-knowledge-framework",
+    "sha": "ef3c137f0d5ae533a3a50bff7b4a48fbe2cb237b",
+    "agent": "Claude Code",
+    "function_name": "test_get_patterns_by_category",
+    "is_method": false,
+    "category": "Type-semantics bug",
+    "commit_description": "fix: update test_knowledge_manager.py to use UnifiedDatabase instead of ChromaDBConnector\n\nFixed test infrastructure issues affecting CI:\n- Updated all mock references from ChromaDBConnector to UnifiedDatabase\n- Added proper 'document' field to test data for pattern/solution validation\n- Fixed mock ",
+    "raw_counterexample": "Given: (manager='', mock_pattern_classification='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00'),\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_get_patterns_by_category_old.test_get_patterns_by_category : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'get_patterns_in_category'\")\n  MementoRC__claude-code-knowledge-framework_ef3c137f_test_get_patterns_by_category_new.test_get_patterns_by_category : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'get_patterns_by_category'\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_MementoRC__claude-code-knowledge-framework_ef3c137f_test_get_patterns_by_category.py",
+    "minimized_counterexample": "Args: (manager='', mock_pattern_classification='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00')\n- Old Code: raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'get_patterns_in_category'\")\n- New Code: raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'get_patterns_by_category'\")"
+  },
+  {
+    "task_name": "OpenSourceAP__CrossSection_c3f9d304_fastxtile",
+    "repo": "OpenSourceAP/CrossSection",
+    "sha": "c3f9d304bf92bdf6fb1c94b83fed6f455e8656ed",
+    "agent": "Claude Code",
+    "function_name": "fastxtile",
+    "is_method": false,
+    "category": "Type-semantics bug",
+    "commit_description": "Fix AccrualsBM predictor: handle -inf values in fastxtile function\n\n- Root cause: -inf values from log(ceq/mve_c) when ceq/mve_c <= 0 broke pd.qcut\n- Solution: Replace -inf/+inf with NaN before quantile calculation in fastxtile\n- Result: Missing observations reduced from 9,605 to 423 (95.6% improvem",
+    "raw_counterexample": "Given: (series='\\x02\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00', n_quantiles=0),\n  OpenSourceAP__CrossSection_c3f9d304_fastxtile_old.fastxtile : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'dropna'\")\n  OpenSourceAP__CrossSection_c3f9d304_fastxtile_new.fastxtile : raises NameError(\"name 'pd' is not defined\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_OpenSourceAP__CrossSection_c3f9d304_fastxtile.py",
+    "minimized_counterexample": "Args: (series='\\x02\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00', n_quantiles=0)\n- Old Code: raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'dropna'\")\n- New Code: raises NameError(\"name 'pd' is not defined\")"
+  },
+  {
+    "task_name": "ebowman__polarized-training-analysis_fa5922ca_calculate_adherence_score",
+    "repo": "ebowman/polarized-training-analysis",
+    "sha": "fa5922ca3d64a7b13e2afb6cba0ff13d4a227215",
+    "agent": "Claude Code",
+    "function_name": "calculate_adherence_score",
+    "is_method": true,
+    "category": "Type-semantics bug",
+    "commit_description": "Fix AI recommendations error for low-volume training approach\n\n- Added handling for \"low-volume\" training approach in adherence score calculation\n- Prevents KeyError when training volume is below 4 hours/week\n- Low-volume training now gets flexible adherence scoring (50-75%) based on zone distributi",
+    "raw_counterexample": "Given: (zone1_percent=inf, zone2_percent=inf, zone3_percent=30.0, training_approach='low-volume'),\n  ebowman__polarized-training-analysis_fa5922ca_calculate_adherence_score_old.calculate_adherence_score_wrapper : raises TypeError(\"unsupported operand type(s) for -: 'float' and '_DynamicMock'\")\n  ebowman__polarized-training-analysis_fa5922ca_calculate_adherence_score_new.calculate_adherence_score_wrapper : returns 50.0",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_ebowman__polarized-training-analysis_fa5922ca_calculate_adherence_score.py",
+    "minimized_counterexample": "Args: (zone1_percent=inf, zone2_percent=inf, zone3_percent=30.0, training_approach='low-volume')\n- Old Code: raises TypeError(\"unsupported operand type(s) for -: 'float' and '_DynamicMock'\")\n- New Code: returns 50.0"
+  },
+  {
+    "task_name": "fyn-tech__fyn-runner_324690d6_test_initialization",
+    "repo": "fyn-tech/fyn-runner",
+    "sha": "324690d6bce46f0a615182d21ff2fee040bc9eeb",
+    "agent": "Claude Code",
+    "function_name": "test_initialization",
+    "is_method": true,
+    "category": "Type-semantics bug",
+    "commit_description": "refactored ServerProxy tests.\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+    "raw_counterexample": "Given: (server_proxy='', mock_logger='\\x00', mock_file_manager='', mock_configuration='\\x00\\x00\\x01\\x00\\x00\\x00'),\n  fyn-tech__fyn-runner_324690d6_test_initialization_old.test_initialization_wrapper : raises TypeError('test_initialization_wrapper() takes 1 positional argument but 4 were given')\n  fyn-tech__fyn-runner_324690d6_test_initialization_new.test_initialization_wrapper : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'logger'\")\nGiven: (server_proxy='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\x00'),\n  fyn-tech__fyn-runner_324690d6_test_initialization_old.test_initialization_wrapper : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'running'\")\n  fyn-tech__fyn-runner_324690d6_test_initialization_new.test_initialization_wrapper : raises TypeError(\"test_initialization_wrapper() missing 3 required positional arguments: 'mock_logger', 'mock_file_manager', and 'mock_configuration'\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_fyn-tech__fyn-runner_324690d6_test_initialization.py",
+    "minimized_counterexample": "Args: (server_proxy='', mock_logger='\\x00', mock_file_manager='', mock_configuration='\\x00\\x00\\x01\\x00\\x00\\x00')\n- Old Code: raises TypeError('test_initialization_wrapper() takes 1 positional argument but 4 were given')\n- New Code: raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'logger'\")"
+  },
+  {
+    "task_name": "Jackal104__Bible-Clock-v4_c64834c2__estimate_date_content_height",
+    "repo": "Jackal104/Bible-Clock-v4",
+    "sha": "c64834c265d56f85486fd214822bb1cba0617954",
+    "agent": "Claude Code",
+    "function_name": "_estimate_date_content_height",
+    "is_method": true,
+    "category": "Type-semantics bug",
+    "commit_description": "Fix vertical centering for date mode biblical events\n\n- Replace rough height estimates with accurate text measurements\n- Use actual textbbox measurements for all content elements\n- Measure wrapped text lines accurately for proper height calculation\n- Fixes vertical centering issue where \"Noah's Ark ",
+    "raw_counterexample": "Given: (verse_data={'': 0, '\\x00': 0, '\\x00\\x00': ''}, content_width=0),\n  Jackal104__Bible-Clock-v4_c64834c2__estimate_date_content_height_old._estimate_date_content_height_wrapper : raises TypeError(\"unsupported operand type(s) for +: '_DynamicMock' and 'int'\")\n  Jackal104__Bible-Clock-v4_c64834c2__estimate_date_content_height_new._estimate_date_content_height_wrapper : raises NameError(\"name 'Image' is not defined\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_Jackal104__Bible-Clock-v4_c64834c2__estimate_date_content_height.py",
+    "minimized_counterexample": "Args: (verse_data={'': 0, '\\x00': 0, '\\x00\\x00': ''}, content_width=0)\n- Old Code: raises TypeError(\"unsupported operand type(s) for +: '_DynamicMock' and 'int'\")\n- New Code: raises NameError(\"name 'Image' is not defined\")"
+  },
+  {
+    "task_name": "EduardKakosyan__hugo_c12ba122_main",
+    "repo": "EduardKakosyan/hugo",
+    "sha": "c12ba12269cf37f8d1aec00e7a254b552de3a06d",
+    "agent": "Claude Code",
+    "function_name": "main",
+    "is_method": false,
+    "category": "Requirement misunderstanding / Missing branch logic",
+    "commit_description": "Rewrite Gemini Live voice chat with clean, seamless architecture\n\n- Complete rewrite for better reliability and user experience\n- Streamlined recording with real-time volume visualization\n- Clean transcription and instant AI voice responses\n- Proper streaming audio playback with queue management\n- C",
+    "raw_counterexample": "Given: (),\n  EduardKakosyan__hugo_c12ba122_main_old.main : raises NameError(\"name 'AudioLoop' is not defined\")\n  EduardKakosyan__hugo_c12ba122_main_new.main : raises NameError(\"name 'VoiceChat' is not defined\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_EduardKakosyan__hugo_c12ba122_main.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises NameError(\"name 'AudioLoop' is not defined\")\n- New Code: raises NameError(\"name 'VoiceChat' is not defined\")"
+  },
+  {
+    "task_name": "EduardKakosyan__hugo_c12ba122___init__",
+    "repo": "EduardKakosyan/hugo",
+    "sha": "c12ba12269cf37f8d1aec00e7a254b552de3a06d",
+    "agent": "Claude Code",
+    "function_name": "__init__",
+    "is_method": true,
+    "category": "Requirement misunderstanding / Missing branch logic",
+    "commit_description": "Rewrite Gemini Live voice chat with clean, seamless architecture\n\n- Complete rewrite for better reliability and user experience\n- Streamlined recording with real-time volume visualization\n- Clean transcription and instant AI voice responses\n- Proper streaming audio playback with queue management\n- C",
+    "raw_counterexample": "Given: (),\n  EduardKakosyan__hugo_c12ba122___init___old.__init___wrapper : raises NameError(\"name 'ConversationState' is not defined\")\n  EduardKakosyan__hugo_c12ba122___init___new.__init___wrapper : raises NameError(\"name 'genai' is not defined\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_EduardKakosyan__hugo_c12ba122___init__.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises NameError(\"name 'ConversationState' is not defined\")\n- New Code: raises NameError(\"name 'genai' is not defined\")"
+  },
+  {
+    "task_name": "kmarchais__mmgpy_ba312b33__run_mmg2d",
+    "repo": "kmarchais/mmgpy",
+    "sha": "ba312b33c21a18a54e64e3db2527e4bcf589e61f",
+    "agent": "Claude Code",
+    "function_name": "_run_mmg2d",
+    "is_method": false,
+    "category": "Requirement misunderstanding / Missing branch logic",
+    "commit_description": "Fix cross-platform site-packages detection for executable wrappers\n\nThe previous Windows fix used site.getsitepackages()[1] which causes\nIndexError on macOS/Linux where only one site-packages directory exists.\n\nFixed by:\n- Check length of site.getsitepackages() before accessing [1]\n- Only use [1] on",
+    "raw_counterexample": "Given: (),\n  kmarchais__mmgpy_ba312b33__run_mmg2d_old._run_mmg2d : raises NameError(\"name 'Path' is not defined\")\n  kmarchais__mmgpy_ba312b33__run_mmg2d_new._run_mmg2d : raises NameError(\"name 'site' is not defined\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_kmarchais__mmgpy_ba312b33__run_mmg2d.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises NameError(\"name 'Path' is not defined\")\n- New Code: raises NameError(\"name 'site' is not defined\")"
+  },
+  {
+    "task_name": "kmarchais__mmgpy_ba312b33__run_mmg3d",
+    "repo": "kmarchais/mmgpy",
+    "sha": "ba312b33c21a18a54e64e3db2527e4bcf589e61f",
+    "agent": "Claude Code",
+    "function_name": "_run_mmg3d",
+    "is_method": false,
+    "category": "Requirement misunderstanding / Missing branch logic",
+    "commit_description": "Fix cross-platform site-packages detection for executable wrappers\n\nThe previous Windows fix used site.getsitepackages()[1] which causes\nIndexError on macOS/Linux where only one site-packages directory exists.\n\nFixed by:\n- Check length of site.getsitepackages() before accessing [1]\n- Only use [1] on",
+    "raw_counterexample": "Given: (),\n  kmarchais__mmgpy_ba312b33__run_mmg3d_old._run_mmg3d : raises NameError(\"name 'Path' is not defined\")\n  kmarchais__mmgpy_ba312b33__run_mmg3d_new._run_mmg3d : raises NameError(\"name 'site' is not defined\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_kmarchais__mmgpy_ba312b33__run_mmg3d.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises NameError(\"name 'Path' is not defined\")\n- New Code: raises NameError(\"name 'site' is not defined\")"
+  },
+  {
+    "task_name": "kmarchais__mmgpy_ba312b33__run_mmgs",
+    "repo": "kmarchais/mmgpy",
+    "sha": "ba312b33c21a18a54e64e3db2527e4bcf589e61f",
+    "agent": "Claude Code",
+    "function_name": "_run_mmgs",
+    "is_method": false,
+    "category": "Requirement misunderstanding / Missing branch logic",
+    "commit_description": "Fix cross-platform site-packages detection for executable wrappers\n\nThe previous Windows fix used site.getsitepackages()[1] which causes\nIndexError on macOS/Linux where only one site-packages directory exists.\n\nFixed by:\n- Check length of site.getsitepackages() before accessing [1]\n- Only use [1] on",
+    "raw_counterexample": "Given: (),\n  kmarchais__mmgpy_ba312b33__run_mmgs_old._run_mmgs : raises NameError(\"name 'Path' is not defined\")\n  kmarchais__mmgpy_ba312b33__run_mmgs_new._run_mmgs : raises NameError(\"name 'site' is not defined\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_kmarchais__mmgpy_ba312b33__run_mmgs.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises NameError(\"name 'Path' is not defined\")\n- New Code: raises NameError(\"name 'site' is not defined\")"
+  },
+  {
+    "task_name": "luisrms69__facturacion_mexico_8b184dff_after_install",
+    "repo": "luisrms69/facturacion_mexico",
+    "sha": "8b184dffec3c540e4b295c3871d3e95047662590",
+    "agent": "Claude Code",
+    "function_name": "after_install",
+    "is_method": false,
+    "category": "Requirement misunderstanding / Missing branch logic",
+    "commit_description": "fix: Add installation logging to diagnose GitHub CI app installation issues\n\n- Added logging to after_install() to track installation progress\n- Helps diagnose recurring \"App facturacion_mexico is not installed\" errors in CI\n- Non-functional change to trigger CI re-run and app reinstallation\n- Insta",
+    "raw_counterexample": "Given: (),\n  luisrms69__facturacion_mexico_8b184dff_after_install_old.after_install : raises NameError(\"name 'create_initial_configuration' is not defined\")\n  luisrms69__facturacion_mexico_8b184dff_after_install_new.after_install : raises NameError(\"name 'frappe' is not defined\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_luisrms69__facturacion_mexico_8b184dff_after_install.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises NameError(\"name 'create_initial_configuration' is not defined\")\n- New Code: raises NameError(\"name 'frappe' is not defined\")"
+  },
+  {
+    "task_name": "luisrms69__condominio-management_9bba24ae_setUp",
+    "repo": "luisrms69/condominio-management",
+    "sha": "9bba24ae692947aac2f7becfba0b31f099c21f42",
+    "agent": "Claude Code",
+    "function_name": "setUp",
+    "is_method": true,
+    "category": "Requirement misunderstanding / Missing branch logic",
+    "commit_description": "fix(financial_management): resolver DoesNotExistError en Resident Account test_business_logic_direct.py\n\n- Cambiar ResidentAccount(\"Resident Account\") \u2192 frappe.new_doc(\"Resident Account\")\n- Aplicar expert feedback: crear instancia nueva en lugar de cargar desde DB\n- Fix aplicado en 5 ubicaciones den",
+    "raw_counterexample": "Given: (),\n  luisrms69__condominio-management_9bba24ae_setUp_old.setUp_wrapper : raises NameError(\"name 'ResidentAccount' is not defined\")\n  luisrms69__condominio-management_9bba24ae_setUp_new.setUp_wrapper : raises ModuleNotFoundError(\"No module named 'frappe'\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_luisrms69__condominio-management_9bba24ae_setUp.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises NameError(\"name 'ResidentAccount' is not defined\")\n- New Code: raises ModuleNotFoundError(\"No module named 'frappe'\")"
+  },
+  {
+    "task_name": "luisrms69__condominio-management_9bba24ae_test_set_default_values_functionality",
+    "repo": "luisrms69/condominio-management",
+    "sha": "9bba24ae692947aac2f7becfba0b31f099c21f42",
+    "agent": "Claude Code",
+    "function_name": "test_set_default_values_functionality",
+    "is_method": true,
+    "category": "Requirement misunderstanding / Missing branch logic",
+    "commit_description": "fix(financial_management): resolver DoesNotExistError en Resident Account test_business_logic_direct.py\n\n- Cambiar ResidentAccount(\"Resident Account\") \u2192 frappe.new_doc(\"Resident Account\")\n- Aplicar expert feedback: crear instancia nueva en lugar de cargar desde DB\n- Fix aplicado en 5 ubicaciones den",
+    "raw_counterexample": "Given: (),\n  luisrms69__condominio-management_9bba24ae_test_set_default_values_functionality_old.test_set_default_values_functionality_wrapper : raises NameError(\"name 'ResidentAccount' is not defined\")\n  luisrms69__condominio-management_9bba24ae_test_set_default_values_functionality_new.test_set_default_values_functionality_wrapper : raises ModuleNotFoundError(\"No module named 'frappe'\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_luisrms69__condominio-management_9bba24ae_test_set_default_values_functionality.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises NameError(\"name 'ResidentAccount' is not defined\")\n- New Code: raises ModuleNotFoundError(\"No module named 'frappe'\")"
+  },
+  {
+    "task_name": "luisrms69__condominio-management_9bba24ae_test_comprehensive_business_logic_flow",
+    "repo": "luisrms69/condominio-management",
+    "sha": "9bba24ae692947aac2f7becfba0b31f099c21f42",
+    "agent": "Claude Code",
+    "function_name": "test_comprehensive_business_logic_flow",
+    "is_method": true,
+    "category": "Requirement misunderstanding / Missing branch logic",
+    "commit_description": "fix(financial_management): resolver DoesNotExistError en Resident Account test_business_logic_direct.py\n\n- Cambiar ResidentAccount(\"Resident Account\") \u2192 frappe.new_doc(\"Resident Account\")\n- Aplicar expert feedback: crear instancia nueva en lugar de cargar desde DB\n- Fix aplicado en 5 ubicaciones den",
+    "raw_counterexample": "Given: (),\n  luisrms69__condominio-management_9bba24ae_test_comprehensive_business_logic_flow_old.test_comprehensive_business_logic_flow_wrapper : raises NameError(\"name 'ResidentAccount' is not defined\")\n  luisrms69__condominio-management_9bba24ae_test_comprehensive_business_logic_flow_new.test_comprehensive_business_logic_flow_wrapper : raises ModuleNotFoundError(\"No module named 'frappe'\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_luisrms69__condominio-management_9bba24ae_test_comprehensive_business_logic_flow.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises NameError(\"name 'ResidentAccount' is not defined\")\n- New Code: raises ModuleNotFoundError(\"No module named 'frappe'\")"
+  },
+  {
+    "task_name": "Constellations-AI__TradingSystem_c5577c9f___init__",
+    "repo": "Constellations-AI/TradingSystem",
+    "sha": "c5577c9f18d558d50d9c6110d1b104211ecfbe3d",
+    "agent": "Claude Code",
+    "function_name": "__init__",
+    "is_method": true,
+    "category": "Requirement misunderstanding / Missing branch logic",
+    "commit_description": "Fix database initialization race condition causing account resets\n\n- Prevent multiple database initializations per process\n- Stop accounts from being recreated on every API call\n- Fix flashing portfolio data issue\n- Database tables only created once per process\n\n\ud83e\udd16 Generated with [Claude Code](https:",
+    "raw_counterexample": "Given: (db_path='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\x00'),",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_Constellations-AI__TradingSystem_c5577c9f___init__.py",
+    "minimized_counterexample": "Args: (db_path='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\x00')\n- Old Code: Unknown\n- New Code: Unknown"
+  },
+  {
+    "task_name": "pranavmodi__salesbot_1003c8ef_process_pending_email_jobs",
+    "repo": "pranavmodi/salesbot",
+    "sha": "1003c8ef702075be76df2ab8c3ac5840b0ce38ee",
+    "agent": "Claude Code",
+    "function_name": "process_pending_email_jobs",
+    "is_method": false,
+    "category": "Requirement misunderstanding / Missing branch logic",
+    "commit_description": "fix(scheduler): Add Flask application context to process_pending_email_jobs\n\nFixed Flask application context error in campaign scheduler background jobs.\nThe process_pending_email_jobs function was calling _execute_email_job without\nproper Flask application context, causing \"Working outside of appli",
+    "raw_counterexample": "Given: (),\n  pranavmodi__salesbot_1003c8ef_process_pending_email_jobs_old.process_pending_email_jobs : returns None\n  pranavmodi__salesbot_1003c8ef_process_pending_email_jobs_new.process_pending_email_jobs : raises ModuleNotFoundError(\"No module named 'flask'\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_pranavmodi__salesbot_1003c8ef_process_pending_email_jobs.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: returns None\n- New Code: raises ModuleNotFoundError(\"No module named 'flask'\")"
+  },
+  {
+    "task_name": "pranavchavda__flock-native_8664aed9___init__",
+    "repo": "pranavchavda/flock-native",
+    "sha": "8664aed91fd0ced5c030e4dbe959648e723798fe",
+    "agent": "Claude Code",
+    "function_name": "__init__",
+    "is_method": true,
+    "category": "Requirement misunderstanding / Missing branch logic",
+    "commit_description": "Add proper desktop notification support to Python version\n\n- Initialize libnotify for desktop notifications\n- Pre-approve notification permissions for flock.com origins\n- Intercept WebKit notifications and show them via libnotify/dunst\n- Add debug logging to track notification flow\n- Properly cleanu",
+    "raw_counterexample": "Given: (),\n  pranavchavda__flock-native_8664aed9___init___old.__init___wrapper : raises NameError(\"name 'Gtk' is not defined\")\n  pranavchavda__flock-native_8664aed9___init___new.__init___wrapper : raises NameError(\"name 'Notify' is not defined\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_pranavchavda__flock-native_8664aed9___init__.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises NameError(\"name 'Gtk' is not defined\")\n- New Code: raises NameError(\"name 'Notify' is not defined\")"
+  },
+  {
+    "task_name": "pranavchavda__flock-native_8664aed9_quit_app",
+    "repo": "pranavchavda/flock-native",
+    "sha": "8664aed91fd0ced5c030e4dbe959648e723798fe",
+    "agent": "Claude Code",
+    "function_name": "quit_app",
+    "is_method": true,
+    "category": "Requirement misunderstanding / Missing branch logic",
+    "commit_description": "Add proper desktop notification support to Python version\n\n- Initialize libnotify for desktop notifications\n- Pre-approve notification permissions for flock.com origins\n- Intercept WebKit notifications and show them via libnotify/dunst\n- Add debug logging to track notification flow\n- Properly cleanu",
+    "raw_counterexample": "Given: (widget='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\x00'),\n  pranavchavda__flock-native_8664aed9_quit_app_old.quit_app_wrapper : raises NameError(\"name 'Gtk' is not defined\")\n  pranavchavda__flock-native_8664aed9_quit_app_new.quit_app_wrapper : raises NameError(\"name 'Notify' is not defined\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_pranavchavda__flock-native_8664aed9_quit_app.py",
+    "minimized_counterexample": "Args: (widget='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\x00')\n- Old Code: raises NameError(\"name 'Gtk' is not defined\")\n- New Code: raises NameError(\"name 'Notify' is not defined\")"
+  },
+  {
+    "task_name": "prathikkv__BioIntel_c6329b5a_handler",
+    "repo": "prathikkv/BioIntel",
+    "sha": "c6329b5a6f21281941fa6a6508b1c51756cce8ba",
+    "agent": "Claude Code",
+    "function_name": "handler",
+    "is_method": false,
+    "category": "Wrong/suboptimal algorithm",
+    "commit_description": "\ud83d\udd27 Fix Vercel function invocation error - Ultra-minimal handler\n\nCritical Fix Applied:\n\u2705 Simplified function handler to bare minimum (no FastAPI initially)\n\u2705 Added comprehensive error catching with detailed logging\n\u2705 Uses standard JSON response format for Vercel compatibility\n\u2705 Multiple entry point a",
+    "raw_counterexample": "Given: (request='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\x00'),\n  prathikkv__BioIntel_c6329b5a_handler_old.handler : raises NameError(\"name 'app' is not defined\")\n  prathikkv__BioIntel_c6329b5a_handler_new.handler : raises NameError(\"name 'time' is not defined\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_prathikkv__BioIntel_c6329b5a_handler.py",
+    "minimized_counterexample": "Args: (request='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\x00')\n- Old Code: raises NameError(\"name 'app' is not defined\")\n- New Code: raises NameError(\"name 'time' is not defined\")"
+  },
+  {
+    "task_name": "kimata__outdoor_unit_cooler_05b160ba_start",
+    "repo": "kimata/outdoor_unit_cooler",
+    "sha": "05b160ba4182477af41beb36aa302cd4df232c24",
+    "agent": "Claude Code",
+    "function_name": "start",
+    "is_method": false,
+    "category": "Wrong/suboptimal algorithm",
+    "commit_description": "fix: add error handling for web app creation in actuator\n\n- Add try-catch block around create_app() to capture detailed error logs\n- This helps diagnose GitLab CI failures where actuator stops after GPIO initialization\n- Improves debugging visibility for web server startup issues\n\n\ud83e\udd16 Generated with [",
+    "raw_counterexample": "Given: (config='', event_queue='', port='\\x00\\x00\\x00\\x00\\x00'),\n  kimata__outdoor_unit_cooler_05b160ba_start_old.start : raises NameError(\"name 'werkzeug' is not defined\")\n  kimata__outdoor_unit_cooler_05b160ba_start_new.start : raises NameError(\"name 'create_app' is not defined\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_kimata__outdoor_unit_cooler_05b160ba_start.py",
+    "minimized_counterexample": "Args: (config='', event_queue='', port='\\x00\\x00\\x00\\x00\\x00')\n- Old Code: raises NameError(\"name 'werkzeug' is not defined\")\n- New Code: raises NameError(\"name 'create_app' is not defined\")"
+  },
+  {
+    "task_name": "Haruqun__pachi777_988c41b2_extract_graph_data",
+    "repo": "Haruqun/pachi777",
+    "sha": "988c41b2e5b05b386f209e0489815d24c6ee8058",
+    "agent": "Claude Code",
+    "function_name": "extract_graph_data",
+    "is_method": true,
+    "category": "Type-semantics bug",
+    "commit_description": "web_analyzer.py\u306eextract_graph_data\u30e1\u30bd\u30c3\u30c9\u3092\u4fee\u6b63\n\n- \u6587\u5b57\u5217\uff08\u30d5\u30a1\u30a4\u30eb\u30d1\u30b9\uff09\u304c\u6e21\u3055\u308c\u305f\u5834\u5408\u306e\u51e6\u7406\u3092\u8ffd\u52a0\n- AttributeError: 'str' object has no attribute 'size' \u30a8\u30e9\u30fc\u3092\u4fee\u6b63\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+    "raw_counterexample": "Given: (img='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x01\\x01'),\n  Haruqun__pachi777_988c41b2_extract_graph_data_old.extract_graph_data_wrapper : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'size'\")\n  Haruqun__pachi777_988c41b2_extract_graph_data_new.extract_graph_data_wrapper : raises NameError(\"name 'cv2' is not defined\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_Haruqun__pachi777_988c41b2_extract_graph_data.py",
+    "minimized_counterexample": "Args: (img='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x01\\x01')\n- Old Code: raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'size'\")\n- New Code: raises NameError(\"name 'cv2' is not defined\")"
+  },
+  {
+    "task_name": "HubSpot__homebrew-pypi-poet_f5baa0a5__find_latest_version",
+    "repo": "HubSpot/homebrew-pypi-poet",
+    "sha": "f5baa0a5975a2e90bcd744dba87e944eb833ffc4",
+    "agent": "Claude Code",
+    "function_name": "_find_latest_version",
+    "is_method": false,
+    "category": "Wrong/suboptimal algorithm",
+    "commit_description": "Fix _find_latest_version to handle malformed versions\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+    "raw_counterexample": "Given: (distributions='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\x00'),\n  HubSpot__homebrew-pypi-poet_f5baa0a5__find_latest_version_old._find_latest_version : raises NameError(\"name 'pkg_resources' is not defined\")\n  HubSpot__homebrew-pypi-poet_f5baa0a5__find_latest_version_new._find_latest_version : raises NameError(\"name 'InvalidVersion' is not defined\")\nGiven: (distributions=''),\n  HubSpot__homebrew-pypi-poet_f5baa0a5__find_latest_version_old._find_latest_version : raises ValueError('max() iterable argument is empty')\n  HubSpot__homebrew-pypi-poet_f5baa0a5__find_latest_version_new._find_latest_version : returns None",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_HubSpot__homebrew-pypi-poet_f5baa0a5__find_latest_version.py",
+    "minimized_counterexample": "Args: (distributions='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\x00')\n- Old Code: raises NameError(\"name 'pkg_resources' is not defined\")\n- New Code: raises NameError(\"name 'InvalidVersion' is not defined\")"
+  },
+  {
+    "task_name": "MementoRC__llm-pytest-analyzer_8a70654d_worker",
+    "repo": "MementoRC/llm-pytest-analyzer",
+    "sha": "8a70654de5287a72df91219b1f199962cb2d34ff",
+    "agent": "Claude Code",
+    "function_name": "worker",
+    "is_method": false,
+    "category": "Type-semantics bug",
+    "commit_description": "fix: resolve test_thread_safety timeout causing CI failures\n\n- Fix deadlock in test_thread_safety that was causing 600+ second timeouts\n- Create fresh optimizer instances per thread to avoid shared state issues\n- Reduce thread timeout from 30s to 5s per thread to prevent CI hangs\n- Add graceful time",
+    "raw_counterexample": "Given: (worker_id='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\x00'),\n  MementoRC__llm-pytest-analyzer_8a70654d_worker_old.worker : raises TypeError('worker() takes 0 positional arguments but 1 was given')\n  MementoRC__llm-pytest-analyzer_8a70654d_worker_new.worker : raises NameError(\"name 'errors' is not defined\")\nGiven: (),\n  MementoRC__llm-pytest-analyzer_8a70654d_worker_old.worker : raises NameError(\"name 'errors' is not defined\")\n  MementoRC__llm-pytest-analyzer_8a70654d_worker_new.worker : raises TypeError(\"worker() missing 1 required positional argument: 'worker_id'\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_MementoRC__llm-pytest-analyzer_8a70654d_worker.py",
+    "minimized_counterexample": "Args: (worker_id='\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\x00')\n- Old Code: raises TypeError('worker() takes 0 positional arguments but 1 was given')\n- New Code: raises NameError(\"name 'errors' is not defined\")"
+  },
+  {
+    "task_name": "antonovdmitriy__alg_bb659879_show_stats",
+    "repo": "antonovdmitriy/alg",
+    "sha": "bb659879ea59043ee1110749a66f4be5625be615",
+    "agent": "Claude Code",
+    "function_name": "show_stats",
+    "is_method": false,
+    "category": "Type-semantics bug",
+    "commit_description": "Update statistics script to include image data\n\n- Add comprehensive image statistics showing coverage across all words\n- Include concurrent image checking with progress indicator\n- Add --check-images flag to optionally enable image availability checking\n- Display image coverage percentage and distri",
+    "raw_counterexample": "Given: (categories_file='\\x00\\x00', words_file='\\x00', icons_file=None, skip_image_check=False),\n  antonovdmitriy__alg_bb659879_show_stats_old.show_stats : raises TypeError('show_stats() takes from 2 to 3 positional arguments but 4 were given')\n  antonovdmitriy__alg_bb659879_show_stats_new.show_stats : raises NameError(\"name 'load_json' is not defined\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_antonovdmitriy__alg_bb659879_show_stats.py",
+    "minimized_counterexample": "Args: (categories_file='\\x00\\x00', words_file='\\x00', icons_file=None, skip_image_check=False)\n- Old Code: raises TypeError('show_stats() takes from 2 to 3 positional arguments but 4 were given')\n- New Code: raises NameError(\"name 'load_json' is not defined\")"
+  },
+  {
+    "task_name": "razor389__sec_queries_edd13c59__is_year_data_complete",
+    "repo": "razor389/sec_queries",
+    "sha": "edd13c59133579d4386d4ec7ee99693cb60d205f",
+    "agent": "Claude Code",
+    "function_name": "_is_year_data_complete",
+    "is_method": false,
+    "category": "Type-semantics bug",
+    "commit_description": "Align balance sheet completeness checks with segmentation logic\n\n- Modified _is_year_data_complete() to include balance sheet category validation\n- Balance sheet missing data now triggers continued filing searches like segments\n- Added comprehensive logging for balance sheet completeness checks\n- En",
+    "raw_counterexample": "Given: (year='0', data={}, cfg='\\x00\\x00\\x00\\x00\\x00\\x00\\x00'),\n  razor389__sec_queries_edd13c59__is_year_data_complete_old._is_year_data_complete : raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'segments'\")\n  razor389__sec_queries_edd13c59__is_year_data_complete_new._is_year_data_complete : raises ModuleNotFoundError(\"No module named 'edgar_extractor'\")",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_razor389__sec_queries_edd13c59__is_year_data_complete.py",
+    "minimized_counterexample": "Args: (year='0', data={}, cfg='\\x00\\x00\\x00\\x00\\x00\\x00\\x00')\n- Old Code: raises AttributeError(\"'LazyIntSymbolicStr' object has no attribute 'segments'\")\n- New Code: raises ModuleNotFoundError(\"No module named 'edgar_extractor'\")"
+  },
+  {
+    "task_name": "mo9mo9-uwu-mo9mo9__Kumihan-Formatter_f63a28e8_test_cli_help",
+    "repo": "mo9mo9-uwu-mo9mo9/Kumihan-Formatter",
+    "sha": "f63a28e850fbfdba71f782d63cf2c2b872e7ca7d",
+    "agent": "Claude Code",
+    "function_name": "test_cli_help",
+    "is_method": false,
+    "category": "Requirement misunderstanding / Missing branch logic",
+    "commit_description": "debug: Windows CLI\u30c6\u30b9\u30c8\u5931\u6557\u539f\u56e0\u8abf\u67fb\u7528\u30c7\u30d0\u30c3\u30b0\u60c5\u5831\u8ffd\u52a0\n\n- platform\u60c5\u5831\u3001\u5b9f\u884c\u53ef\u80fd\u30d5\u30a1\u30a4\u30eb\u30d1\u30b9\u3001\u623b\u308a\u5024\u8a73\u7d30\u3092\u51fa\u529b\n- \u30a8\u30f3\u30b3\u30fc\u30c7\u30a3\u30f3\u30b0\u3092utf-8\u306b\u660e\u793a\u7684\u306b\u6307\u5b9a\n- \u8a73\u7d30\u306a\u30a2\u30b5\u30fc\u30b7\u30e7\u30f3\u30e1\u30c3\u30bb\u30fc\u30b8\u3092\u8ffd\u52a0\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+    "raw_counterexample": "Given: (),\n  mo9mo9-uwu-mo9mo9__Kumihan-Formatter_f63a28e8_test_cli_help_old.test_cli_help : raises NameError(\"name 'subprocess' is not defined\")\n  mo9mo9-uwu-mo9mo9__Kumihan-Formatter_f63a28e8_test_cli_help_new.test_cli_help : raises SideEffectDetected('A \"socket.gethostname\" operation was detected. It\\'s dangerous to run CrossHair on code with side effects. To allow this operation anyway, use \"--unblock=socket.gethostname\".')",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_mo9mo9-uwu-mo9mo9__Kumihan-Formatter_f63a28e8_test_cli_help.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises NameError(\"name 'subprocess' is not defined\")\n- New Code: raises SideEffectDetected('A \"socket.gethostname\" operation was detected. It\\'s dangerous to run CrossHair on code with side effects. To allow this operation anyway, use \"--unblock=socket.gethostname\".')"
+  },
+  {
+    "task_name": "mo9mo9-uwu-mo9mo9__Kumihan-Formatter_f63a28e8_test_cli_sample_command",
+    "repo": "mo9mo9-uwu-mo9mo9/Kumihan-Formatter",
+    "sha": "f63a28e850fbfdba71f782d63cf2c2b872e7ca7d",
+    "agent": "Claude Code",
+    "function_name": "test_cli_sample_command",
+    "is_method": false,
+    "category": "Requirement misunderstanding / Missing branch logic",
+    "commit_description": "debug: Windows CLI\u30c6\u30b9\u30c8\u5931\u6557\u539f\u56e0\u8abf\u67fb\u7528\u30c7\u30d0\u30c3\u30b0\u60c5\u5831\u8ffd\u52a0\n\n- platform\u60c5\u5831\u3001\u5b9f\u884c\u53ef\u80fd\u30d5\u30a1\u30a4\u30eb\u30d1\u30b9\u3001\u623b\u308a\u5024\u8a73\u7d30\u3092\u51fa\u529b\n- \u30a8\u30f3\u30b3\u30fc\u30c7\u30a3\u30f3\u30b0\u3092utf-8\u306b\u660e\u793a\u7684\u306b\u6307\u5b9a\n- \u8a73\u7d30\u306a\u30a2\u30b5\u30fc\u30b7\u30e7\u30f3\u30e1\u30c3\u30bb\u30fc\u30b8\u3092\u8ffd\u52a0\n\n\ud83e\udd16 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+    "raw_counterexample": "Given: (),\n  mo9mo9-uwu-mo9mo9__Kumihan-Formatter_f63a28e8_test_cli_sample_command_old.test_cli_sample_command : raises NameError(\"name 'subprocess' is not defined\")\n  mo9mo9-uwu-mo9mo9__Kumihan-Formatter_f63a28e8_test_cli_sample_command_new.test_cli_sample_command : raises SideEffectDetected('A \"socket.gethostname\" operation was detected. It\\'s dangerous to run CrossHair on code with side effects. To allow this operation anyway, use \"--unblock=socket.gethostname\".')",
+    "repro_script": "C:\\Users\\rhith\\Downloads\\llm-diff-bugfinder\\project\\results\\benchmark\\repro_mo9mo9-uwu-mo9mo9__Kumihan-Formatter_f63a28e8_test_cli_sample_command.py",
+    "minimized_counterexample": "Args: ()\n- Old Code: raises NameError(\"name 'subprocess' is not defined\")\n- New Code: raises SideEffectDetected('A \"socket.gethostname\" operation was detected. It\\'s dangerous to run CrossHair on code with side effects. To allow this operation anyway, use \"--unblock=socket.gethostname\".')"
   }
 ]

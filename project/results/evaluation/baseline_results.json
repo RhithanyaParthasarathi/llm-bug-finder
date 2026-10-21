@@ -1,0 +1,814 @@
+{
+  "total_evaluated": 101,
+  "mypy_caught": 8,
+  "mypy_detection_rate": "7.9%",
+  "pylint_caught": 9,
+  "pylint_detection_rate": "8.9%",
+  "our_tool_caught": 101,
+  "our_tool_detection_rate": "100.0%",
+  "details": [
+    {
+      "task_name": "kym6464__clipboard-to-url_89c83dc3_read_csv",
+      "function_name": "read_csv",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "alexwday__iris-project_2a072768__process_reference_buffer",
+      "function_name": "_process_reference_buffer",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "HumanEval_10_make_palindrome",
+      "function_name": "make_palindrome",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "HumanEval_18_how_many_times",
+      "function_name": "how_many_times",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "HumanEval_26_remove_duplicates",
+      "function_name": "remove_duplicates",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "MementoRC__ci-framework_3478c8b8_test_security_to_reporting_integration",
+      "function_name": "test_security_to_reporting_integration",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_test_add_pattern",
+      "function_name": "test_add_pattern",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_test_update_pattern",
+      "function_name": "test_update_pattern",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_test_search_patterns",
+      "function_name": "test_search_patterns",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_test_create_category",
+      "function_name": "test_get_patterns_by_category",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_test_get_pattern_categories",
+      "function_name": "test_get_pattern_categories",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_test_add_error_solution",
+      "function_name": "test_add_error_solution",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_test_search_error_solutions",
+      "function_name": "test_search_error_solutions",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_add_pattern",
+      "function_name": "add_pattern",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_get_pattern",
+      "function_name": "get_pattern",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_update_pattern",
+      "function_name": "update_pattern",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_delete_pattern",
+      "function_name": "delete_pattern",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_search_patterns",
+      "function_name": "search_patterns",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_add_error_solution",
+      "function_name": "add_error_solution",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_get_error_solution",
+      "function_name": "get_error_solution",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_search_error_solutions",
+      "function_name": "search_error_solutions",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "MementoRC__claude-code-knowledge-framework_5a06fe2c_test_get_error_solution_success",
+      "function_name": "test_get_error_solution_success",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "MementoRC__claude-code-knowledge-framework_5a06fe2c_test_update_error_solution_success",
+      "function_name": "test_update_error_solution_success",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": true,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "MementoRC__claude-code-knowledge-framework_5a06fe2c_test_update_error_solution_metadata_only",
+      "function_name": "test_update_error_solution_metadata_only",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": true,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "MementoRC__claude-code-knowledge-framework_5a06fe2c_test_delete_error_solution_success",
+      "function_name": "test_delete_error_solution_success",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "MementoRC__mcp-git_fc222178_test_load_environment_with_empty_github_token",
+      "function_name": "test_load_environment_with_empty_github_token",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "MementoRC__mcp-git_c6fd58c9_test_load_environment_with_empty_github_token",
+      "function_name": "test_load_environment_with_empty_github_token",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "tobypullan__CC_GH_Integration_229fa7e5_subtract_vectors",
+      "function_name": "subtract_vectors",
+      "category": "Type-semantics bug",
+      "mypy_caught": true,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "toiee-lab__librechat-manager_c3b15322_list_users",
+      "function_name": "list_users",
+      "category": "Wrong/suboptimal algorithm",
+      "mypy_caught": true,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "naofumi-fujii__my-schedule_d75ef60f_is_holiday",
+      "function_name": "is_holiday",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "naofumi-fujii__my-schedule_d75ef60f_get_credentials",
+      "function_name": "get_credentials",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "naofumi-fujii__my-schedule_d75ef60f_main",
+      "function_name": "main",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "johnathan-greenaway__chat-console_74219b58__get_selected_model_id",
+      "function_name": "_get_selected_model_id",
+      "category": "Wrong/suboptimal algorithm",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "johnYuan98__johnYuan98-warehouse-pdf-processor_b6000f11_get_algin_sort_key",
+      "function_name": "get_algin_sort_key",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "Darelldrayton__parking-in-a-pinch_a5979f69_get_permissions",
+      "function_name": "get_permissions",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "Tamas54__Kormanyzati-Gazdasagi-Hirlevel_776e37d0___init__",
+      "function_name": "__init__",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "kevin82222__remote-server_728c6bf8_connectionLost",
+      "function_name": "connectionLost",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "kikuchinomegane__task_manager_d1f607fc_run_cli",
+      "function_name": "run_cli",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "kimata__rasp-water_ce116c79_test_event",
+      "function_name": "test_event",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "broadinstitute__starrynight_01127134_transform",
+      "function_name": "transform",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "budouchan__discord-points-bot-sp_9d140101_init_db",
+      "function_name": "init_db",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "Darelldrayton__parking-in-a-pinch_c46eca3f_get_queryset",
+      "function_name": "get_queryset",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "DevsyAI__devsy-action_07413391_test_pr_gen_mode",
+      "function_name": "test_pr_gen_mode",
+      "category": "Wrong/suboptimal algorithm",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "stevegsax__mistral-ocr_67d34f85___init__",
+      "function_name": "__init__",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": true,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "stevegsax__mistral-ocr_2054bcd9___init__",
+      "function_name": "__init__",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "Von-Base-Enterprises__core-nexus_bddede4d___init__",
+      "function_name": "__init__",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "g1nx22yra1k__Motas_85bb3f86_main",
+      "function_name": "main",
+      "category": "Wrong/suboptimal algorithm",
+      "mypy_caught": true,
+      "pylint_caught": true,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "fsgeek__Mallku_6670996a_get_db_config",
+      "function_name": "get_db_config",
+      "category": "Wrong/suboptimal algorithm",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "awilmoth__mcp-firewall_1567d406_preload_rules",
+      "function_name": "preload_rules",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "CAESER-UOFM__CAESER_water_levels_monitoring_system_576b618e__load_databases",
+      "function_name": "_load_databases",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": true,
+      "pylint_caught": true,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "willtech3__emoji-smith_bc149977_handler",
+      "function_name": "handler",
+      "category": "Wrong/suboptimal algorithm",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "willtech3__emoji-smith_709a44c0___init__",
+      "function_name": "__init__",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": true,
+      "pylint_caught": true,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "merlin-quix__webinar-solar-farm_1138e755_main",
+      "function_name": "main",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "willtech3__emoji-smith_f2ebb645__create_app",
+      "function_name": "_create_app",
+      "category": "Wrong/suboptimal algorithm",
+      "mypy_caught": true,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "DevinGreenwell__IOAgent_287bb62d__initialize_client",
+      "function_name": "_initialize_client",
+      "category": "Wrong/suboptimal algorithm",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "ANTIFRAGILE-Stadium__racing-drone-simulation_42e6bfa8_draw_drone",
+      "function_name": "draw_drone",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "ViktorSharga__pwSpammer_5985badc___init__",
+      "function_name": "__init__",
+      "category": "Type-semantics bug",
+      "mypy_caught": true,
+      "pylint_caught": true,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "okihara__juiz-mcp_d619cccc_add_todo",
+      "function_name": "add_todo",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "okihara__juiz-mcp_d619cccc_get_all_todos",
+      "function_name": "get_all_todos",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "inspirepan__klaude-code_86c7666b__switch_mode_or_insert",
+      "function_name": "_switch_mode_or_insert",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "mugipan-en__fastapi-ddd-template_dcb4e2e7_rebuild_models",
+      "function_name": "rebuild_models",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "mukhtar-github__taxpoynt-eInvoice_3194e9a2_upgrade",
+      "function_name": "upgrade",
+      "category": "Wrong/suboptimal algorithm",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "mukhtar-github__taxpoynt-eInvoice_3194e9a2_downgrade",
+      "function_name": "downgrade",
+      "category": "Wrong/suboptimal algorithm",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "megjohnson1999__chimeric-contig-detector_d088cfdc__refine_breakpoint",
+      "function_name": "_refine_breakpoint",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "megjohnson1999__chimeric-contig-detector_d088cfdc__quick_signal_check",
+      "function_name": "_quick_signal_check",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "nduong2000__ab-perf-test-dashboard_ee72fbdc_stop_test",
+      "function_name": "stop_test",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "cklose2000__document-slides-poc_1f5ea9f1_extract_from_bytes",
+      "function_name": "extract_from_bytes",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "cklose2000__document-slides-poc_1f5ea9f1__extract_sheet_data",
+      "function_name": "_extract_sheet_data",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "tom2tomtomtom__brand_audit_f3ba784a__generate_visual_identity_analysis",
+      "function_name": "_generate_visual_identity_analysis",
+      "category": "Wrong/suboptimal algorithm",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "tom2tomtomtom__brand_audit_f3ba784a__generate_ai_brand_analysis",
+      "function_name": "_generate_ai_brand_analysis",
+      "category": "Wrong/suboptimal algorithm",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "tom2tomtomtom__brand_audit_f3ba784a__generate_competitive_landscape_analysis",
+      "function_name": "_generate_competitive_landscape_analysis",
+      "category": "Wrong/suboptimal algorithm",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "tom2tomtomtom__brand_audit_f3ba784a__generate_strategic_insights",
+      "function_name": "_generate_strategic_insights",
+      "category": "Wrong/suboptimal algorithm",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "tom2tomtomtom__brand_audit_f3ba784a__generate_strategic_recommendations",
+      "function_name": "_generate_strategic_recommendations",
+      "category": "Wrong/suboptimal algorithm",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "tom2tomtomtom__brand_audit_f3ba784a__generate_risk_assessment",
+      "function_name": "_generate_risk_assessment",
+      "category": "Wrong/suboptimal algorithm",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_test_get_patterns_by_category",
+      "function_name": "test_get_patterns_by_category",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "OpenSourceAP__CrossSection_c3f9d304_fastxtile",
+      "function_name": "fastxtile",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "ebowman__polarized-training-analysis_fa5922ca_calculate_adherence_score",
+      "function_name": "calculate_adherence_score",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "fyn-tech__fyn-runner_324690d6_test_initialization",
+      "function_name": "test_initialization",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "Jackal104__Bible-Clock-v4_c64834c2__estimate_date_content_height",
+      "function_name": "_estimate_date_content_height",
+      "category": "Type-semantics bug",
+      "mypy_caught": true,
+      "pylint_caught": true,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "EduardKakosyan__hugo_c12ba122_main",
+      "function_name": "main",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "EduardKakosyan__hugo_c12ba122___init__",
+      "function_name": "__init__",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "kmarchais__mmgpy_ba312b33__run_mmg2d",
+      "function_name": "_run_mmg2d",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "kmarchais__mmgpy_ba312b33__run_mmg3d",
+      "function_name": "_run_mmg3d",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "kmarchais__mmgpy_ba312b33__run_mmgs",
+      "function_name": "_run_mmgs",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "luisrms69__facturacion_mexico_8b184dff_after_install",
+      "function_name": "after_install",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "luisrms69__condominio-management_9bba24ae_setUp",
+      "function_name": "setUp",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "luisrms69__condominio-management_9bba24ae_test_set_default_values_functionality",
+      "function_name": "test_set_default_values_functionality",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "luisrms69__condominio-management_9bba24ae_test_comprehensive_business_logic_flow",
+      "function_name": "test_comprehensive_business_logic_flow",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "Constellations-AI__TradingSystem_c5577c9f___init__",
+      "function_name": "__init__",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "pranavmodi__salesbot_1003c8ef_process_pending_email_jobs",
+      "function_name": "process_pending_email_jobs",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "pranavchavda__flock-native_8664aed9___init__",
+      "function_name": "__init__",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "pranavchavda__flock-native_8664aed9_quit_app",
+      "function_name": "quit_app",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "prathikkv__BioIntel_c6329b5a_handler",
+      "function_name": "handler",
+      "category": "Wrong/suboptimal algorithm",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "kimata__outdoor_unit_cooler_05b160ba_start",
+      "function_name": "start",
+      "category": "Wrong/suboptimal algorithm",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "Haruqun__pachi777_988c41b2_extract_graph_data",
+      "function_name": "extract_graph_data",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": true,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "HubSpot__homebrew-pypi-poet_f5baa0a5__find_latest_version",
+      "function_name": "_find_latest_version",
+      "category": "Wrong/suboptimal algorithm",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "MementoRC__llm-pytest-analyzer_8a70654d_worker",
+      "function_name": "worker",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "antonovdmitriy__alg_bb659879_show_stats",
+      "function_name": "show_stats",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "razor389__sec_queries_edd13c59__is_year_data_complete",
+      "function_name": "_is_year_data_complete",
+      "category": "Type-semantics bug",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "mo9mo9-uwu-mo9mo9__Kumihan-Formatter_f63a28e8_test_cli_help",
+      "function_name": "test_cli_help",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    },
+    {
+      "task_name": "mo9mo9-uwu-mo9mo9__Kumihan-Formatter_f63a28e8_test_cli_sample_command",
+      "function_name": "test_cli_sample_command",
+      "category": "Requirement misunderstanding / Missing branch logic",
+      "mypy_caught": false,
+      "pylint_caught": false,
+      "our_tool_caught": true
+    }
+  ]
+}

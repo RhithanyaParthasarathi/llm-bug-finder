@@ -79,51 +79,29 @@ Modern AI coding agents generate billions of lines of code changes daily, but ve
 
 ## 7. System Design
 
-```
-                      ┌────────────────────────────────────────┐
-                      │    nuprl/AgentPack (1.8M Commits)      │
-                      │    (Streamed via Hugging Face Hub)     │
-                      └──────────────────┬─────────────────────┘
-                                         │
-                                         ▼
-                      ┌────────────────────────────────────────┐
-                      │   Context & Stub Synthesizer           │
-                      │  - Class Method Isolation (MockSelf)   │
-                      │  - Automatic Type Inference (defaults) │
-                      │  - External Dependency Mocking         │
-                      └──────────────────┬─────────────────────┘
-                                         │
-                                         ▼
-                      ┌────────────────────────────────────────┐
-                      │  Candidate Extraction & Task Builder   │
-                      │  (old_version.py vs. new_version.py)   │
-                      └──────────────────┬─────────────────────┘
-                                         │
-                                         ▼
-                      ┌────────────────────────────────────────┐
-                      │       PART 1: CrossHair Runner         │
-                      │      (Symbolic Execution & Z3)         │
-                      │   Finds x such that Old(x) != New(x)   │
-                      │     * Checkpoint Resumption Store *    │
-                      └──────────────────┬─────────────────────┘
-                                         │
-                          ┌──────────────┴──────────────┐
-                          │                             │
-                   [No Divergence]              [Divergence Found]
-                          │                             │
-                          ▼                             ▼
-                  Marked Preserved            ┌────────────────────────────────────┐
-                                              │   PART 2: Smart Reachability       │
-                                              │   (Constant Propagation + AST)     │
-                                              └─────────────────┬──────────────────┘
-                                                                │
-                                        ┌───────────────────────┼──────────────────────┐
-                                        ▼                       ▼                      ▼
-                               [CONFIRMED_BUG_HIT]       [CONCRETE_SAFE]        [VARIABLE_PARAM]
-                              (Literal/Const Breaks)  (Literal/Const Agrees) (Dynamic Call Site)
-                                        │                       │                      │
-                                        ▼                       ▼                      ▼
-                                 Direct Blocker         Proven Harmless        Flagged for Audit
+```mermaid
+graph TD
+    classDef core fill:#e1f5fe,stroke:#03a9f4,stroke-width:2px,color:#000;
+    classDef db fill:#fce4ec,stroke:#e91e63,stroke-width:2px,color:#000;
+    classDef ext fill:#f5f5f5,stroke:#999,stroke-width:2px,color:#000;
+
+    subgraph "1. Getting the Data"
+        HF["Cloud Storage<br>(HuggingFace)"]:::ext --> AP[("Massive Database<br>(1.8 Million AI Edits)")]:::db
+        AP --> Loader["Code Extractor<br>(Finds what the AI changed)"]:::core
+    end
+
+    subgraph "2. Finding the Bugs (Core Engine)"
+        Loader --> Isolator["Code Isolator<br>(Wraps the code so it can be tested alone)"]:::core
+        Isolator --> SMT["Math-Based Bug Detector<br>(Proves if the new code is broken)"]:::core
+        SMT -.-> Polyglot["Future Upgrades<br>(Adding C++ and Java Support)"]:::ext
+        SMT -->|Broken Inputs Found| SRA["Impact Checker<br>(Checks if the real app actually uses those broken inputs)"]:::core
+    end
+
+    subgraph "3. Saving & Viewing Results"
+        SRA --> Bench[("Verified Bug Database<br>(Saves only real, proven bugs)")]:::db
+        SMT -.-> State[("Progress Saver<br>(Lets us pause and resume)")]:::db
+        CLI(["Developer Command Line<br>(Tool to view the results)"]) -.-> Bench
+    end
 ```
 
 ---
@@ -181,16 +159,18 @@ Phase 3:                   [████████]
 Phase 4:                           [░░░░░░░░]
 Phase 5:                                   [░░░░░░░░]
 Phase 6:                                           [░░░░░░░░]
+Phase 7:                                                   [░░░░░░░░]
            (██ = Completed to Date | ░░ = Upcoming Plan)
 ```
 
-| Phase | Timeline | Milestone / Work Item | Status | Verification Evidence in Repo |
+| Phase | Week | Milestone / Work Item | Status | Evidence in Repo |
 |---|---|---|---|---|
-| **Phase 1** | **Week 1** | **Dataset Ingestion & Schema Discovery**<br>- Authenticated streaming from `nuprl/AgentPack`<br>- Discovered real 6-field schema<br>- Git unified diff hunk parser & AST isolator | **Completed** | `scripts/inspect_agentpack_schema.py`, `src/agentpack_loader.py` |
-| **Phase 2** | **Week 2** | **Symbolic Differential Runner & Context Synthesis**<br>- CrossHair runner with timeout controls<br>- Resumable checkpointing subsystem<br>- Context synthesizer for class methods (`MockSelf`) | **Completed** | `src/crosshair_runner.py`, `src/context_synthesizer.py`, `tests/` |
-| **Phase 3** | **Week 3 (Current)** | **Reachability Analysis & Benchmark Harvesting**<br>- Smart reachability analyzer with constant propagation<br>- 100k commit sweep producing **50 verified bug benchmark**<br>- Developer CLI (`cli.py`) & **Review 1 Presentation** | **Completed (Current Milestone)** | `cli.py`, `src/smart_reachability.py`, `results/benchmark/benchmark_bugs.json` |
-| **Phase 4** | **Week 4** | **Benchmark Expansion & Taxonomy Deep-Dive**<br>- Scaling benchmark across Codex and Cursor datasets<br>- Statistical breakdown of bug categories and root causes<br>- Automated minimization of SMT counterexamples | **Upcoming** | `scripts/harvest_benchmark.py`, `results/benchmark/` |
-| **Phase 5** | **Week 5** | **Inter-procedural Reachability & CI/CD Integration**<br>- Inter-procedural call-graph tracking across multi-file repositories<br>- GitHub Action bot for automated PR regression commenting | **Upcoming** | `src/github_action.py`, `src/smart_reachability.py` |
-| **Phase 6** | **Weeks 6–7** | **Final Empirical Evaluation & Thesis Defense**<br>- Full benchmark ablation study against standard unit test suites<br>- Comprehensive project report, documentation, and final defense | **Upcoming** | `docs/final_report.md` |
+| **Phase 1** | **Week 1** | **Dataset ingestion & schema discovery:** authenticated streaming from nuprl/AgentPack; real dataset schema confirmed; Git unified-diff hunk parser and AST isolator implemented. | Completed — verified with real code | `agentpack_loader.py` |
+| **Phase 2** | **Week 2** | **Symbolic differential runner & context synthesis:** CrossHair runner with timeout controls; resumable checkpointing subsystem; context synthesizer for class methods (MockSelf). | Completed — verified with real code | `crosshair_runner.py`, `context_synthesizer.py`, `tests/` |
+| **Phase 3** | **Week 3** | **Reachability analysis & benchmark harvesting:** smart reachability analyzer with constant propagation; large-scale AgentPack sweep reported (~100,000 commits, 50 candidate bugs); developer CLI; Review 1. | In Progress | `cli.py`, `smart_reachability.py`, `benchmark_bugs.json` |
+| **Phase 4** | **Week 4** | **Benchmark expansion & taxonomy deep-dive:** statistical breakdown of bug categories and root causes; automated minimization of SMT counterexamples for readability. | Planned | `harvest_benchmark.py` |
+| **Phase 5** | **Week 5** | **Inter-procedural reachability & CI/CD integration:** call-graph tracking across multi-file repositories; GitHub Action bot for automated PR regression comments. | Planned | `github_action.py` |
+| **Phase 6** | **Week 6** | **Language expansion:**<br>— C/C++: adapt the differential architecture to Clang + KLEE; compile diffs to LLVM bitcode for symbolic comparison.<br>— Java: adapt the architecture to Symbolic PathFinder (SPF); abstract the runner interface for polyglot SMT verification. | Stretch<br>(not yet started) | `klee_runner.cpp`, `spf_runner.java` |
+| **Phase 7** | **Week 7** | **Final empirical evaluation & defense:** full benchmark ablation study against standard unit-test suites; final report, documentation, and defense. | Planned | Final report & Presentation |
 
 ---

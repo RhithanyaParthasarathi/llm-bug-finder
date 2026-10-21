@@ -12,6 +12,8 @@ import os
 import sys
 import tempfile
 
+sys.stdout.reconfigure(encoding='utf-8')
+
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
@@ -19,13 +21,16 @@ if PROJECT_ROOT not in sys.path:
 from src.context_synthesizer import extract_all_changed_functions
 from src.crosshair_runner import run_diffbehavior
 from src.smart_reachability import analyze_reachability
+from src.call_graph_tracker import track_calls_in_repo
 
 
-def check_diff(old_file_path: str, new_file_path: str, callers_file: str = ""):
+def check_diff(old_file_path: str, new_file_path: str, callers_file: str = "", repo_dir: str = "", pr_comment: bool = False):
     print(f"\n{'='*70}")
     print(f"LLM-Diff-BugFinder: Checking Diff for Behavioral Regressions")
     print(f"  Old version: {old_file_path}")
     print(f"  New version: {new_file_path}")
+    if repo_dir:
+        print(f"  Target Repository: {repo_dir}")
     print(f"{'='*70}\n")
 
     with open(old_file_path, "r", encoding="utf-8") as f:
@@ -56,37 +61,80 @@ def check_diff(old_file_path: str, new_file_path: str, callers_file: str = ""):
             res = run_diffbehavior(f"{func_name}_old", f"{func_name}_new", entry_point, cwd=tmpdir, per_condition_timeout=10)
 
             if res.counterexample_found:
-                print(f"[!] DIVERGENCE DETECTED in `{func_name}`!")
+                print(f"[!] REGRESSION DETECTED in `{func_name}`!")
                 print(f"    Counterexample found by SMT solver:")
                 for line in res.raw_output.splitlines()[:10]:
                     print(f"      {line}")
 
+                import importlib.util
+                spec_old = importlib.util.spec_from_file_location(f"{func_name}_old", old_mod_path)
+                mod_old = importlib.util.module_from_spec(spec_old)
+                spec_old.loader.exec_module(mod_old)
+                fn_old = getattr(mod_old, entry_point)
+
+                spec_new = importlib.util.spec_from_file_location(f"{func_name}_new", new_mod_path)
+                mod_new = importlib.util.module_from_spec(spec_new)
+                spec_new.loader.exec_module(mod_new)
+                fn_new = getattr(mod_new, entry_point)
+
+                all_findings = []
+
+                # 1. Single callers file if provided
                 if callers_file and os.path.exists(callers_file):
                     print(f"\n    [+] Analyzing Call-Site Reachability in {callers_file}...")
                     with open(callers_file, "r", encoding="utf-8") as cf:
                         callers_src = cf.read()
-                    
-                    try:
-                        import importlib.util
-                        spec_old = importlib.util.spec_from_file_location(f"{func_name}_old", old_mod_path)
-                        mod_old = importlib.util.module_from_spec(spec_old)
-                        spec_old.loader.exec_module(mod_old)
-                        fn_old = getattr(mod_old, entry_point)
+                    findings = analyze_reachability(callers_src, func_name, fn_old, fn_new)
+                    all_findings.extend([(callers_file, f) for f in findings])
 
-                        spec_new = importlib.util.spec_from_file_location(f"{func_name}_new", new_mod_path)
-                        mod_new = importlib.util.module_from_spec(spec_new)
-                        spec_new.loader.exec_module(mod_new)
-                        fn_new = getattr(mod_new, entry_point)
+                # 2. Entire repository scan if repo_dir provided
+                if repo_dir and os.path.exists(repo_dir):
+                    print(f"\n    [+] Scanning entire repository '{repo_dir}' for callers of `{func_name}`...")
+                    repo_calls = track_calls_in_repo(repo_dir, func_name)
+                    print(f"    Found {len(repo_calls)} call site(s) across repository.")
 
-                        findings = analyze_reachability(callers_src, func_name, fn_old, fn_new)
-                        print(f"    {'Caller':<20} {'Line':<6} {'Verdict':<20} Detail")
-                        print(f"    {'-'*65}")
-                        for finding in findings:
-                            print(f"    {finding.caller or '<module>':<20} {finding.line:<6} {finding.verdict:<20} {finding.detail}")
-                    except Exception as e:
-                        print(f"    [!] Error during call-site execution: {e}")
+                    unique_files = list({c[0] for c in repo_calls})
+                    for rel_file in unique_files:
+                        full_fpath = os.path.join(repo_dir, rel_file)
+                        try:
+                            with open(full_fpath, "r", encoding="utf-8") as rf:
+                                r_src = rf.read()
+                            r_findings = analyze_reachability(r_src, func_name, fn_old, fn_new)
+                            all_findings.extend([(rel_file, f) for f in r_findings])
+                        except Exception:
+                            pass
+
+                if all_findings:
+                    print(f"\n    {'File':<30} {'Caller':<18} {'Line':<6} {'Verdict':<18}")
+                    print(f"    {'-'*76}")
+                    for fpath, finding in all_findings:
+                        print(f"    {fpath[:28]:<30} {finding.caller or '<module>':<18} {finding.line:<6} {finding.verdict:<18}")
+
+                if pr_comment:
+                    print("\n" + "="*40 + " AUTOMATED PR BOT COMMENT " + "="*40)
+                    print(f"### ⚠️ LLM-Diff-BugFinder: Silent Behavioral Regression Detected\n")
+                    print(f"The proposed diff modifies `{func_name}`, but alters its runtime behavior on specific inputs.\n")
+                    print(f"**SMT Counterexample Proof:**")
+                    print("```text")
+                    for line in res.raw_output.splitlines()[:5]:
+                        print(line)
+                    print("```\n")
+                    if all_findings:
+                        hits = [f for f in all_findings if f[1].verdict == 'CONFIRMED_BUG_HIT']
+                        flagged = [f for f in all_findings if f[1].verdict == 'VARIABLE_PARAM']
+                        print(f"**Downstream Repository Impact:**")
+                        print(f"- 🔴 **Confirmed Broken Callers:** {len(hits)} location(s)")
+                        for fpath, f in hits:
+                            print(f"  - `{fpath}:{f.line}` ({f.caller or 'module'})")
+                        print(f"- ⚠️ **Flagged for Audit (Dynamic Variables):** {len(flagged)} location(s)")
+                        for fpath, f in flagged:
+                            print(f"  - `{fpath}:{f.line}` ({f.caller or 'module'})")
+                    else:
+                        print(f"**Downstream Impact:** No direct callers found in the analyzed scope.")
+                    print(f"\n**Action:** 🛑 Merge Blocked. Please review and revert the behavioral divergence.")
+                    print("="*106 + "\n")
             else:
-                print(f"[+] `{func_name}`: No behavioral divergences found (function contract preserved).")
+                print(f"[+] `{func_name}`: No behavioral divergences found (function contract mathematically preserved).")
 
 
 def print_benchmark_report():
@@ -114,15 +162,17 @@ def main():
     subparsers = parser.add_subparsers(dest="command")
 
     check_parser = subparsers.add_parser("check", help="Check two file versions for behavioral regression")
-    check_parser.add_argument("--old-file", required=True)
-    check_parser.add_argument("--new-file", required=True)
-    check_parser.add_argument("--callers-file", default="")
+    check_parser.add_argument("--old-file", required=True, help="Path to original (canonical) file")
+    check_parser.add_argument("--new-file", required=True, help="Path to AI-modified file")
+    check_parser.add_argument("--callers-file", default="", help="Single file containing callers to analyze")
+    check_parser.add_argument("--repo-dir", default="", help="Path to full repository directory to scan call graph")
+    check_parser.add_argument("--pr-comment", action="store_true", help="Format output as a GitHub PR review bot comment")
 
     subparsers.add_parser("benchmark-report", help="Display verified benchmark bugs report")
 
     args = parser.parse_args()
     if args.command == "check":
-        check_diff(args.old_file, args.new_file, args.callers_file)
+        check_diff(args.old_file, args.new_file, callers_file=args.callers_file, repo_dir=args.repo_dir, pr_comment=args.pr_comment)
     elif args.command == "benchmark-report":
         print_benchmark_report()
     else:

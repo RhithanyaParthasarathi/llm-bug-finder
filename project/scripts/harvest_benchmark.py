@@ -62,7 +62,12 @@ def stream_with_retry(max_retries=5):
     raise ConnectionError("Failed to connect to Hugging Face after multiple retries.")
 
 
-def harvest(limit=15000, target_bugs=10, workdir="results/benchmark_workdir", benchmark_dir="results/benchmark"):
+def harvest(limit=15000, target_bugs=10, offset=0, workdir=None, benchmark_dir=None):
+    base_proj = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    if workdir is None:
+        workdir = os.path.join(base_proj, "results", "benchmark_workdir")
+    if benchmark_dir is None:
+        benchmark_dir = os.path.join(base_proj, "results", "benchmark")
     os.makedirs(workdir, exist_ok=True)
     os.makedirs(benchmark_dir, exist_ok=True)
     benchmark_file = os.path.join(benchmark_dir, "benchmark_bugs.json")
@@ -73,7 +78,7 @@ def harvest(limit=15000, target_bugs=10, workdir="results/benchmark_workdir", be
             existing_bugs = json.load(f)
     seen_tasks = {b["task_name"] for b in existing_bugs}
 
-    print(f"Starting Benchmark Harvester (Target: {target_bugs} bugs, Limit: {limit} commits)...")
+    print(f"Starting Benchmark Harvester (Offset: {offset}, Target: {target_bugs} bugs, Limit: {limit} commits)...")
     print(f"Existing verified bugs in benchmark: {len(existing_bugs)}")
 
     ds = stream_with_retry()
@@ -85,10 +90,14 @@ def harvest(limit=15000, target_bugs=10, workdir="results/benchmark_workdir", be
     try:
         for r in ds:
             scanned += 1
-            if scanned > limit or new_bugs_found >= target_bugs:
+            if scanned <= offset:
+                if scanned % 10000 == 0:
+                    print(f"Fast-forwarding stream... passed record {scanned}/{offset}", flush=True)
+                continue
+            if scanned > (offset + limit) or new_bugs_found >= target_bugs:
                 break
 
-            if scanned % 1000 == 0:
+            if (scanned - offset) % 1000 == 0:
                 print(f"Scanned {scanned} commits | Candidates tested: {candidates_tested} | Total bugs: {len(existing_bugs)}", flush=True)
 
             agent = r.get("agent", "")
@@ -185,5 +194,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit", type=int, default=15000)
     parser.add_argument("--target", type=int, default=10)
+    parser.add_argument("--offset", type=int, default=0)
     args = parser.parse_args()
-    harvest(limit=args.limit, target_bugs=args.target)
+    harvest(limit=args.limit, target_bugs=args.target, offset=args.offset)

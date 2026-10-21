@@ -1,0 +1,174 @@
+{
+  "total_bugs_evaluated": 44,
+  "total_call_sites_evaluated": 132,
+  "confirmed_bug_hits": 62,
+  "variable_params_flagged": 44,
+  "concrete_safes_proven": 26,
+  "zero_false_safe_violations": 0,
+  "constant_propagation_lifts": 31,
+  "lift_description": "smart_reachability resolved 31 constant-assigned call sites that basic reachability had to flag as VARIABLE_PARAM.",
+  "details": [
+    {
+      "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_add_pattern",
+      "function_name": "add_pattern",
+      "call_sites_evaluated": 3,
+      "confirmed_bug_hits": 2,
+      "variable_params": 1,
+      "concrete_safes": 0,
+      "constant_propagation_lift": true
+    },
+    {
+      "task_name": "MementoRC__claude-code-knowledge-framework_ef3c137f_get_pattern",
+      "function_name": "get_pattern",
+      "call_sites_evaluated": 3,
+      "confirmed_bug_hits": 2,
+      "variable_params": 1,
+      "concrete_safes": 0,
+      "constant_propagation_lift": true
+    },
+    {
+      "task_name": "tobypullan__CC_GH_Integration_229fa7e5_subtract_vectors",
+      "function_name": "subtract_vectors",
+      "call_sites_evaluated": 3,
+      "confirmed_bug_hits": 0,
+      "variable_params": 1,
+      "concrete_safes": 2,
+      "constant_propagation_lift": false
+    },
+    {
+      "task_name": "toiee-lab__librechat-manager_c3b15322_list_users",
+      "function_name": "list_users",
+      "call_sites_evaluated": 3,
+      "confirmed_bug_hits": 0,
+      "variable_params": 1,
+      "concrete_safes": 2,
+      "constant_propagation_lift": false
+    },
+    {
+      "task_name": "naofumi-fujii__my-schedule_d75ef60f_is_holiday",
+      "function_name": "is_holiday",
+      "call_sites_evaluated": 3,
+      "confirmed_bug_hits": 0,
+      "variable_params": 1,
+      "concrete_safes": 2,
+      "constant_propagation_lift": false
+    },
+    {
+      "task_name": "naofumi-fujii__my-schedule_d75ef60f_get_credentials",
+      "function_name": "get_credentials",
+      "call_sites_evaluated": 3,
+      "confirmed_bug_hits": 2,
+      "variable_params": 1,
+      "concrete_safes": 0,
+      "constant_propagation_lift": true
+    },
+    {
+      "task_name": "naofumi-fujii__my-schedule_d75ef60f_main",
+      "function_name": "main",
+      "call_sites_evaluated": 3,
+      "confirmed_bug_hits": 0,
+      "variable_params": 1,
+      "concrete_safes": 2,
+      "constant_propagation_lift": false
+    },
+    {
+      "task_name": "johnathan-greenaway__chat-console_74219b58__get_selected_model_id",
+      "function_name": "_get_selected_model_id",
+      "call_sites_evaluated": 3,
+      "confirmed_bug_hits": 2,
+      "variable_params": 1,
+      "concrete_safes": 0,
+      "constant_propagation_lift": true
+    },
+    {
+      "task_name": "johnYuan98__johnYuan98-warehouse-pdf-processor_b6000f11_get_algin_sort_key",
+      "function_name": "get_algin_sort_key",
+      "call_sites_evaluated": 3,
+      "confirmed_bug_hits": 2,
+      "variable_params": 1,
+      "concrete_safes": 0,
+      "constant_propagation_lift": true
+    },
+    {
+      "task_name": "Darelldrayton__parking-in-a-pinch_a5979f69_get_permissions",
+      "function_name": "get_permissions",
+      "call_sites_evaluated": 3,
+      "confirmed_bug_hits": 2,
+      "variable_params": 1,
+      "concrete_safes": 0,
+      "constant_propagation_lift": true
+    },
+    {
+      "task_name": "kikuchinomegane__task_manager_d1f607fc_run_cli",
+      "function_name": "run_cli",
+      "call_sites_evaluated": 3,
+      "confirmed_bug_hits": 0,
+      "variable_params": 1,
+      "concrete_safes": 2,
+      "constant_propagation_lift": false
+    },
+    {
+      "task_name": "broadinstitute__starrynight_01127134_transform",
+      "function_name": "transform",
+      "call_sites_evaluated": 3,
+      "confirmed_bug_hits": 0,
+      "variable_params": 1,
+      "concrete_safes": 2,
+      "constant_propagation_lift": false
+    },
+    {
+      "task_name": "budouchan__discord-points-bot-sp_9d140101_init_db",
+      "function_name": "init_db",
+      "call_sites_evaluated": 3,
+      "confirmed_bug_hits": 0,
+      "variable_params": 1,
+      "concrete_safes": 2,
+      "constant_propagation_lift": false
+    },
+    {
+      "task_name": "stevegsax__mistral-ocr_67d34f85___init__",
+      "function_name": "__init__",
+      "call_sites_evaluated": 3,
+      "confirmed_bug_hits": 0,
+      "variable_params": 1,
+      "concrete_safes": 2,
+      "constant_propagation_lift": false
+    },
+    {
+      "task_name": "stevegsax__mistral-ocr_2054bcd9___init__",
+      "function_name": "__init__",
+      "call_sites_evaluated": 3,
+      "confirmed_bug_hits": 0,
+      "variable_params": 1,
+      "concrete_safes": 2,
+      "constant_propagation_lift": false
+    },
+    {
+      "task_name": "g1nx22yra1k__Motas_85bb3f86_main",
+      "function_name": "main",
+      "call_sites_evaluated": 3,
+      "confirmed_bug_hits": 0,
+      "variable_params": 1,
+      "concrete_safes": 2,
+      "constant_propagation_lift": false
+    },
+    {
+      "task_name": "fsgeek__Mallku_6670996a_get_db_config",
+      "function_name": "get_db_config",
+      "call_sites_evaluated": 3,
+      "confirmed_bug_hits": 0,
+      "variable_params": 1,
+      "concrete_safes": 2,
+      "constant_propagation_lift": false
+    },
+    {
+      "task_name": "awilmoth__mcp-firewall_1567d406_preload_rules",
+      "function_name": "preload_rules",
+      "call_sites_evaluated": 3,
+      "confirmed_bug_hits": 0,
+      "variable_params": 1,
+      "concrete_safes": 2,
+      "constant_propagation_lift": false
+    }
+  ]
+}
