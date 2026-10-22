@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llm-diff-bugfinder"
+version = "1.0.0"
+description = "Automated Detection and Reachability Analysis of Silent Behavioral Regressions in AI-Generated Code Diffs"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "Rhithanya Parthasarathi"},
+    {name = "Ashwath"},
+    {name = "Hariharan"},
+    {name = "Rithik"}
+]
+keywords = ["symbolic-execution", "smt", "z3", "llm", "differential-testing", "code-review", "github-action"]
+dependencies = [
+    "crosshair-tool>=0.0.110",
+    "z3-solver>=5.1.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "mypy>=1.9.0",
+    "pylint>=3.1.0",
+    "datasets>=2.18.0",
+    "huggingface-hub>=0.22.0"
+]
+
+[project.scripts]
+llm-bugfinder = "cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["project*"]

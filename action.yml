@@ -1,0 +1,89 @@
+name: 'LLM-Diff-BugFinder'
+description: 'Automated Detection & Reachability Analysis of Silent Behavioral Regressions in AI Code Diffs'
+author: 'Rhithanya Parthasarathi & Team'
+
+inputs:
+  timeout:
+    description: 'Timeout per changed function in seconds'
+    required: false
+    default: '30'
+  fail-on-bug:
+    description: 'Whether to block PR merge when behavioral regression is confirmed'
+    required: false
+    default: 'true'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      shell: bash
+      run: |
+        pip install --quiet crosshair-tool>=0.0.110 z3-solver>=5.1.0
+
+    - name: Compute PR Diff
+      shell: bash
+      run: |
+        git diff origin/${{ github.base_ref }}...HEAD -- "*.py" > /tmp/pr.diff
+
+    - name: Run LLM-Diff-BugFinder Scanner
+      id: scanner
+      shell: bash
+      run: |
+        python ${{ github.action_path }}/project/scripts/pr_scanner.py \
+          --diff /tmp/pr.diff \
+          --repo . \
+          --timeout ${{ inputs.timeout }} \
+          --output /tmp/pr_comment.md
+      continue-on-error: true
+
+    - name: Post PR Review Comment
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{ github.token }}
+        script: |
+          const fs = require('fs');
+          let body;
+          try {
+            body = fs.readFileSync('/tmp/pr_comment.md', 'utf8');
+          } catch(e) {
+            body = "✅ **LLM-Diff-BugFinder**: No Python files changed or no behavioral regressions detected.";
+          }
+
+          const { data: comments } = await github.rest.issues.listComments({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number,
+          });
+
+          const botComment = comments.find(c =>
+            c.user.type === 'Bot' &&
+            c.body.includes('LLM-Diff-BugFinder')
+          );
+
+          if (botComment) {
+            await github.rest.issues.updateComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: botComment.id,
+              body: body,
+            });
+          } else {
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: body,
+            });
+          }
+
+    - name: Enforce Merge Block
+      if: inputs.fail-on-bug == 'true' && steps.scanner.outcome == 'failure'
+      shell: bash
+      run: |
+        echo "❌ LLM-Diff-BugFinder: Behavioral regression confirmed. Blocking merge."
+        exit 1

@@ -170,11 +170,45 @@ def main():
 
     subparsers.add_parser("benchmark-report", help="Display verified benchmark bugs report")
 
+    scan_parser = subparsers.add_parser("scan-pr", help="Scan a git diff or multi-file PR for regressions")
+    scan_parser.add_argument("--diff", default=None, help="Path to .diff file")
+    scan_parser.add_argument("--stdin", action="store_true", help="Read diff from stdin (e.g. git diff | ...)")
+    scan_parser.add_argument("--repo", default=None, help="Path to repository root for call-graph tracking")
+    scan_parser.add_argument("--timeout", type=int, default=30, help="CrossHair timeout per function in seconds")
+    scan_parser.add_argument("--output", default=None, help="Save PR comment markdown to file")
+
     args = parser.parse_args()
     if args.command == "check":
         check_diff(args.old_file, args.new_file, callers_file=args.callers_file, repo_dir=args.repo_dir, pr_comment=args.pr_comment)
     elif args.command == "benchmark-report":
         print_benchmark_report()
+    elif args.command == "scan-pr":
+        sys.path.insert(0, os.path.join(PROJECT_ROOT, "scripts"))
+        from pr_scanner import scan_pr_diff, parse_all_changed_functions, format_pr_comment
+        
+        diff_text = ""
+        if args.stdin:
+            diff_text = sys.stdin.read()
+        elif args.diff:
+            diff_text = open(args.diff, encoding="utf-8").read()
+        
+        if not diff_text.strip():
+            print("ERROR: Empty diff provided. Usage: git diff main HEAD | python cli.py scan-pr --stdin")
+            sys.exit(1)
+
+        repo_path = args.repo or (os.getcwd() if os.path.isdir(".git") else None)
+        changed = parse_all_changed_functions(diff_text)
+        reports = scan_pr_diff(diff_text, repo_path=repo_path, per_func_timeout=args.timeout)
+        comment = format_pr_comment(reports, total_checked=len(changed))
+        print("\n" + "=" * 60)
+        print("  AUTOMATED PR COMMENT (Markdown)")
+        print("=" * 60 + "\n")
+        print(comment)
+        if args.output:
+            with open(args.output, "w", encoding="utf-8") as f:
+                f.write(comment)
+            print(f"\n[Comment saved to {args.output}]")
+        sys.exit(1 if reports else 0)
     else:
         parser.print_help()
 
