@@ -63,9 +63,8 @@ jobs:
             --diff /tmp/pr.diff \
             --repo . \
             --timeout 25 \
-            --output /tmp/pr_comment.md
-          echo "exit_code=$?" >> $GITHUB_OUTPUT
-        continue-on-error: true   # Don't fail the step itself; we handle it below
+            --output /tmp/pr_comment.md || echo "FOUND_BUGS=true" >> $GITHUB_ENV
+        continue-on-error: true
 
       # ── 6. Post the result as a PR comment ───────────────────────────────
       - name: Post PR comment
@@ -110,9 +109,8 @@ jobs:
             }
 
       # ── 7. Fail the CI check if regressions were found ───────────────────
-      #   Comment this out if you want the check to be advisory-only (not blocking)
       - name: Fail if regressions found
-        if: steps.scanner.outcome == 'failure'
+        if: env.FOUND_BUGS == 'true'
         run: |
           echo "❌ LLM-Diff-BugFinder found behavioral regressions. See PR comment for details."
           exit 1
