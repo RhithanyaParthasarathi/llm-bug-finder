@@ -120,20 +120,63 @@ def parse_all_changed_functions(diff_text: str) -> List[ChangedFunction]:
 
 
 def _parse_funcs(src: str) -> dict:
-    """Return {name: (node, unparsed_source)} for all function defs."""
+    """Return {name: unparsed_source} for all function defs, resilient to partial diff hunks."""
+    funcs = {}
     for candidate in [src, textwrap.dedent(src)]:
         try:
             tree = ast.parse(candidate)
-            funcs = {}
             for node in ast.walk(tree):
                 if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
-                    # Detect methods (parent is ClassDef)
                     funcs[node.name] = ast.unparse(node)
             if funcs:
                 return funcs
         except (SyntaxError, IndentationError):
             pass
-    return {}
+
+    # Slicing fallback: if candidate starts with stray comments or unclosed strings before def
+    m = re.search(r"(?m)^(?:def |async def )", src)
+    if m:
+        sub = src[m.start():]
+        try:
+            tree = ast.parse(sub)
+            for node in ast.walk(tree):
+                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                    funcs[node.name] = ast.unparse(node)
+            if funcs:
+                return funcs
+        except (SyntaxError, IndentationError):
+            pass
+
+    # Line-by-line fallback: extract individual function blocks independently
+    lines = src.splitlines()
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        m_def = re.match(r"^(\s*)(?:async\s+)?def\s+([a-zA-Z0-9_]+)\s*\(", line)
+        if m_def:
+            indent = len(m_def.group(1))
+            fname = m_def.group(2)
+            fn_lines = [line]
+            i += 1
+            while i < len(lines):
+                nxt = lines[i]
+                if nxt.strip() and not nxt.startswith(" " * (indent + 1)) and not nxt.startswith("\t"):
+                    break
+                fn_lines.append(nxt)
+                i += 1
+            fn_code = textwrap.dedent("\n".join(fn_lines))
+            try:
+                tree = ast.parse(fn_code)
+                for node in ast.walk(tree):
+                    if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == fname:
+                        funcs[fname] = ast.unparse(node)
+                        break
+            except Exception:
+                pass
+        else:
+            i += 1
+
+    return funcs
 
 
 def _diff_functions(file_path: str, old_src: str, new_src: str) -> List[ChangedFunction]:
