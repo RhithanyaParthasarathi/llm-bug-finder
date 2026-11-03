@@ -80,33 +80,13 @@ jobs:
               body = "✅ **LLM-Diff-BugFinder**: No Python files changed or no behavioral regressions detected.";
             }
 
-            // Find existing bot comment and update it (avoid comment spam on re-runs)
-            const { data: comments } = await github.rest.issues.listComments({
+            // Always post a fresh comment at the bottom of the PR
+            await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
+              body: body,
             });
-
-            const botComment = comments.find(c =>
-              c.user.type === 'Bot' &&
-              c.body.includes('LLM-Diff-BugFinder')
-            );
-
-            if (botComment) {
-              await github.rest.issues.updateComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                comment_id: botComment.id,
-                body: body,
-              });
-            } else {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number,
-                body: body,
-              });
-            }
 
       # ── 7. Fail the CI check if regressions were found ───────────────────
       - name: Fail if regressions found

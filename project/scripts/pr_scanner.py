@@ -311,7 +311,8 @@ def scan_pr_diff(diff_text: str, repo_path: Optional[str] = None,
         print(f"  {label}", end="  ", flush=True)
 
         out, elapsed = run_crosshair_on_pair(func, timeout=per_func_timeout)
-        confirmed = "Given:" in out or "differ" in out.lower()
+        out_lower = out.lower()
+        confirmed = ("given:" in out_lower or "differ on" in out_lower or "behavior differs" in out_lower) and "no differences found" not in out_lower and "timeout" not in out_lower
 
         marker = "❌ BUG FOUND" if confirmed else ("⏱  timeout" if "timeout" in out else "✅ no divergence")
         print(f"{marker}  ({elapsed:.1f}s)")
