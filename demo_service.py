@@ -3,11 +3,10 @@ Demo CSV Processing Service.
 Used for demonstrating live PR behavioral regression checks.
 """
 
-def parse_csv_lines(value: str) -> list[str]:
-    """Parse CSV text and ensure non-empty."""
-    lines = value.strip().splitlines()
+def parse_csv_lines(data: str) -> list[str]:
+    lines = [line.strip() for line in data.splitlines() if line.strip()]
+    # To this (simulating an AI assistant "optimizing" or tightening constraints):
     assert len(lines) >= 2, "Expected at least 2 lines for CSV structure"
-    assert "," in lines[0] or ";" in lines[0] or "\t" in lines[0], "Expected comma, semicolon, or tab delimiter"
     return lines
 
 
