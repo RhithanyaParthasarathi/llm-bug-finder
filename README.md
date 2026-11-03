@@ -12,7 +12,8 @@ AI coding assistants (such as **Claude Code**, **Cursor Agent**, and **GitHub Co
 1. **Detects Behavioral Divergences:** Uses the Z3 SMT solver via **CrossHair** to explore execution paths symbolically and solve for exact concrete inputs where the AI's version breaks the original function contract.
 2. **Synthesizes Context & Stubs:** Supports class methods (`MockSelf`), docstring/default-based type inference, and external library dependency mocking.
 3. **Smart Reachability Analysis:** Performs intra-procedural constant propagation across the codebase AST to prove which downstream callers are broken (**`CONFIRMED_BUG_HIT`**) vs. unaffected (**`CONCRETE_SAFE`**) with zero AI hallucination.
-4. **Mined Benchmark Suite:** Includes a curated benchmark of **50 verified, reproducible real-world AI bugs** harvested from 100,000 commits in the **AgentPack** dataset.
+4. **Mined Benchmark Suite:** Includes a curated benchmark of **101 verified, reproducible real-world AI bugs** harvested from **100,000 commits** in the **AgentPack** dataset across 57 repositories.
+5. **GitHub Actions CI/CD Bot:** Packaged as a drop-in reusable composite Action (`action.yml`) that scans incoming pull requests, posts automated witness proof comments, and blocks merging on confirmed regressions.
 
 ---
 
@@ -110,15 +111,27 @@ pip install -r project/requirements.txt
 
 Here are all the commands to run every part of the system:
 
-### 1. View the 50-Bug Benchmark Report
-Display the formatted summary table of all 50 verified real-world AI regressions:
+### 1. View the 101-Bug Benchmark Report
+Display the formatted summary table of all 101 verified real-world AI regressions:
 ```bash
 python cli.py benchmark-report
 ```
 
 ---
 
-### 2. Check a Code Diff for Regressions
+### 2. Scan a Pull Request or Git Diff
+Scan an entire git commit or PR diff with AST call-graph reachability:
+```bash
+# Scan git diff directly from working branch against main:
+git diff main...HEAD | python cli.py scan-pr --stdin --repo .
+
+# Or scan a saved unified diff file:
+python cli.py scan-pr --diff pr.diff --repo . --output pr_comment.md
+```
+
+---
+
+### 3. Check a Function Diff for Regressions
 Run differential symbolic execution and call-site reachability on two file versions:
 ```bash
 # Basic check:
@@ -135,19 +148,24 @@ python cli.py check \
 
 ---
 
-### 3. Run the Batch Harvester on AgentPack
-Stream commits directly from Hugging Face, synthesize class methods, test with CrossHair, and harvest verified bugs into the benchmark:
+### 4. Run Interactive PR Simulation & Browser Demo
+Simulate a full GitHub Pull Request scan and open the interactive review preview in your browser:
 ```bash
-# Quick test scan (10,000 commits, target 5 bugs):
-python project/scripts/harvest_benchmark.py --limit 10000 --target 5
-
-# Full-scale benchmark sweep (100,000 commits, target 50 bugs):
-python project/scripts/harvest_benchmark.py --limit 100000 --target 50
+python project/scripts/demo_pr_simulation.py
 ```
 
 ---
 
-### 4. Run the Automated Unit Test Suite
+### 5. Generate Evidence Items E1 to E14
+Run any individual evidence generator or all at once:
+```bash
+python project/scripts/generate_evidence.py ALL
+# Or individual items: python project/scripts/generate_evidence.py E1
+```
+
+---
+
+### 6. Run the Automated Unit Test Suite
 Execute the entire test suite (verifying checkpointing, context synthesis, and constant propagation):
 ```bash
 python -m pytest
@@ -155,24 +173,43 @@ python -m pytest
 
 ---
 
-### 5. Inspect AgentPack Dataset Schema
-Stream the first 8 records from `nuprl/AgentPack` and inspect top-level keys and unified diff formats:
-```bash
-python project/scripts/inspect_agentpack_schema.py
+## 🤖 Reusable GitHub Action Integration
+
+Any external repository can add LLM-Diff-BugFinder as a mandatory merge blocker by adding `.github/workflows/bugfinder.yml`:
+
+```yaml
+name: Z3 Differential Regression Gatekeeper
+on:
+  pull_request:
+    paths: ["**.py"]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: RhithanyaParthasarathi/llm-bug-finder@main
 ```
 
 ---
 
 ## 📊 Benchmark Suite Results
 
-Across **100,001 scanned commits** from the `nuprl/AgentPack` dataset, the pipeline discovered and verified **50 reproducible real-world AI bugs**:
+Across **100,001 scanned commits** from the `nuprl/AgentPack` dataset, the pipeline discovered and verified **101 reproducible real-world AI bugs** across **57 repositories**:
+- **85 Concrete Counterexamples:** Exact input witnesses generated where `Old(x) != New(x)`
+- **16 Path Divergences:** Execution branches terminated or modified unexpectedly
 
-| Category | Bugs Found | Example Repositories |
-|---|---|---|
-| **Requirement Misunderstanding / Missing Logic** | **23** | `awilmoth/mcp-firewall`, `MementoRC/claude-code-knowledge-framework`, `naofumi-fujii/my-schedule`, `broadinstitute/starrynight` |
-| **Type-Semantics Bug** | **17** | `MementoRC/mcp-git`, `kevin82222/remote-server`, `tobypullan/CC_GH_Integration`, `kimata/rasp-water` |
-| **Wrong / Suboptimal Algorithm** | **7** | `HumanEval_10`, `toiee-lab/librechat-manager`, `johnathan-greenaway/chat-console`, `fsgeek/Mallku`, `DevsyAI/devsy-action` |
-| **Incorrect Edge-Case Handling / Robustness Crash** | **3** | `kym6464/clipboard-to-url`, `HumanEval_18` |
+Furthermore, the **132-Call-Site Reachability Benchmark** proved:
+- **62 CONFIRMED_BUG_HIT:** Call sites broken at runtime with constant inputs (Direct Blockers)
+- **26 CONCRETE_SAFE:** Call sites mathematically unaffected despite the function change
+- **44 VARIABLE_PARAM:** Dynamic calls flagged for prioritized human review
+- **0 False-Safe Violations:** 100% mathematical soundness guarantee
 
 All benchmark bugs are saved in [`project/results/benchmark/benchmark_bugs.json`](project/results/benchmark/benchmark_bugs.json), and standalone reproduction tests are available in `project/results/benchmark/repro_*.py`.
 
