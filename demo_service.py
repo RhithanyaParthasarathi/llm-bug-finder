@@ -4,9 +4,10 @@ Used for demonstrating live PR behavioral regression checks.
 """
 
 def parse_csv_lines(data: str) -> list[str]:
-    lines = [line.strip() for line in data.splitlines() if line.strip()]
-    # To this (simulating an AI assistant "optimizing" or tightening constraints):
-    assert len(lines) >= 2, "Expected at least 2 lines for CSV structure"
+    """Parse CSV text and ensure non-empty."""
+    lines = data.strip().splitlines()
+    assert len(lines) > 0, "Expected non-empty CSV string"
+    assert "," in lines[0] or ";" in lines[0] or "\t" in lines[0], "Expected comma, semicolon, or tab delimiter"
     return lines
 
 
