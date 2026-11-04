@@ -1,11 +1,8 @@
 """
-Demo Service: Real-World Behavioral Regression Scenarios.
-Used for demonstrating live PR behavioral regression checks and call-graph reachability.
+Demo CSV Processing Service.
+Used for demonstrating live PR behavioral regression checks.
 """
 
-# ==============================================================================
-# Scenario 1: CSV Line Count Validation (Structural Assertion Regression)
-# ==============================================================================
 def parse_csv_lines(data: str) -> list[str]:
     lines = [line.strip() for line in data.splitlines() if line.strip()]
     assert len(lines) > 0, "Expected at least 1 line"
@@ -14,7 +11,7 @@ def parse_csv_lines(data: str) -> list[str]:
 
 
 def process_header(csv_text: str) -> str:
-    """Downstream caller for Scenario 1."""
+    """Helper that calls parse_csv_lines."""
     lines = parse_csv_lines(csv_text)
     return lines[0].strip()
 
