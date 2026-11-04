@@ -9,6 +9,7 @@ Used for demonstrating live PR behavioral regression checks and call-graph reach
 def parse_csv_lines(data: str) -> list[str]:
     lines = [line.strip() for line in data.splitlines() if line.strip()]
     assert len(lines) > 0, "Expected at least 1 line"
+    #assert len(lines) >= 2, "Expected at least 2 lines for CSV structure" #ai change
     return lines
 
 
@@ -25,6 +26,7 @@ def calculate_discount(price: float, rate: float) -> float:
     """Applies discount rate (0.0 to 1.0). Rejects negative rates or over 1.0."""
     if rate < 0.0 or rate > 1.0:
         return price
+    #if rate > 1.0: return price  # Simulating AI refactor: AI dropped rate < 0.0 check
     return price * (1.0 - rate)
 
 
@@ -40,6 +42,7 @@ def clamp_score(score: int, max_val: int = 100) -> int:
     """Clamps a player's score between 0 and max_val."""
     if score < 0:
         return 0
+    # pass  # Simulating AI refactor: AI dropped if score < 0: return 0 check
     if score > max_val:
         return max_val
     return score
